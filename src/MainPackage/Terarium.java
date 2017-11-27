@@ -1,0 +1,86 @@
+package MainPackage;
+import java.io.File;
+import java.util.*;
+import InsectePackage.Carnivore;
+import InsectePackage.Herbivore;
+import InsectePackage.Insecte;
+
+public class Terarium {
+	
+	//Propriétés
+	
+	protected int largeur;
+	protected int hauteur;
+	protected int capacity;
+	private List<Insecte> listeInsecte = new LinkedList<Insecte>();
+	private int nbInsecte = getListeInsecte().size();
+	private File image;
+	
+	public Terarium() {
+		largeur=820;
+		hauteur=400;
+		capacity=30;
+		setImage(new File("fond.jpg"));
+	}
+	
+	//Add an insect to the Terarium
+	
+	public void addInsecte(Insecte m) {
+		if (getNbInsecte()<capacity)
+			getListeInsecte().add(m);
+		else
+			System.out.println("Plus de places dans ce terarium");
+		nbInsecte = getListeInsecte().size();
+	}
+	
+	//Check position of each insects and if only one is Carnivore, it will kill the other
+	
+	public void checkPosition() {
+		List<Insecte> l = new LinkedList<Insecte>();
+		for(Insecte a : getListeInsecte()) {
+			for(Insecte b : getListeInsecte()) {
+				if(a!=b) {
+					if(a.getX()==b.getX() & a.getY()==b.getY()) {
+						if((a instanceof Carnivore) & (b instanceof Herbivore)) {
+							((Carnivore)a).kill(b);
+							l.add(b);
+						}
+						else if((a instanceof Herbivore) & (b instanceof Carnivore)) {
+							((Carnivore)b).kill(a);
+							l.add(a);
+						}
+						}
+					}
+				}
+			}
+		for(Insecte a : l)
+			getListeInsecte().remove(a);
+	}
+	
+	public void description() {
+		System.out.println("Ce terrarium contient :");
+		for(Insecte i : getListeInsecte()) {
+			i.decrire();
+		}
+	}
+
+	public File getImage() {
+		return image;
+	}
+
+	public void setImage(File image) {
+		this.image = image;
+	}
+
+	public int getNbInsecte() {
+		return nbInsecte;
+	}
+
+	public List<Insecte> getListeInsecte() {
+		return listeInsecte;
+	}
+
+	public void setListeInsecte(List<Insecte> listeInsecte) {
+		this.listeInsecte = listeInsecte;
+	}
+}
