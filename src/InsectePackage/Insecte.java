@@ -57,5 +57,10 @@ public abstract class Insecte {
 	public void setHauteur(int hauteur) {
 		this.hauteur = hauteur;
 	}
+	
+	public int getFoodLevel()
+	{
+		return this.foodLevel;
+	}
 }
 
