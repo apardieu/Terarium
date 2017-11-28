@@ -59,5 +59,17 @@ public class IHM extends JFrame{
 		
 		setLocationRelativeTo(null);
 		setVisible(true);
+		
+		Thread refresh = new Thread(new AutoRefresh());
+		refresh.start();
+	}
+	
+	class AutoRefresh implements Runnable{
+
+		@Override
+		public void run() {
+			while(true)
+				repaint();
+		}
 	}
 }

@@ -35,18 +35,18 @@ public class TerariumView extends JPanel{
             	if(ins instanceof Herbivore)
             	{
             	try {
-					g.drawImage(ImageIO.read(new File("resources/mouchetest.png")), ins.getX(), ins.getY(), 100,100, null); //changer en getLargeur et getHauteur qui sera défini pour chaque type d'insecte
+            		ins.setY(this.getHeight()-ins.getHauteur()*this.getHeight()/604);
+					g.drawImage(ImageIO.read(new File("resources/mouchetest.png")), ins.getX()*this.getWidth()/809, ins.getY(), ins.getLargeur()*this.getWidth()/809, ins.getHauteur()*this.getHeight()/604, null); //changer en getLargeur et getHauteur qui sera défini pour chaque type d'insecte
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             	}
             	if(ins instanceof Carnivore)
             	{
             		try {
-						g.drawImage(ImageIO.read(new File("resources/carnivore.png")), ins.getX(), ins.getY(), 100,100, null);
+            			ins.setY(this.getHeight()-ins.getHauteur()*this.getHeight()/604);
+						g.drawImage(ImageIO.read(new File("resources/carnivore.png")), ins.getX()*this.getWidth()/809, ins.getY(), ins.getLargeur()*this.getWidth()/809, ins.getHauteur()*this.getHeight()/604, null);
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
             	}
@@ -61,10 +61,8 @@ public class TerariumView extends JPanel{
 	{
 		int emptyfood = 100-ins.getFoodLevel();
 		g.setColor(Color.GREEN);
-		g.fillRect(ins.getX(), ins.getY()-10, ins.getFoodLevel(),7);
+		g.fillRect(ins.getX()*this.getWidth()/809, ins.getY()-10, ins.getFoodLevel()*ins.getLargeur()*this.getWidth()/809/100,5*this.getHeight()/604);
 		g.setColor(Color.RED);
-		g.fillRect(ins.getX()+ins.getFoodLevel(), ins.getY()-10, emptyfood,7);
-		
-		
+		g.fillRect(ins.getX()*this.getWidth()/809+ins.getFoodLevel()*ins.getLargeur()*this.getWidth()/809/100, ins.getY()-10, emptyfood*this.getWidth()/809*ins.getLargeur()/100,5*this.getHeight()/604);
 	}
 }

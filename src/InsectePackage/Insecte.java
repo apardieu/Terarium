@@ -6,8 +6,8 @@ public abstract class Insecte {
 	protected int foodLevel;
 	protected int x=0;
 	protected int y=45;
-	protected int hauteur=50;
-	protected int largeur=150;
+	protected int hauteur=80;
+	protected int largeur=80;
 	
 	public void deplacer(int a, int b) {
 		setX(getX() + a);
