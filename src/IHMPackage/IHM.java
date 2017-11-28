@@ -4,15 +4,14 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
+import InsectePackage.Carnivore;
+import InsectePackage.Herbivore;
 import MainPackage.Terarium;
+
+//Thread AutoRefresh : repaint();
 
 public class IHM extends JFrame{
 	
@@ -28,6 +27,9 @@ public class IHM extends JFrame{
 		tera.setBackground(Color.blue);
 		donnes.setBackground(Color.green);
 		border.setBackground(Color.black);
+		
+		border.getNewHButton().addActionListener(new ButtonAddHerbivore(t));
+		border.getNewCButton().addActionListener(new ButtonAddCarnivore(t));
 		
 		GridBagLayout gbl = new GridBagLayout();
 		Container container = getContentPane();
@@ -62,6 +64,34 @@ public class IHM extends JFrame{
 		
 		Thread refresh = new Thread(new AutoRefresh());
 		refresh.start();
+	}
+	
+	class ButtonAddHerbivore implements ActionListener{
+		protected Terarium t;
+		
+		public ButtonAddHerbivore(Terarium t) {
+			this.t= t;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Herbivore h = new Herbivore();
+			t.addInsecte(h);
+		}
+	}
+	
+	class ButtonAddCarnivore implements ActionListener{
+		protected Terarium t;
+		
+		public ButtonAddCarnivore(Terarium t) {
+			this.t= t;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Carnivore c = new Carnivore();
+			t.addInsecte(c);
+		}
 	}
 	
 	class AutoRefresh implements Runnable{

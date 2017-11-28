@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -29,9 +31,13 @@ public class TerariumView extends JPanel{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+            synchronized(terarium.getListeInsecte()) {
             for(Insecte ins : terarium.getListeInsecte()) 
             {
-            	
+            	if(ins.getX()*this.getWidth()/809+ins.getLargeur()*this.getWidth()/809 >= this.getWidth())
+            		ins.setDirection(-1);
+            	else if(ins.getX() <= 0)
+            		ins.setDirection(1);
             	if(ins instanceof Herbivore)
             	{
             	try {
@@ -52,8 +58,7 @@ public class TerariumView extends JPanel{
             	}
             	
             	this.drawHealthBar(ins, g);
-            	//terarium.getListeInsecte().get(i).setY(this.getHeight()-terarium.getListeInsecte().get(i).getHauteur());
-            	//g.fillRect(terarium.getListeInsecte().get(i).getX(), terarium.getListeInsecte().get(i).getY(), terarium.getListeInsecte().get(i).getLargeur(), terarium.getListeInsecte().get(i).getHauteur());
+            }
             }
     }
 	

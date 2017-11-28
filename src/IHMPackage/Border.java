@@ -1,8 +1,9 @@
 package IHMPackage;
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -14,8 +15,8 @@ public class Border extends JPanel{
 	
 	public Border() {
 		nourrirButton = new JButton("Nourir");
-		newHButton = new JButton("Herbivore");
-		newCButton = new JButton("Carnivore");
+		setNewHButton(new JButton("Herbivore"));
+		setNewCButton(new JButton("Carnivore"));
 		
 		GridBagLayout gbl = new GridBagLayout();
 		setLayout(gbl);
@@ -30,11 +31,27 @@ public class Border extends JPanel{
 		add(nourrirButton, gbc);
 		
 		gbc.gridy = 1;
-		add(newHButton, gbc);
+		add(getNewHButton(), gbc);
 		
 		gbc.gridy = 2;
-		add(newCButton, gbc);
+		add(getNewCButton(), gbc);
 		
 		
+	}
+
+	public JButton getNewHButton() {
+		return newHButton;
+	}
+
+	public void setNewHButton(JButton newHButton) {
+		this.newHButton = newHButton;
+	}
+
+	public JButton getNewCButton() {
+		return newCButton;
+	}
+
+	public void setNewCButton(JButton newCButton) {
+		this.newCButton = newCButton;
 	}
 }

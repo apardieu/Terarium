@@ -1,17 +1,36 @@
 package InsectePackage;
 import Nourriture.Nourriture;
 
+//Thread Deplacer : Insecte.X
+
 public abstract class Insecte {
 	protected String name;
 	protected int foodLevel;
+	private int direction = 1;
 	protected int x=0;
 	protected int y=45;
 	protected int hauteur=80;
 	protected int largeur=80;
 	
-	public void deplacer(int a, int b) {
-		setX(getX() + a);
-		setY(getY() + b);
+	class Deplacer implements Runnable{
+
+		@Override
+		public void run() {
+			while(foodLevel>0) {
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				setX(getX() + 1 * getDirection());
+			}
+		}
+		
+	}
+	
+	protected void vivre() {
+		Thread deplacement = new Thread(new Deplacer());
+		deplacement.start();
 	}
 	
 	public void manger(Nourriture n) {
@@ -35,11 +54,11 @@ public abstract class Insecte {
 		this.y = y;
 	}
 
-	public int getX() {
+	public synchronized int getX() {
 		return x;
 	}
 
-	public void setX(int x) {
+	public synchronized void setX(int x) {
 		this.x = x;
 	}
 	public int getLargeur() {
@@ -61,6 +80,14 @@ public abstract class Insecte {
 	public int getFoodLevel()
 	{
 		return this.foodLevel;
+	}
+
+	public int getDirection() {
+		return direction;
+	}
+
+	public void setDirection(int direction) {
+		this.direction = direction;
 	}
 }
 

@@ -3,6 +3,7 @@ public class Herbivore extends Insecte{
 	public Herbivore() {
 		name = "Herbivore";
 		foodLevel=50;
+		vivre();
 	}
 	
 	public Herbivore(String n, int a, int b) {
@@ -10,5 +11,6 @@ public class Herbivore extends Insecte{
 		setX(a);
 		setY(b);
 		foodLevel=50;
+		vivre();
 	}
 }
