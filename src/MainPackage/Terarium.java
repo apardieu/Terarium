@@ -25,7 +25,7 @@ public class Terarium {
 	
 	//Add an insect to the Terarium
 	
-	public synchronized void addInsecte(Insecte m) {
+	public void addInsecte(Insecte m) {
 		if (getNbInsecte()<capacity)
 			getListeInsecte().add(m);
 		else
