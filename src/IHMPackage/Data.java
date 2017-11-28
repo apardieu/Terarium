@@ -12,10 +12,9 @@ public class Data extends JPanel{
 	private JLabel argentLabel = null;
 	
 	public Data() {
-		contenantLabel = new JLabel("Nombre d'individus/Capacité :");
-		tempsLabel = new JLabel("Temps: ");
-		argentLabel = new JLabel("Argent: ");
-		
+		setContenantLabel(new JLabel("Nombre d'individus/Capacité :"));
+		setTempsLabel(new JLabel("Temps: "));
+		setArgentLabel(new JLabel("Argent: "));
 		GridBagLayout gbl = new GridBagLayout();
 		setLayout(gbl);
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -23,19 +22,39 @@ public class Data extends JPanel{
 		gbc.gridx = gbc.gridy = 0;
 		gbc.gridheight = 1;
 		gbc.gridwidth = 1;
-		gbc.insets = new Insets(10, 10, 10, 10);
+		gbc.insets = new Insets(10, 10, 10, 0);
 		gbc.anchor = GridBagConstraints.BASELINE_LEADING;
 		gbc.weightx = 0.3;
-		add(contenantLabel, gbc);
+		add(getContenantLabel(), gbc);
 		
 		gbc.gridx = 1;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		add(tempsLabel, gbc);
+		add(getTempsLabel(), gbc);
 		
 		gbc.gridx = 2;
-		gbc.gridheight = 1;
-		gbc.gridwidth = 1;
-		add(argentLabel, gbc);
+		add(getArgentLabel(), gbc);
+	}
+
+	public JLabel getContenantLabel() {
+		return contenantLabel;
+	}
+
+	public void setContenantLabel(JLabel contenantLabel) {
+		this.contenantLabel = contenantLabel;
+	}
+
+	public JLabel getTempsLabel() {
+		return tempsLabel;
+	}
+
+	public void setTempsLabel(JLabel tempsLabel) {
+		this.tempsLabel = tempsLabel;
+	}
+
+	public JLabel getArgentLabel() {
+		return argentLabel;
+	}
+
+	public void setArgentLabel(JLabel argentLabel) {
+		this.argentLabel = argentLabel;
 	}
 }

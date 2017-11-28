@@ -11,13 +11,13 @@ public class Terarium {
 	
 	//Propriétés
 	
-	protected int capacity;
+	private int capacity;
 	private List<Insecte> listeInsecte = Collections.synchronizedList(new LinkedList<Insecte>());
 	private int nbInsecte = getListeInsecte().size();
 	private File image;
 	
 	public Terarium() {
-		capacity=30;
+		setCapacity(30);
 		setImage(new File("fond.jpg"));
 		Thread checkPosition = new Thread(new CheckPosition());
 		checkPosition.start();
@@ -26,7 +26,7 @@ public class Terarium {
 	//Add an insect to the Terarium
 	
 	public void addInsecte(Insecte m) {
-		if (getNbInsecte()<capacity)
+		if (getNbInsecte()<getCapacity())
 			getListeInsecte().add(m);
 		else
 			System.out.println("Plus de places dans ce terarium");
@@ -63,6 +63,7 @@ public class Terarium {
 					for(Insecte a : l)
 						getListeInsecte().remove(a);
 				}
+				nbInsecte = getListeInsecte().size();
 			}
 		}
 		
@@ -93,5 +94,13 @@ public class Terarium {
 
 	public void setListeInsecte(List<Insecte> listeInsecte) {
 		this.listeInsecte = listeInsecte;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
 	}
 }

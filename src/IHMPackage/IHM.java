@@ -14,8 +14,10 @@ import MainPackage.Terarium;
 //Thread AutoRefresh : repaint();
 
 public class IHM extends JFrame{
+	private int startTime;
 	
 	public IHM(Terarium t) {
+		startTime = (int)(System.currentTimeMillis()/1000);
 		setTitle("Tera Land : The Origins");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(1080, 720));
@@ -30,6 +32,22 @@ public class IHM extends JFrame{
 		
 		border.getNewHButton().addActionListener(new ButtonAddHerbivore(t));
 		border.getNewCButton().addActionListener(new ButtonAddCarnivore(t));
+		
+		class DataRefresh implements Runnable{
+
+			@Override
+			public void run() {
+				while(true) {
+					donnes.getContenantLabel().setText("Nombre d'individus/Capacité : " + t.getNbInsecte() + "/" + t.getCapacity());
+					donnes.getTempsLabel().setText("Temps: " + ((int)(System.currentTimeMillis()/1000) - startTime));
+					donnes.getArgentLabel().setText("Argent : " + "0");
+				}
+			}
+			
+		}
+		
+		Thread refreshData = new Thread(new DataRefresh());
+		refreshData.start();
 		
 		GridBagLayout gbl = new GridBagLayout();
 		Container container = getContentPane();
