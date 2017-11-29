@@ -13,8 +13,5 @@ public class Main {
 		t1.addInsecte(new Carnivore());
 		t1.description();
 		IHM ihm = new IHM(t1);
-
-		
-		//Quand tu crée l'insecte tu execute le mode move.
 	}
 }

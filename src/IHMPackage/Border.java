@@ -12,29 +12,39 @@ public class Border extends JPanel{
 	private JButton nourrirButton = null;
 	private JButton newHButton = null;
 	private JButton newCButton = null;
+	private JButton printBoutique = null;
 	
 	public Border() {
 		nourrirButton = new JButton("Nourir");
 		setNewHButton(new JButton("Herbivore"));
 		setNewCButton(new JButton("Carnivore"));
+		setPrintBoutique(new JButton("Boutique"));
 		
 		GridBagLayout gbl = new GridBagLayout();
 		setLayout(gbl);
 		GridBagConstraints gbc = new GridBagConstraints();
 		
 		gbc.gridx = gbc.gridy = 0;
-		gbc.anchor = GridBagConstraints.CENTER;
 		gbc.weighty = 0.3;
 		gbc.weightx = 1;
+		gbc.gridwidth = 2;
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.insets = new Insets(50, 20, 50, 20);
 		add(nourrirButton, gbc);
 		
 		gbc.gridy = 1;
+		gbc.weightx = 0.5;
+		gbc.gridwidth = 1;
 		add(getNewHButton(), gbc);
 		
-		gbc.gridy = 2;
+		gbc.gridx = 1;
 		add(getNewCButton(), gbc);
+		
+		gbc.gridy = 2;
+		gbc.gridx=0;
+		gbc.weightx = 1;
+		gbc.gridwidth = 2;
+		add(getPrintBoutique(), gbc);
 		
 		
 	}
@@ -53,5 +63,13 @@ public class Border extends JPanel{
 
 	public void setNewCButton(JButton newCButton) {
 		this.newCButton = newCButton;
+	}
+
+	public JButton getPrintBoutique() {
+		return printBoutique;
+	}
+
+	public void setPrintBoutique(JButton printBoutique) {
+		this.printBoutique = printBoutique;
 	}
 }

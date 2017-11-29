@@ -13,11 +13,12 @@ public class Terarium {
 	
 	private int capacity;
 	private List<Insecte> listeInsecte = Collections.synchronizedList(new LinkedList<Insecte>());
-	private int nbInsecte = getListeInsecte().size();
+	private int nbInsecte;
 	private File image;
 	
 	public Terarium() {
 		setCapacity(30);
+		nbInsecte = 0;
 		setImage(new File("fond.jpg"));
 		Thread checkPosition = new Thread(new CheckPosition());
 		checkPosition.start();
@@ -58,7 +59,6 @@ public class Terarium {
 								}
 							}
 					}
-
 					}
 					for(Insecte a : l)
 						getListeInsecte().remove(a);

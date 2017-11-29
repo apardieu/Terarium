@@ -7,7 +7,7 @@ public abstract class Insecte {
 	protected String name;
 	protected int foodLevel;
 	private int direction = 1;
-	protected int x=0;
+	protected int x= 0;
 	protected int y=45;
 	protected int hauteur=80;
 	protected int largeur=80;
@@ -54,11 +54,11 @@ public abstract class Insecte {
 		this.y = y;
 	}
 
-	public synchronized int getX() {
+	public int getX() {
 		return x;
 	}
 
-	public synchronized void setX(int x) {
+	public void setX(int x) {
 		this.x = x;
 	}
 	public int getLargeur() {
