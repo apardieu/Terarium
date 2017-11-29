@@ -22,6 +22,10 @@ public abstract class Insecte {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				if(getX()+getLargeur()>= 809)
+            		setDirection(-1);
+            	else if(getX() <= 0)
+            		setDirection(1);
 				setX(getX() + 1 * getDirection());
 			}
 		}

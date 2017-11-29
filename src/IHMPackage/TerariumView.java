@@ -34,7 +34,7 @@ public class TerariumView extends JPanel{
             synchronized(terarium.getListeInsecte()) {
             for(Insecte ins : terarium.getListeInsecte()) 
             {
-            	if(ins.getX()*this.getWidth()/809+ins.getLargeur()*this.getWidth()/809 >= this.getWidth())
+            	if((ins.getX()+ins.getLargeur())*this.getWidth()/809 >= this.getWidth())
             		ins.setDirection(-1);
             	else if(ins.getX() <= 0)
             		ins.setDirection(1);
@@ -56,7 +56,6 @@ public class TerariumView extends JPanel{
 						e.printStackTrace();
 					}
             	}
-            	
             	this.drawHealthBar(ins, g);
             }
             }
