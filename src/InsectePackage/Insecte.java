@@ -11,30 +11,50 @@ public abstract class Insecte {
 	protected int y=45;
 	protected int hauteur=80;
 	protected int largeur=80;
-	//LOL
-	class Deplacer implements Runnable{
+	
+	public void deplacer() {
+		if(getX()+getLargeur()>= 809)
+    		setDirection(-1);
+    	else if(getX() <= 0)
+    		setDirection(1);
+		setX(getX() + 1 * getDirection());
+	}
 
+	class Deplacer implements Runnable{
+		private Insecte i;
+		
+		public Deplacer(Insecte i) {
+			this.i = i;
+		}
+		
 		@Override
 		public void run() {
 			while(foodLevel>0) {
 				try {
-					Thread.sleep(10);
+					Thread.sleep(5);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if(getX()+getLargeur()>= 809)
-            		setDirection(-1);
-            	else if(getX() <= 0)
-            		setDirection(1);
-				setX(getX() + 1 * getDirection());
+				synchronized(i) {
+					try {
+						i.wait();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if(getX()+getLargeur()>= 809)
+	            		setDirection(-1);
+	            	else if(getX() <= 0)
+	            		setDirection(1);
+					setX(getX() + 1 * getDirection());
+				}
 			}
 		}
-		
 	}
 	
 	protected void vivre() {
-		Thread deplacement = new Thread(new Deplacer());
-		deplacement.start();
+		//Thread deplacement = new Thread(new Deplacer(this));
+		//deplacement.start();
 	}
 	
 	public void manger(Nourriture n) {

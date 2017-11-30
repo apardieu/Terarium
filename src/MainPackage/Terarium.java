@@ -21,17 +21,21 @@ public class Terarium {
 		nbInsecte = 0;
 		setImage(new File("fond.jpg"));
 		Thread checkPosition = new Thread(new CheckPosition());
+		checkPosition.setName("checkPosition");
+		checkPosition.setPriority(Thread.MAX_PRIORITY);
 		checkPosition.start();
 	}
 	
 	//Add an insect to the Terarium
 	
 	public void addInsecte(Insecte m) {
+		synchronized(getListeInsecte()) {
 		if (getNbInsecte()<getCapacity())
 			getListeInsecte().add(m);
 		else
 			System.out.println("Plus de places dans ce terarium");
 		nbInsecte = getListeInsecte().size();
+		}
 	}
 	
 	//Check position of each insects and if only one is Carnivore, it will kill the other
@@ -40,30 +44,32 @@ public class Terarium {
 		@Override
 		public void run() {
 			while(true){
-				if(getNbInsecte() > 1) {
+				try {
+					Thread.sleep(5);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 					List<Insecte> l = new LinkedList<Insecte>();
+					List<Insecte> l2 =  getListeInsecte();
 					synchronized(getListeInsecte()) {
-						for(Insecte a : getListeInsecte()) {
-							for(Insecte b : getListeInsecte()) {
-								if(a!=b) {
-									if(a.getX()==b.getX() & a.getY()==b.getY()) {
-										if((a instanceof Carnivore) & (b instanceof Herbivore)) {
-											((Carnivore)a).kill(b);
-											l.add(b);
-										}
-										else if((a instanceof Herbivore) & (b instanceof Carnivore)) {
-											((Carnivore)b).kill(a);
-											l.add(a);
-										}
+						for(Insecte a : l2) {
+							for(Insecte b : l2) {
+								if((a instanceof Carnivore) & (b instanceof Herbivore)) {
+									 if(a.getX()==b.getX() & a.getY()==b.getY()) {
+										((Carnivore)a).kill(b);
+										l.add(b);
 									}
 								}
 							}
-					}
-					}
+						}
 					for(Insecte a : l)
 						getListeInsecte().remove(a);
-				}
+					}
 				nbInsecte = getListeInsecte().size();
+				List<Insecte> l3 =  getListeInsecte();
+				for(Insecte a : l3) {
+					a.deplacer();
+				}
 			}
 		}
 		
