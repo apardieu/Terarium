@@ -21,6 +21,7 @@ public class Terarium {
 		nbInsecte = 0;
 		setImage(new File("fond.jpg"));
 		Thread checkPosition = new Thread(new CheckPosition());
+		checkPosition.setName("checkposition");
 		checkPosition.start();
 	}
 	

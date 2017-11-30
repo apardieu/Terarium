@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
 import InsectePackage.Insecte;
+import InsectePackage.Sexe;
 import MainPackage.Terarium;
 
 public class TerariumView extends JPanel{
@@ -55,8 +56,11 @@ public class TerariumView extends JPanel{
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+                	
             	}
             	this.drawHealthBar(ins, g);
+            	//if(ins.getSexe()==Sexe.FEMALE)
+            		
             }
             }
     }

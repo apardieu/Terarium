@@ -11,6 +11,8 @@ public abstract class Insecte {
 	protected int y=45;
 	protected int hauteur=80;
 	protected int largeur=80;
+	protected Sexe sexe;
+	
 	//LOL
 	class Deplacer implements Runnable{
 
@@ -34,6 +36,7 @@ public abstract class Insecte {
 	
 	protected void vivre() {
 		Thread deplacement = new Thread(new Deplacer());
+		deplacement.setDaemon(true);
 		deplacement.start();
 	}
 	
@@ -92,6 +95,16 @@ public abstract class Insecte {
 
 	public void setDirection(int direction) {
 		this.direction = direction;
+	}
+	
+	public void setSexe(Sexe s)
+	{
+		this.sexe=s;
+	}
+	
+	public Sexe getSexe()
+	{
+		return this.sexe;
 	}
 }
 
