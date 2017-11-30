@@ -11,7 +11,7 @@ public abstract class Insecte {
 	protected int y=45;
 	protected int hauteur=80;
 	protected int largeur=80;
-	
+	//LOL
 	class Deplacer implements Runnable{
 
 		@Override
