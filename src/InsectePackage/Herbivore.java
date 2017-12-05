@@ -1,9 +1,12 @@
 package InsectePackage;
+
+import java.io.File;
+
 public class Herbivore extends Insecte{
 	public Herbivore() {
 		name = "Herbivore";
 		foodLevel=50;
-		vivre();
+		setImage(new File("resources/mouchetest.png"));
 	}
 	
 	public Herbivore(String n, int a, int b) {
@@ -11,6 +14,6 @@ public class Herbivore extends Insecte{
 		setX(a);
 		setY(b);
 		foodLevel=50;
-		vivre();
+		setImage(new File("resources/mouchetest.png"));
 	}
 }

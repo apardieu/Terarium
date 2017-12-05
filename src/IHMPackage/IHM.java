@@ -86,9 +86,6 @@ public class IHM extends JFrame{
 		
 		setLocationRelativeTo(null);
 		setVisible(true);
-		
-		Thread refresh = new Thread(new AutoRefresh());
-		refresh.start();
 	}
 	
 	class ButtonAddHerbivore implements ActionListener{
@@ -136,15 +133,6 @@ public class IHM extends JFrame{
 				((View) view).setPanel(tera);
 			else
 				((View) view).setPanel(shop);
-		}
-	}
-	
-	class AutoRefresh implements Runnable{
-
-		@Override
-		public void run() {
-			while(true)
-				repaint();
 		}
 	}
 }

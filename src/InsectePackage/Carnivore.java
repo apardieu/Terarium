@@ -1,9 +1,12 @@
 package InsectePackage;
+
+import java.io.File;
+
 public class Carnivore extends Insecte{
 	public Carnivore() {
 		name = "Carnivore";
 		foodLevel=30;
-		vivre();
+		setImage(new File("resources/carnivore.png"));
 	}
 	
 	public Carnivore(String n, int a, int b) {
@@ -11,7 +14,7 @@ public class Carnivore extends Insecte{
 		setX(a);
 		setY(b);
 		foodLevel=30;
-		vivre();
+		setImage(new File("resources/carnivore.png"));
 	}
 	
 	public void kill(Insecte m) {

@@ -1,5 +1,6 @@
 package InsectePackage;
 import Nourriture.Nourriture;
+import java.io.File;
 
 //Thread Deplacer : Insecte.X
 
@@ -12,32 +13,16 @@ public abstract class Insecte {
 	protected int hauteur=80;
 	protected int largeur=80;
 	protected Sexe sexe;
-	
-	//LOL
-	class Deplacer implements Runnable{
+	private File image;
 
-		@Override
-		public void run() {
-			while(foodLevel>0) {
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				if(getX()+getLargeur()>= 809)
-            		setDirection(-1);
-            	else if(getX() <= 0)
-            		setDirection(1);
-				setX(getX() + 1 * getDirection());
-			}
+	public void deplacer() {
+		if(foodLevel>0) {
+			if(getX()+getLargeur()>= 809)
+        		setDirection(-1);
+        	else if(getX() <= 0)
+        		setDirection(1);
+			setX(getX() + 1 * getDirection());
 		}
-		
-	}
-	
-	protected void vivre() {
-		Thread deplacement = new Thread(new Deplacer());
-		deplacement.setDaemon(true);
-		deplacement.start();
 	}
 	
 	public void manger(Nourriture n) {
@@ -105,6 +90,14 @@ public abstract class Insecte {
 	public Sexe getSexe()
 	{
 		return this.sexe;
+	}
+
+	public File getImage() {
+		return image;
+	}
+
+	public void setImage(File image) {
+		this.image = image;
 	}
 }
 

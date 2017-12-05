@@ -15,5 +15,7 @@ public class Main {
 		t1.addInsecte(new Carnivore());
 		t1.description();
 		IHM ihm = new IHM(t1);
+		GameController GC = new GameController(t1, ihm);
+		GC.start();
 	}
 }

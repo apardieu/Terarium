@@ -31,29 +31,12 @@ public class View extends JPanel{
 	            synchronized(terarium.getListeInsecte()) {
 	            for(Insecte ins : terarium.getListeInsecte()) 
 	            {
-	            	if(ins.getX()*this.getWidth()/809+ins.getLargeur()*this.getWidth()/809 >= this.getWidth())
-	            		ins.setDirection(-1);
-	            	else if(ins.getX() <= 0)
-	            		ins.setDirection(1);
-	            	if(ins instanceof Herbivore)
-	            	{
 	            	try {
 	            		ins.setY(this.getHeight()-ins.getHauteur()*this.getHeight()/604);
-						g.drawImage(ImageIO.read(new File("resources/mouchetest.png")), ins.getX()*this.getWidth()/809, ins.getY(), ins.getLargeur()*this.getWidth()/809, ins.getHauteur()*this.getHeight()/604, null); //changer en getLargeur et getHauteur qui sera défini pour chaque type d'insecte
+						g.drawImage(ImageIO.read(ins.getImage()), ins.getX()*this.getWidth()/809, ins.getY(), ins.getLargeur()*this.getWidth()/809, ins.getHauteur()*this.getHeight()/604, null); //changer en getLargeur et getHauteur qui sera défini pour chaque type d'insecte
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-	            	}
-	            	if(ins instanceof Carnivore)
-	            	{
-	            		try {
-	            			ins.setY(this.getHeight()-ins.getHauteur()*this.getHeight()/604);
-							g.drawImage(ImageIO.read(new File("resources/carnivore.png")), ins.getX()*this.getWidth()/809, ins.getY(), ins.getLargeur()*this.getWidth()/809, ins.getHauteur()*this.getHeight()/604, null);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-	            	}
-	            	
 	            	this.drawHealthBar(ins, g);
 	            }
             }

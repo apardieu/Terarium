@@ -43,7 +43,7 @@ public class TerariumView extends JPanel{
             	{
             	try {
             		ins.setY(this.getHeight()-ins.getHauteur()*this.getHeight()/604);
-					g.drawImage(ImageIO.read(new File("resources/mouchetest.png")), ins.getX()*this.getWidth()/809, ins.getY(), ins.getLargeur()*this.getWidth()/809, ins.getHauteur()*this.getHeight()/604, null); //changer en getLargeur et getHauteur qui sera défini pour chaque type d'insecte
+					g.drawImage(ImageIO.read(new File("resources/carnivore.png")), ins.getX()*this.getWidth()/809, ins.getY(), ins.getLargeur()*this.getWidth()/809, ins.getHauteur()*this.getHeight()/604, null); //changer en getLargeur et getHauteur qui sera défini pour chaque type d'insecte
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

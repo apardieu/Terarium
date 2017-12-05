@@ -20,9 +20,6 @@ public class Terarium {
 		setCapacity(30);
 		nbInsecte = 0;
 		setImage(new File("fond.jpg"));
-		Thread checkPosition = new Thread(new CheckPosition());
-		checkPosition.setName("checkposition");
-		checkPosition.start();
 	}
 	
 	//Add an insect to the Terarium
@@ -35,40 +32,44 @@ public class Terarium {
 		nbInsecte = getListeInsecte().size();
 	}
 	
-	//Check position of each insects and if only one is Carnivore, it will kill the other
-	class CheckPosition implements Runnable{
-
-		@Override
-		public void run() {
-			while(true){
-				if(getNbInsecte() > 1) {
-					List<Insecte> l = new LinkedList<Insecte>();
-					synchronized(getListeInsecte()) {
-						for(Insecte a : getListeInsecte()) {
-							for(Insecte b : getListeInsecte()) {
-								if(a!=b) {
-									if(a.getX()==b.getX() & a.getY()==b.getY()) {
-										if((a instanceof Carnivore) & (b instanceof Herbivore)) {
-											((Carnivore)a).kill(b);
-											l.add(b);
-										}
-										else if((a instanceof Herbivore) & (b instanceof Carnivore)) {
-											((Carnivore)b).kill(a);
-											l.add(a);
-										}
-									}
-								}
-							}
+	public void deplacerInsectes() {
+		try {
+			Thread.sleep(5);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		int i = 0;
+		while(i<nbInsecte) {
+			Insecte a = this.listeInsecte.get(i);
+			a.deplacer();
+			List<Insecte> l = new LinkedList<Insecte>();
+			for(Insecte b : getListeInsecte()) {
+				if(a!=b) {
+					if(a.getX()==b.getX() & a.getY()==b.getY()) {
+						if((a instanceof Carnivore) & (b instanceof Herbivore)) {
+							((Carnivore)a).kill(b);
+							l.add(b);
+						}
+						if((b instanceof Carnivore) & (a instanceof Herbivore)) {
+							((Carnivore)b).kill(a);
+							l.add(a);
+						}
 					}
-					}
-					for(Insecte a : l)
-						getListeInsecte().remove(a);
 				}
-				nbInsecte = getListeInsecte().size();
+			}
+			nbInsecte-=l.size();
+			for(Insecte ins : l) {
+				this.listeInsecte.remove(ins);
+			}
+			i++;
+		}
+	}
+	
+	//Check position of each insects and if only one is Carnivore, it will kill the other
+	public void checkPosition(Insecte a) {
+			if(getNbInsecte() > 1) {
 			}
 		}
-		
-	}
 	
 	public void description() {
 		System.out.println("Ce terrarium contient :");
