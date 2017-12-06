@@ -2,6 +2,8 @@ package IHMPackage;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -11,12 +13,20 @@ import MainPackage.Terarium;
 import Objets.Boutique;
 import Objets.Objet;
 
-public class View extends JPanel{
+public class View extends JPanel implements MouseListener{
 	private static final long serialVersionUID = 5357544026259177499L;
 	protected JPanel panel;
+	protected int nbPage;
+	protected boolean next=true;
+	protected boolean prev=false;
+	protected File nextArrow;
+	protected File prevArrow;
+	
 	
 	public View() {
+		nbPage=0;
 		this.setLayout(null);
+		this.addMouseListener(this);
 	}
 	
 	protected void paintComponent(Graphics g) {
@@ -53,9 +63,7 @@ public class View extends JPanel{
 				}
 	            int x=75, y=110;
 	            int h=80, l=60;
-	            int j=0;
-	            for(int i=j; i<shop.getListeInsecte().size(); i++) {
-	            	if(i<j+21) {
+	            for(int i=nbPage*21; (i<(nbPage+1)*21 & i<shop.getListeInsecte().size()); i++) {
 		            	Objet o = shop.getListeInsecte().get(i);
 		            	try {
 		            		g.setColor(Color.BLACK);
@@ -75,10 +83,26 @@ public class View extends JPanel{
 		            	}
 		            	else
 		            		x+=l+40;
+		            	if(nbPage==shop.getListeInsecte().size()/23) {
+		            		next=false;
+		            		nextArrow = new File("nextArrowLocked.png");
+		            	}
+		            	else {
+		            		next=true;
+		            		nextArrow = new File("nextArrow.png");
+		            	}
+		            	if(nbPage==0) {
+		            		prev=false;
+		            		prevArrow = new File("prevArrowLocked.png");
+		            	}
+		            	else {
+		            		prev=true;
+		            		prevArrow = new File("prevArrow.png");
+		            	}
 	            	}
-	            }
 	            try {
-					g.drawImage(ImageIO.read(new File("nextArrow.png")), 700*this.getWidth()/809, 525*this.getHeight()/604, 60*this.getWidth()/809, 60*this.getHeight()/604, null);
+	            	g.drawImage(ImageIO.read(nextArrow), 700*this.getWidth()/809, 525*this.getHeight()/604, 60*this.getWidth()/809, 60*this.getHeight()/604, null);
+	            	g.drawImage(ImageIO.read(prevArrow), 40*this.getWidth()/809, 525*this.getHeight()/604, 60*this.getWidth()/809, 60*this.getHeight()/604, null);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -100,5 +124,43 @@ public class View extends JPanel{
 	
 	public JPanel getPanel() {
 		return panel;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(panel instanceof BoutiqueView & next==true) {
+			if(e.getX()>700*this.getWidth()/809 & e.getX()<760*this.getWidth()/809 & e.getY()>525*this.getHeight()/604 & e.getY()<585*this.getHeight()/604) {
+				nbPage++;
+			}
+		}
+		if(panel instanceof BoutiqueView & prev==true) {
+			if(e.getX()>40*this.getWidth()/809 & e.getX()<100*this.getWidth()/809 & e.getY()>525*this.getHeight()/604 & e.getY()<585*this.getHeight()/604) {
+				nbPage--;
+			}
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

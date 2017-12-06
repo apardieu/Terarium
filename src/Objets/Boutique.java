@@ -33,6 +33,30 @@ public class Boutique{
 		getListeInsecte().add(new Objet(500, new Herbivore()));
 		getListeInsecte().add(new Objet(100, new Carnivore()));
 		getListeInsecte().add(new Objet(500, new Herbivore()));
+		getListeInsecte().add(new Objet(100, new Carnivore()));
+		getListeInsecte().add(new Objet(500, new Herbivore()));
+		getListeInsecte().add(new Objet(100, new Carnivore()));
+		getListeInsecte().add(new Objet(500, new Herbivore()));
+		getListeInsecte().add(new Objet(100, new Carnivore()));
+		getListeInsecte().add(new Objet(500, new Herbivore()));
+		getListeInsecte().add(new Objet(100, new Carnivore()));
+		getListeInsecte().add(new Objet(500, new Herbivore()));
+		getListeInsecte().add(new Objet(100, new Carnivore()));
+		getListeInsecte().add(new Objet(500, new Herbivore()));
+		getListeInsecte().add(new Objet(100, new Carnivore()));
+		getListeInsecte().add(new Objet(500, new Herbivore()));
+		getListeInsecte().add(new Objet(100, new Carnivore()));
+		getListeInsecte().add(new Objet(500, new Herbivore()));
+		getListeInsecte().add(new Objet(100, new Carnivore()));
+		getListeInsecte().add(new Objet(500, new Herbivore()));
+		getListeInsecte().add(new Objet(100, new Carnivore()));
+		getListeInsecte().add(new Objet(500, new Herbivore()));
+		getListeInsecte().add(new Objet(100, new Carnivore()));
+		getListeInsecte().add(new Objet(500, new Herbivore()));
+		getListeInsecte().add(new Objet(100, new Carnivore()));
+		getListeInsecte().add(new Objet(500, new Herbivore()));
+		getListeInsecte().add(new Objet(100, new Carnivore()));
+		getListeInsecte().add(new Objet(500, new Herbivore()));
 	}
 
 	public List<Objet> getListeInsecte() {
