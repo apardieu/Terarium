@@ -42,6 +42,10 @@ public class Terarium {
 		while(i<nbInsecte) {
 			Insecte a = this.listeInsecte.get(i);
 			a.deplacer();
+			if(a.getFoodLevel()<1) {
+				this.listeInsecte.remove(a);
+				nbInsecte--;
+			}
 			List<Insecte> l = new LinkedList<Insecte>();
 			for(Insecte b : getListeInsecte()) {
 				if(a!=b) {
@@ -64,10 +68,6 @@ public class Terarium {
 			nbInsecte-=l.size();
 			for(Insecte ins : l) {
 				this.listeInsecte.remove(ins);
-			}
-			if(a.getFoodLevel()<1) {
-				this.listeInsecte.remove(a);
-				nbInsecte--;
 			}
 			i++;
 		}
