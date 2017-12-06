@@ -17,6 +17,11 @@ import MainPackage.Terarium;
 
 public class IHM extends JFrame{
 	private int startTime;
+	protected View view;
+	protected TerariumView tera;
+	protected BoutiqueView shop;
+	protected Data donnes;
+	protected Border border;
 	
 	public IHM(Terarium t) {
 		startTime = (int)(System.currentTimeMillis()/1000);
@@ -24,11 +29,11 @@ public class IHM extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(1080, 720));
 		
-		View view = new View();
-		TerariumView tera = new TerariumView(t);
-		BoutiqueView shop = new BoutiqueView();
-		Data donnes = new Data();
-		Border border = new Border();
+		view = new View();
+		tera = new TerariumView(t);
+		shop = new BoutiqueView();
+		donnes = new Data();
+		border = new Border();
 		view.setPanel(tera);
 		
 		tera.setBackground(Color.blue);
@@ -38,23 +43,7 @@ public class IHM extends JFrame{
 		border.getNewHButton().addActionListener(new ButtonAddHerbivore(t));
 		border.getNewCButton().addActionListener(new ButtonAddCarnivore(t));
 		
-		class DataRefresh implements Runnable{
-
-			@Override
-			public void run() {
-				while(true) {
-					donnes.getContenantLabel().setText("Nombre d'individus/Capacité : " + t.getNbInsecte() + "/" + t.getCapacity());
-					donnes.getTempsLabel().setText("Temps: " + ((int)(System.currentTimeMillis()/1000) - startTime));
-					donnes.getArgentLabel().setText("Argent : " + "0");
-				}
-			}
-			
-		}
-		
 		border.getPrintBoutique().addActionListener(new ButtonPrintBoutique(view, shop, tera));
-		
-		Thread refreshData = new Thread(new DataRefresh());
-		refreshData.start();
 		
 		GridBagLayout gbl = new GridBagLayout();
 		Container container = getContentPane();
@@ -86,6 +75,12 @@ public class IHM extends JFrame{
 		
 		setLocationRelativeTo(null);
 		setVisible(true);
+	}
+	
+	public void refreshData(Terarium t) {
+		donnes.getContenantLabel().setText("Nombre d'individus/Capacité : " + t.getNbInsecte() + "/" + t.getCapacity());
+		donnes.getTempsLabel().setText("Temps: " + ((int)(System.currentTimeMillis()/1000) - startTime));
+		donnes.getArgentLabel().setText("Argent : " + "0");
 	}
 	
 	class ButtonAddHerbivore implements ActionListener{

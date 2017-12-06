@@ -13,6 +13,7 @@ public class GameController extends Thread{
 	public void run() {
 		while(true) {
 			terarium.deplacerInsectes();
+			ihm.refreshData(terarium);
 			ihm.repaint();
 		}
 	}
