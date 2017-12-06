@@ -12,10 +12,12 @@ import javax.swing.JPanel;
 import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
 import MainPackage.Terarium;
+import Objets.Boutique;
 
 //Thread AutoRefresh : repaint();
 
 public class IHM extends JFrame{
+	private static final long serialVersionUID = -3796859435142574261L;
 	private int startTime;
 	protected View view;
 	protected TerariumView tera;
@@ -31,7 +33,7 @@ public class IHM extends JFrame{
 		
 		view = new View();
 		tera = new TerariumView(t);
-		shop = new BoutiqueView();
+		shop = new BoutiqueView(new Boutique());
 		donnes = new Data();
 		border = new Border();
 		view.setPanel(tera);

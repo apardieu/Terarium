@@ -1,5 +1,4 @@
 package IHMPackage;
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -7,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Data extends JPanel{
+	private static final long serialVersionUID = -8153420072559073398L;
 	private JLabel contenantLabel = null;
 	private JLabel tempsLabel = null;
 	private JLabel argentLabel = null;

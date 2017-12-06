@@ -11,7 +11,7 @@ public abstract class Insecte {
 	protected int x= 0;
 	protected int y=45;
 	protected int hauteur=80;
-	protected int largeur=80;
+	protected int largeur=60;
 	protected Sexe sexe;
 	private File image;
 	private int maxFoodLevel = 100000;

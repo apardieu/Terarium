@@ -1,23 +1,17 @@
 package IHMPackage;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
 import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
 import InsectePackage.Insecte;
-import InsectePackage.Sexe;
 import MainPackage.Terarium;
 
 public class TerariumView extends JPanel{
+	private static final long serialVersionUID = -8916755259904328022L;
 	protected Terarium terarium;
 	
 	public TerariumView(Terarium tera) {

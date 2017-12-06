@@ -73,12 +73,6 @@ public class Terarium {
 		}
 	}
 	
-	//Check position of each insects and if only one is Carnivore, it will kill the other
-	public void checkPosition(Insecte a) {
-			if(getNbInsecte() > 1) {
-			}
-		}
-	
 	public void description() {
 		System.out.println("Ce terrarium contient :");
 		for(Insecte i : getListeInsecte()) {

@@ -5,7 +5,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import Objets.Boutique;
+
 public class BoutiqueView extends JPanel{
+	protected Boutique shop;
+	
+	public BoutiqueView(Boutique shop) {
+		this.shop = shop;
+	}
 
 	protected void paintComponent(Graphics g) {
         super.paintComponent(g);
