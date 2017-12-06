@@ -5,7 +5,7 @@ import java.io.File;
 public class Herbivore extends Insecte{
 	public Herbivore() {
 		name = "Herbivore";
-		foodLevel=50;
+		foodLevel=(int) (getMaxFoodLevel()*0.5);
 		setImage(new File("resources/mouchetest.png"));
 	}
 	
@@ -13,7 +13,7 @@ public class Herbivore extends Insecte{
 		name = n;
 		setX(a);
 		setY(b);
-		foodLevel=50;
+		foodLevel=50000;
 		setImage(new File("resources/mouchetest.png"));
 	}
 }

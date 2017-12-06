@@ -67,7 +67,7 @@ public class TerariumView extends JPanel{
 	
 	public void drawHealthBar(Insecte ins, Graphics g)
 	{
-		int emptyfood = 100-ins.getFoodLevel();
+		int emptyfood = ins.getMaxFoodLevel()-ins.getFoodLevel();
 		g.setColor(Color.GREEN);
 		g.fillRect(ins.getX()*this.getWidth()/809, ins.getY()-10, ins.getFoodLevel()*ins.getLargeur()*this.getWidth()/809/100,5*this.getHeight()/604);
 		g.setColor(Color.RED);

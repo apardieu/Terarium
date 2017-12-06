@@ -5,7 +5,7 @@ import java.io.File;
 public class Carnivore extends Insecte{
 	public Carnivore() {
 		name = "Carnivore";
-		foodLevel=30;
+		foodLevel=30000;
 		setImage(new File("resources/carnivore.png"));
 	}
 	
@@ -18,10 +18,10 @@ public class Carnivore extends Insecte{
 	}
 	
 	public void kill(Insecte m) {
-		if ((foodLevel+m.foodLevel/10)<100)
+		if ((foodLevel+m.foodLevel/10)<this.getMaxFoodLevel())
 			foodLevel+=m.foodLevel/10;
 		else
-			foodLevel=100;
+			foodLevel=this.getMaxFoodLevel();
 		m.foodLevel=0;
 	}
 }

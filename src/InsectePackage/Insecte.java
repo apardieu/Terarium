@@ -14,6 +14,8 @@ public abstract class Insecte {
 	protected int largeur=80;
 	protected Sexe sexe;
 	private File image;
+	private int maxFoodLevel = 100000;
+	private float speedTire = 3;
 
 	public void deplacer() {
 		if(foodLevel>0) {
@@ -22,12 +24,13 @@ public abstract class Insecte {
         	else if(getX() <= 0)
         		setDirection(1);
 			setX(getX() + 1 * getDirection());
+			foodLevel-=speedTire;
 		}
 	}
 	
 	public void manger(Nourriture n) {
-		if ((foodLevel+n.getFoodPower())>100)
-			foodLevel=100;
+		if ((foodLevel+n.getFoodPower())>getMaxFoodLevel())
+			foodLevel=getMaxFoodLevel();
 		else
 			foodLevel+=n.getFoodPower();
 	}
@@ -98,6 +101,14 @@ public abstract class Insecte {
 
 	public void setImage(File image) {
 		this.image = image;
+	}
+
+	public int getMaxFoodLevel() {
+		return maxFoodLevel;
+	}
+
+	public void setMaxFoodLevel(int maxFoodLevel) {
+		this.maxFoodLevel = maxFoodLevel;
 	}
 }
 

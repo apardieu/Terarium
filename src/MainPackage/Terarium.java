@@ -47,12 +47,16 @@ public class Terarium {
 				if(a!=b) {
 					if(a.getX()==b.getX() & a.getY()==b.getY()) {
 						if((a instanceof Carnivore) & (b instanceof Herbivore)) {
-							((Carnivore)a).kill(b);
-							l.add(b);
+							if(a.getFoodLevel()+b.getFoodLevel()/10<=a.getMaxFoodLevel()) {
+								((Carnivore)a).kill(b);
+								l.add(b);
+							}
 						}
 						if((b instanceof Carnivore) & (a instanceof Herbivore)) {
-							((Carnivore)b).kill(a);
-							l.add(a);
+							if(b.getFoodLevel()+a.getFoodLevel()/10<=b.getMaxFoodLevel()) {
+								((Carnivore)b).kill(a);
+								l.add(a);
+							}
 						}
 					}
 				}
@@ -60,6 +64,10 @@ public class Terarium {
 			nbInsecte-=l.size();
 			for(Insecte ins : l) {
 				this.listeInsecte.remove(ins);
+			}
+			if(a.getFoodLevel()<1) {
+				this.listeInsecte.remove(a);
+				nbInsecte--;
 			}
 			i++;
 		}
