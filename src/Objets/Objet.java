@@ -1,41 +1,24 @@
 package Objets;
 
+import java.io.File;
+
 import InsectePackage.Insecte;
 import Nourriture.Nourriture;
 
-public class Objet{
-	private int price;
-	private Insecte insecte;
-	protected Soins soin;
-	protected Substrat substrat;
-	protected Nourriture food;
-	
-	public Objet(int price, Insecte insecte) {
-		this.setPrice(price);
-		this.setInsecte(insecte);
-	}
-	
-	public Objet(int price, Soins soin) {
-		this.setPrice(price);
-		this.soin = soin;
-	}
-	
-	public Objet(int price, Substrat substrat) {
-		this.setPrice(price);
-		this.substrat = substrat;
-	}
-	
-	public Objet(int price, Nourriture food) {
-		this.setPrice(price);
-		this.food = food;
+public abstract class Objet{
+	protected int price;
+	protected File image;
+	private int xShop;
+	private int lShop;
+	private int hShop;
+	private int yShop;
+
+	public File getImage() {
+		return image;
 	}
 
-	public Insecte getInsecte() {
-		return insecte;
-	}
-
-	public void setInsecte(Insecte insecte) {
-		this.insecte = insecte;
+	public void setImage(File image) {
+		this.image = image;
 	}
 
 	public int getPrice() {
@@ -44,6 +27,38 @@ public class Objet{
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public int getxShop() {
+		return xShop;
+	}
+
+	public void setxShop(int xShop) {
+		this.xShop = xShop;
+	}
+
+	public int getyShop() {
+		return yShop;
+	}
+
+	public void setyShop(int yShop) {
+		this.yShop = yShop;
+	}
+
+	public int getlShop() {
+		return lShop;
+	}
+
+	public void setlShop(int lShop) {
+		this.lShop = lShop;
+	}
+
+	public int gethShop() {
+		return hShop;
+	}
+
+	public void sethShop(int hShop) {
+		this.hShop = hShop;
 	}
 	
 }

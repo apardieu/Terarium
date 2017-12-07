@@ -1,10 +1,12 @@
 package InsectePackage;
 import Nourriture.Nourriture;
+import Objets.Objet;
+
 import java.io.File;
 
 //Thread Deplacer : Insecte.X
 
-public abstract class Insecte {
+public abstract class Insecte extends Objet{
 	protected String name;
 	protected int foodLevel;
 	private int direction = 1;
@@ -13,7 +15,6 @@ public abstract class Insecte {
 	protected int hauteur=80;
 	protected int largeur=60;
 	protected Sexe sexe;
-	private File image;
 	private int maxFoodLevel = 100000;
 	private float speedTire = 3;
 

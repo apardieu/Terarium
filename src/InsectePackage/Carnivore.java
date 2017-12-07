@@ -7,6 +7,7 @@ public class Carnivore extends Insecte{
 		name = "Carnivore";
 		foodLevel=(int) (getMaxFoodLevel()*0.3);
 		setImage(new File("resources/carnivore.png"));
+		setPrice(1000);
 	}
 	
 	public Carnivore(String n, int a, int b) {

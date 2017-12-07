@@ -6,6 +6,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import InsectePackage.Insecte;
@@ -21,6 +24,9 @@ public class View extends JPanel implements MouseListener{
 	protected boolean prev=false;
 	protected File nextArrow;
 	protected File prevArrow;
+	protected BoutiqueView shopView;
+	protected Boutique shop;
+	private List<Objet> listeInsecte = new LinkedList<Objet>();
 	
 	
 	public View() {
@@ -70,10 +76,14 @@ public class View extends JPanel implements MouseListener{
 		            		g.fillRect((x-15)*this.getWidth()/809, (y-15)*this.getHeight()/604, (l+30)*this.getWidth()/809, (h+30)*this.getHeight()/604);
 		            		g.setColor(Color.WHITE);
 		            		g.fillRect((x-10)*this.getWidth()/809, (y-10)*this.getHeight()/604, (l+20)*this.getWidth()/809, (h+20)*this.getHeight()/604);
-		            		g.drawImage(ImageIO.read(o.getInsecte().getImage()), x*this.getWidth()/809, y*this.getHeight()/604,l*this.getWidth()/809, h*this.getHeight()/604, null);
+		            		g.drawImage(ImageIO.read(o.getImage()), x*this.getWidth()/809, y*this.getHeight()/604,l*this.getWidth()/809, h*this.getHeight()/604, null);
 		            		g.setColor(Color.BLACK);
 		            		g.setFont(new Font("Dialog", Font.BOLD, 15*this.getWidth()/809));
 		            		g.drawString("Price : " + o.getPrice(), (x-15)*this.getWidth()/809, (y+h+30)*this.getHeight()/604);
+		            		o.setxShop((x-15)*this.getWidth()/809);
+		            		o.setlShop((l+30)*this.getWidth()/809);
+		            		o.sethShop((h+30)*this.getHeight()/604);
+		            		o.setyShop((y-15)*this.getHeight()/604);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -83,7 +93,7 @@ public class View extends JPanel implements MouseListener{
 		            	}
 		            	else
 		            		x+=l+40;
-		            	if(nbPage==shop.getListeInsecte().size()/23) {
+		            	if(nbPage==shop.getListeInsecte().size()/21) {
 		            		next=false;
 		            		nextArrow = new File("nextArrowLocked.png");
 		            	}
@@ -99,6 +109,7 @@ public class View extends JPanel implements MouseListener{
 		            		prev=true;
 		            		prevArrow = new File("prevArrow.png");
 		            	}
+		            	listeInsecte = shop.getListeInsecte();
 	            	}
 	            try {
 	            	g.drawImage(ImageIO.read(nextArrow), 700*this.getWidth()/809, 525*this.getHeight()/604, 60*this.getWidth()/809, 60*this.getHeight()/604, null);
@@ -136,6 +147,14 @@ public class View extends JPanel implements MouseListener{
 		if(panel instanceof BoutiqueView & prev==true) {
 			if(e.getX()>40*this.getWidth()/809 & e.getX()<100*this.getWidth()/809 & e.getY()>525*this.getHeight()/604 & e.getY()<585*this.getHeight()/604) {
 				nbPage--;
+			}
+		}
+		if(panel instanceof BoutiqueView) {
+			for(int i=nbPage*21; (i<(nbPage+1)*21 & i<listeInsecte.size()); i++) {
+				Objet o = listeInsecte.get(i);
+				if(e.getX()>o.getxShop() & e.getX()<(o.getxShop()+o.getlShop()) & e.getY()>o.getyShop() & e.getY()<(o.getyShop()+o.gethShop())) {
+					System.out.println("Price : " + o.getPrice());
+				}
 			}
 		}
 	}
