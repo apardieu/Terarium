@@ -50,19 +50,41 @@ public class Terarium extends Objet{
 				nbInsecte--;
 			}
 			List<Insecte> l = new LinkedList<Insecte>();
+			if(a instanceof Herbivore) {
+				if(a.getFoodLevel()<a.getMaxFoodLevel()/10) {
+					((Herbivore)a).zombie();
+				}
+				if(a.getFoodLevel()>a.getMaxFoodLevel()*0.8) {
+					((Herbivore)a).normal();
+				}
+			}
 			for(Insecte b : getListeInsecte()) {
 				if(a!=b) {
 					if(a.getX()==b.getX() & a.getY()==b.getY()) {
 						if((a instanceof Carnivore) & (b instanceof Herbivore)) {
 							if(a.getFoodLevel()+b.getFoodLevel()/10<=a.getMaxFoodLevel()) {
-								((Carnivore)a).kill(b);
+								a.kill(b);
 								l.add(b);
 							}
 						}
 						if((b instanceof Carnivore) & (a instanceof Herbivore)) {
 							if(b.getFoodLevel()+a.getFoodLevel()/10<=b.getMaxFoodLevel()) {
-								((Carnivore)b).kill(a);
+								b.kill(a);
 								l.add(a);
+							}
+						}
+						if((a instanceof Herbivore) & (b instanceof Herbivore)) {
+							if(a.isCanibale()==true & (b instanceof Herbivore) & b.isCanibale()==false) {
+								if(a.getFoodLevel()+b.getFoodLevel()/10<=a.getMaxFoodLevel()) {
+									a.kill(b);
+									l.add(b);
+								}
+							}
+							if(b.isCanibale()==true & (a instanceof Herbivore) & a.isCanibale()==false) {
+								if(b.getFoodLevel()+a.getFoodLevel()/10<=b.getMaxFoodLevel()) {
+									b.kill(a);
+									l.add(a);
+								}
 							}
 						}
 					}
@@ -74,6 +96,7 @@ public class Terarium extends Objet{
 			}
 			i++;
 		}
+		
 	}
 	
 	public void description() {

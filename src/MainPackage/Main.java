@@ -8,12 +8,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		Terarium t1 = new Terarium();
-		Herbivore h = new Herbivore();
-		h.setSexe(Sexe.MALE);
-		h.setX(300);
-		t1.addInsecte(h);
-		t1.addInsecte(new Carnivore());
-		t1.description();
 		IHM ihm = new IHM(t1);
 		GameController GC = new GameController(t1, ihm);
 		GC.start();

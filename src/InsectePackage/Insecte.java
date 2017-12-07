@@ -14,7 +14,8 @@ public abstract class Insecte extends Objet{
 	protected int largeur=60;
 	protected Sexe sexe;
 	private int maxFoodLevel = 100000;
-	private float speedTire = 3;
+	private float speedTire = 20;
+	private boolean canibale;
 
 	//Move the insect 1 step by 1 step, check if the insect have to move right or left and loose life each step
 	
@@ -110,6 +111,26 @@ public abstract class Insecte extends Objet{
 
 	public void setMaxFoodLevel(int maxFoodLevel) {
 		this.maxFoodLevel = maxFoodLevel;
+	}
+	
+	//Kill an insect and win 10% of the life of the victim
+	
+	public void kill(Insecte m) {
+		if(m.isCanibale()==true) {
+			if ((foodLevel+m.foodLevel/10)<this.getMaxFoodLevel())
+				foodLevel+=m.foodLevel/10;
+			else
+				foodLevel=this.getMaxFoodLevel();
+			m.foodLevel=0;
+		}
+	}
+
+	public boolean isCanibale() {
+		return canibale;
+	}
+
+	public void setCanibale(boolean canibale) {
+		this.canibale = canibale;
 	}
 }
 
