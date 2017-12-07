@@ -26,6 +26,8 @@ public class View extends JPanel implements MouseListener{
 	protected File prevArrow;
 	protected BoutiqueView shopView;
 	protected Boutique shop;
+	protected boolean insecteShop = false;
+	protected boolean mainShop = true;
 	private List<Objet> listeInsecte = new LinkedList<Objet>();
 	
 	
@@ -41,7 +43,7 @@ public class View extends JPanel implements MouseListener{
 			Terarium terarium = tera.terarium;
 	        super.paintComponent(g);
 	            try {
-					g.drawImage(ImageIO.read(terarium.getImage()), 0, 0, this.getWidth(), this.getHeight(), null);
+	            	g.drawImage(ImageIO.read(terarium.getImage()), 0, 0, this.getWidth(), this.getHeight(), null);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -62,8 +64,17 @@ public class View extends JPanel implements MouseListener{
 			BoutiqueView shopView = (BoutiqueView) panel;
 			Boutique shop = shopView.shop;
 	        super.paintComponent(g);
+	        if(mainShop==true) {
+	        	try {
+					g.drawImage(ImageIO.read(new File("mainShop.jpg")), 0, 0, this.getWidth(), this.getHeight(), null);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	        }
+	        if(insecteShop==true) {
 	            try {
-					g.drawImage(ImageIO.read(new File("boutique.jpg")), 0, 0, this.getWidth(), this.getHeight(), null);
+	            	g.drawImage(ImageIO.read(new File("boutique.jpg")), 0, 0, this.getWidth(), this.getHeight(), null);
+	            	g.drawImage(ImageIO.read(new File("main.png")), 716*this.getWidth()/809, 10*this.getHeight()/604, 65*this.getWidth()/809, 57*this.getHeight()/604, null);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -117,6 +128,7 @@ public class View extends JPanel implements MouseListener{
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+	        }
 		}
     }
 	
@@ -139,22 +151,36 @@ public class View extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(panel instanceof BoutiqueView & next==true) {
-			if(e.getX()>700*this.getWidth()/809 & e.getX()<760*this.getWidth()/809 & e.getY()>525*this.getHeight()/604 & e.getY()<585*this.getHeight()/604) {
-				nbPage++;
-			}
-		}
-		if(panel instanceof BoutiqueView & prev==true) {
-			if(e.getX()>40*this.getWidth()/809 & e.getX()<100*this.getWidth()/809 & e.getY()>525*this.getHeight()/604 & e.getY()<585*this.getHeight()/604) {
-				nbPage--;
-			}
-		}
-		if(panel instanceof BoutiqueView) {
-			for(int i=nbPage*21; (i<(nbPage+1)*21 & i<listeInsecte.size()); i++) {
-				Objet o = listeInsecte.get(i);
-				if(e.getX()>o.getxShop() & e.getX()<(o.getxShop()+o.getlShop()) & e.getY()>o.getyShop() & e.getY()<(o.getyShop()+o.gethShop())) {
-					System.out.println("Price : " + o.getPrice());
+		if(insecteShop==true) {
+			if(panel instanceof BoutiqueView & next==true) {
+				if(e.getX()>700*this.getWidth()/809 & e.getX()<760*this.getWidth()/809 & e.getY()>525*this.getHeight()/604 & e.getY()<585*this.getHeight()/604) {
+					nbPage++;
 				}
+			}
+			if(panel instanceof BoutiqueView & prev==true) {
+				if(e.getX()>40*this.getWidth()/809 & e.getX()<100*this.getWidth()/809 & e.getY()>525*this.getHeight()/604 & e.getY()<585*this.getHeight()/604) {
+					nbPage--;
+				}
+			}
+			if(panel instanceof BoutiqueView) {
+				for(int i=nbPage*21; (i<(nbPage+1)*21 & i<listeInsecte.size()); i++) {
+					Objet o = listeInsecte.get(i);
+					if(e.getX()>o.getxShop() & e.getX()<(o.getxShop()+o.getlShop()) & e.getY()>o.getyShop() & e.getY()<(o.getyShop()+o.gethShop())) {
+						System.out.println("Price : " + o.getPrice());
+					}
+				}
+			}
+			if(panel instanceof BoutiqueView) {
+				if(e.getX()>716*this.getWidth()/809 & e.getX()<781*this.getWidth()/809 & e.getY()>10*this.getHeight()/604 & e.getY()<67*this.getHeight()/604) {
+					insecteShop=false;
+					mainShop=true;
+				}
+			}
+		}
+		if(mainShop==true & panel instanceof BoutiqueView) {
+			if(e.getX()>284*this.getWidth()/809 & e.getX()<493*this.getWidth()/809 & e.getY()>132*this.getHeight()/604 & e.getY()<179*this.getHeight()/604) {
+				mainShop=false;
+				insecteShop=true;
 			}
 		}
 	}
