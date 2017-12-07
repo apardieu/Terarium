@@ -1,4 +1,5 @@
 package IHMPackage;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -7,7 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
@@ -24,19 +24,21 @@ public class IHM extends JFrame{
 	protected BoutiqueView shop;
 	protected Data donnes;
 	protected Border border;
+	protected boolean teraView;
 	
 	public IHM(Terarium t) {
 		startTime = (int)(System.currentTimeMillis()/1000);
 		setTitle("Tera Land : The Origins");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setMinimumSize(new Dimension(1080, 720));
+		setMinimumSize(new Dimension(JFrame.MAXIMIZED_HORIZ, JFrame.MAXIMIZED_VERT));
 		
-		view = new View();
 		tera = new TerariumView(t);
-		shop = new BoutiqueView(new Boutique());
+		Boutique boutique = new Boutique();
+		shop = new BoutiqueView(boutique);
+		view = new View(tera, shop);
 		donnes = new Data();
 		border = new Border();
-		view.setPanel(tera);
+		teraView = true;
 		
 		tera.setBackground(Color.blue);
 		donnes.setBackground(Color.green);
@@ -45,7 +47,7 @@ public class IHM extends JFrame{
 		border.getNewHButton().addActionListener(new ButtonAddHerbivore(t));
 		border.getNewCButton().addActionListener(new ButtonAddCarnivore(t));
 		
-		border.getPrintBoutique().addActionListener(new ButtonPrintBoutique(view, shop, tera));
+		border.getPrintBoutique().addActionListener(new ButtonPrintBoutique(view));
 		
 		GridBagLayout gbl = new GridBagLayout();
 		Container container = getContentPane();
@@ -74,6 +76,8 @@ public class IHM extends JFrame{
 		gbc.anchor = GridBagConstraints.CENTER;
 		gbc.fill = GridBagConstraints.BOTH;
 		container.add(border, gbc);
+		
+		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -114,22 +118,22 @@ public class IHM extends JFrame{
 	}
 	
 	class ButtonPrintBoutique implements ActionListener{
-		protected JPanel view;
-		protected BoutiqueView shop;
-		protected TerariumView tera;
+		protected View view;
 		
-		public ButtonPrintBoutique(JPanel view, BoutiqueView shop, TerariumView tera) {
+		public ButtonPrintBoutique(View view) {
 			this.view = view;
-			this.shop = shop;
-			this.tera = tera;
 		}
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(((View) view).getPanel() instanceof BoutiqueView)
-				((View) view).setPanel(tera);
-			else
-				((View) view).setPanel(shop);
-		}
+			if(teraView==false) {
+				teraView=true;
+				view.TeraView();
+			}
+			else {
+				teraView=false;
+				view.boutiqueView();
+			}
 	}
+}
 }

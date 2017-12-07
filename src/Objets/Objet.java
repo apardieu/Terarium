@@ -2,9 +2,6 @@ package Objets;
 
 import java.io.File;
 
-import InsectePackage.Insecte;
-import Nourriture.Nourriture;
-
 public abstract class Objet{
 	protected int price;
 	protected File image;
