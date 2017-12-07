@@ -16,15 +16,21 @@ public class View extends JPanel{
 		cl = new CardLayout();
 		setLayout(cl);
 		
+		//Add the two view with Terrarium first
+		
 		this.add(tera, "tera");
 		this.add(shop, "shop");
 	}
+	
+	//Show the boutique
 	
 	public void boutiqueView() {
 		shop.mainShop=true;
 		shop.nbPage=0;
 		cl.last(this);
 	}
+	
+	//Show the terrarium
 	
 	public void TeraView() {
 		cl.first(this);

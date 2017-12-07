@@ -15,6 +15,9 @@ public class Data extends JPanel{
 		setContenantLabel(new JLabel("Nombre d'individus/Capacité :"));
 		setTempsLabel(new JLabel("Temps: "));
 		setArgentLabel(new JLabel("Argent: "));
+		
+		//GridBagLayout is used to place the buttons
+		
 		GridBagLayout gbl = new GridBagLayout();
 		setLayout(gbl);
 		GridBagConstraints gbc = new GridBagConstraints();

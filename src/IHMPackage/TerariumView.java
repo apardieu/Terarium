@@ -18,11 +18,16 @@ public class TerariumView extends JPanel{
 	
 	protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        
+        //Paint the background
         try {
 			g.drawImage(ImageIO.read(terarium.getImage()), 0, 0, this.getWidth(), this.getHeight(), null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+        
+        //Paint each insect of the terrarium
+        
         synchronized(terarium.getListeInsecte()) {
 	        for(Insecte ins : terarium.getListeInsecte()) 
 	        {
@@ -36,6 +41,8 @@ public class TerariumView extends JPanel{
 	        }
         }
     }
+	
+	//Paint the Health bar at the top of the insect
 	
 	public void drawHealthBar(Insecte ins, Graphics g)
 	{

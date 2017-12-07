@@ -1,5 +1,4 @@
 package IHMPackage;
-
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -8,13 +7,10 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
-
 import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
 import MainPackage.Terarium;
 import Objets.Boutique;
-
-//Thread AutoRefresh : repaint();
 
 public class IHM extends JFrame{
 	private static final long serialVersionUID = -3796859435142574261L;
@@ -27,6 +23,9 @@ public class IHM extends JFrame{
 	protected boolean teraView;
 	
 	public IHM(Terarium t) {
+		
+		//Initialize time when app is launched
+		
 		startTime = (int)(System.currentTimeMillis()/1000);
 		setTitle("Tera Land : The Origins");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,14 +39,14 @@ public class IHM extends JFrame{
 		border = new Border();
 		teraView = true;
 		
-		tera.setBackground(Color.blue);
-		donnes.setBackground(Color.green);
+		donnes.setBackground(Color.black);
 		border.setBackground(Color.black);
 		
 		border.getNewHButton().addActionListener(new ButtonAddHerbivore(t));
 		border.getNewCButton().addActionListener(new ButtonAddCarnivore(t));
-		
 		border.getPrintBoutique().addActionListener(new ButtonPrintBoutique(view));
+		
+		//Add view with 95% of Height and 85% of Width
 		
 		GridBagLayout gbl = new GridBagLayout();
 		Container container = getContentPane();
@@ -60,6 +59,8 @@ public class IHM extends JFrame{
 		gbc.fill = GridBagConstraints.BOTH;
 		container.add(view, gbc);
 		
+		//Add donnes with 85% of Width and 5% of Height
+		
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.weightx = 0.85;
@@ -67,6 +68,8 @@ public class IHM extends JFrame{
 		gbc.anchor = GridBagConstraints.LAST_LINE_START;
 		gbc.fill = GridBagConstraints.BOTH;
 		container.add(donnes, gbc);
+		
+		//Add border with 15% of Width and 100% of Height
 		
 		gbc.gridx = 1;
 		gbc.gridy = 0;
@@ -78,12 +81,16 @@ public class IHM extends JFrame{
 		container.add(border, gbc);
 		
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
 	
+	//Refresh time, money and NbInsect/Capacity
+	
 	public void refreshData(Terarium t) {
+		donnes.getContenantLabel().setForeground(Color.white);
+		donnes.getTempsLabel().setForeground(Color.white);
+		donnes.getArgentLabel().setForeground(Color.white);
 		donnes.getContenantLabel().setText("Nombre d'individus/Capacité : " + t.getNbInsecte() + "/" + t.getCapacity());
 		donnes.getTempsLabel().setText("Temps: " + ((int)(System.currentTimeMillis()/1000) - startTime));
 		donnes.getArgentLabel().setText("Argent : " + "0");
@@ -116,6 +123,8 @@ public class IHM extends JFrame{
 			t.addInsecte(c);
 		}
 	}
+	
+	//Change the Card in the cardLayout of view to switch between Boutique and Terrarium
 	
 	class ButtonPrintBoutique implements ActionListener{
 		protected View view;

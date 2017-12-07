@@ -10,13 +10,7 @@ public class Carnivore extends Insecte{
 		setPrice(1000);
 	}
 	
-	public Carnivore(String n, int a, int b) {
-		name = n;
-		setX(a);
-		setY(b);
-		foodLevel=30;
-		setImage(new File("resources/carnivore.png"));
-	}
+	//Kill an insect and win 10% of the life of the victim
 	
 	public void kill(Insecte m) {
 		if ((foodLevel+m.foodLevel/10)<this.getMaxFoodLevel())

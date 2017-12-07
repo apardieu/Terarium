@@ -1,14 +1,14 @@
 package IHMPackage;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Border extends JPanel{
+	private static final long serialVersionUID = -2252455145201448815L;
 	private JButton nourrirButton = null;
 	private JButton newHButton = null;
 	private JButton newCButton = null;
@@ -19,6 +19,8 @@ public class Border extends JPanel{
 		setNewHButton(new JButton("Herbivore"));
 		setNewCButton(new JButton("Carnivore"));
 		setPrintBoutique(new JButton("Boutique"));
+		
+		//GridBagLayout is used to place the buttons
 		
 		GridBagLayout gbl = new GridBagLayout();
 		setLayout(gbl);
@@ -45,8 +47,6 @@ public class Border extends JPanel{
 		gbc.weightx = 1;
 		gbc.gridwidth = 2;
 		add(getPrintBoutique(), gbc);
-		
-		
 	}
 
 	public JButton getNewHButton() {

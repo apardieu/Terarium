@@ -4,8 +4,6 @@ import Objets.Objet;
 
 import java.io.File;
 
-//Thread Deplacer : Insecte.X
-
 public abstract class Insecte extends Objet{
 	protected String name;
 	protected int foodLevel;
@@ -18,6 +16,8 @@ public abstract class Insecte extends Objet{
 	private int maxFoodLevel = 100000;
 	private float speedTire = 3;
 
+	//Move the insect 1 step by 1 step, check if the insect have to move right or left and loose life each step
+	
 	public void deplacer() {
 		if(foodLevel>0) {
 			if(getX()+getLargeur()>= 809)

@@ -10,6 +10,8 @@ public class GameController extends Thread{
 		this.ihm = ihm;
 	}
 	
+	//Thread move the insects, refresh data (time, money etc) and repaint the gui
+	
 	public void run() {
 		while(true) {
 			terarium.deplacerInsectes();

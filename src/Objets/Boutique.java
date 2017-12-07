@@ -4,6 +4,7 @@ import java.util.List;
 
 import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
+import MainPackage.Player;
 
 public class Boutique{
 	private List<Objet> listeInsecte = new LinkedList<Objet>();
@@ -39,5 +40,14 @@ public class Boutique{
 
 	public void setListeInsecte(List<Objet> listeInsecte) {
 		this.listeInsecte = listeInsecte;
+	}
+	
+	public boolean buy(Player p, Objet o) {
+		
+		if(p.getArgent()>=o.getPrice()) {
+			return true;
+		}
+		else
+			return false;
 	}
 }

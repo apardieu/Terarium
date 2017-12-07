@@ -1,4 +1,5 @@
 package Nourriture;
+
 public abstract class Nourriture {
 	protected String name;
 	private int foodPower;

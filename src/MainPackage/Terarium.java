@@ -4,17 +4,15 @@ import java.util.*;
 import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
 import InsectePackage.Insecte;
+import Objets.Objet;
 
-//Thread CheckPosition : ListInsecte et ses insectes;
-
-public class Terarium {
+public class Terarium extends Objet{
 	
 	//Propriétés
 	
 	private int capacity;
 	private List<Insecte> listeInsecte = Collections.synchronizedList(new LinkedList<Insecte>());
 	private int nbInsecte;
-	private File image;
 	
 	public Terarium() {
 		setCapacity(30);
@@ -32,6 +30,8 @@ public class Terarium {
 		nbInsecte = getListeInsecte().size();
 	}
 	
+	//Move an insect and check the position of the other in order to kill then if possible
+	
 	public void deplacerInsectes() {
 		try {
 			Thread.sleep(5);
@@ -39,6 +39,9 @@ public class Terarium {
 			e.printStackTrace();
 		}
 		int i = 0;
+		
+		//Using a while loop because the number of insect change into the loop
+		
 		while(i<nbInsecte) {
 			Insecte a = this.listeInsecte.get(i);
 			a.deplacer();
