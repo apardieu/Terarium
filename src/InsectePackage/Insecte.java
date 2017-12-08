@@ -4,29 +4,31 @@ import Objets.Objet;
 
 import java.io.File;
 
+import MainPackage.Variables;
+
 public abstract class Insecte extends Objet{
 	protected int foodLevel;
 	private int direction = 1;
 	protected int x= 0;
 	protected int y=45;
-	protected int hauteur=80;
-	protected int largeur=60;
-	protected int xp=x+largeur;
-	protected int yp=y+hauteur;
+	protected int hauteur=121;
+	protected int largeur=108;
 	protected Sexe sexe;
 	private int maxFoodLevel = 100000;
 	private float speedTire;
 	private boolean canibale;
+	protected int percentageStolen=0;
+	protected int speedMove;
 
 	//Move the insect 1 step by 1 step, check if the insect have to move right or left and loose life each step
 	
 	public void deplacer() {
 		if(foodLevel>0) {
-			if(getX()+getLargeur()>= 809)
+			if(getX()+getLargeur()>= Variables.LARGEUR)
         		setDirection(-1);
         	else if(getX() <= 0)
         		setDirection(1);
-			setX(getX() + 1 * getDirection());
+			setX(getX() + speedMove * getDirection());
 			foodLevel-=getSpeedTire();
 		}
 	}
@@ -41,13 +43,11 @@ public abstract class Insecte extends Objet{
 	//Kill an insect and win 10% of the life of the victim
 	
 	public void kill(Insecte m) {
-		if(isCanibale()==true) {
-			if ((foodLevel+m.foodLevel/10)<this.getMaxFoodLevel())
-				foodLevel+=m.foodLevel/10;
+			if ((foodLevel+m.foodLevel*percentageStolen/100)<this.getMaxFoodLevel())
+				foodLevel+=m.foodLevel*percentageStolen/100;
 			else
 				foodLevel=this.getMaxFoodLevel();
 			m.foodLevel=0;
-		}
 	}
 	
 	public void decrire() {
@@ -140,29 +140,6 @@ public abstract class Insecte extends Objet{
 
 	public void setSpeedTire(float speedTire) {
 		this.speedTire = speedTire;
-	}
-	
-	public int getXp() {
-		return xp;
-	}
-
-	public void setXp(int xp) {
-		this.xp = xp;
-	}
-
-	public int getYp() {
-		return yp;
-	}
-
-	public void setYp(int yp) {
-		this.yp = yp;
-	}
-
-	public void setSize(float echelleLargeur, float echelleHauteur) {
-		this.x = (int) (x*echelleLargeur);
-		this.y = (int) (y*echelleHauteur);
-		this.largeur = (int) (largeur*echelleLargeur);
-		this.hauteur = (int) (hauteur*echelleHauteur);
 	}
 }
 

@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import InsectePackage.Insecte;
 import MainPackage.Terarium;
+import MainPackage.Variables;
 
 public class TerariumView extends JPanel{
 	private static final long serialVersionUID = -8916755259904328022L;
@@ -19,8 +20,8 @@ public class TerariumView extends JPanel{
 	protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        float echelleLargeur = (float) (((double) this.getWidth())/809);
-        float echelleHauteur = (float) (((double) this.getHeight())/604);
+        float eL = (float) (((double) this.getWidth())/Variables.LARGEUR); //Echelle largeur
+        float eH = (float) (((double) this.getHeight())/Variables.HAUTEUR); //Echelle Hauteur
 
         //Paint the background
         try {
@@ -35,25 +36,24 @@ public class TerariumView extends JPanel{
 	        for(Insecte ins : terarium.getListeInsecte()) 
 	        {
 	        	try {
-	        		ins.setSize(echelleLargeur, echelleHauteur);
-	        		ins.setY((int) (this.getHeight()-ins.getHauteur()*echelleHauteur));
-					g.drawImage(ImageIO.read(ins.getImage()), ins.getX(), ins.getY(), ins.getLargeur(), ins.getHauteur(), null); //changer en getLargeur et getHauteur qui sera défini pour chaque type d'insecte
+	        		ins.setY((int) (this.getHeight()-ins.getHauteur()*eH));
+					g.drawImage(ImageIO.read(ins.getImage()),(int) (ins.getX()*eL), ins.getY(),(int) (ins.getLargeur()*eL),(int) (ins.getHauteur()*eH), null);
 				} catch (IOException e) {
 					e.printStackTrace(); 
 				}
-	        	this.drawHealthBar(ins, g);
+	        	this.drawHealthBar(ins, g, eL, eH);
 	        }
         }
     }
 	
 	//Paint the Health bar at the top of the insect
 	
-	public void drawHealthBar(Insecte ins, Graphics g)
+	public void drawHealthBar(Insecte ins, Graphics g, float eL, float eH)
 	{
 		int emptyfood = ins.getMaxFoodLevel()-ins.getFoodLevel();
 		g.setColor(Color.GREEN);
-		g.fillRect(ins.getX()*this.getWidth()/809, ins.getY()-10, ins.getFoodLevel()/100*ins.getLargeur()*this.getWidth()/809/1000,5*this.getHeight()/604);
+		g.fillRect((int) (ins.getX()*eL), ins.getY()-10,(int) (ins.getFoodLevel()*ins.getLargeur()*eL/ins.getMaxFoodLevel()),(int) (5*eH));
 		g.setColor(Color.RED);
-		g.fillRect(ins.getX()*this.getWidth()/809+ins.getFoodLevel()/100*ins.getLargeur()*this.getWidth()/809/1000, ins.getY()-10, emptyfood*this.getWidth()/809*ins.getLargeur()/ins.getMaxFoodLevel(),5*this.getHeight()/604);
+		g.fillRect((int) (ins.getX()*eL+ins.getFoodLevel()*ins.getLargeur()*eL/ins.getMaxFoodLevel()), ins.getY()-10, (int) (emptyfood*eL*ins.getLargeur()/ins.getMaxFoodLevel()),(int) (5*eH));
 	}
 }

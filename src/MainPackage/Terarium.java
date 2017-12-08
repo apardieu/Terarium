@@ -34,7 +34,7 @@ public class Terarium extends Objet{
 	
 	public void deplacerInsectes() {
 		try {
-			Thread.sleep(5);
+			Thread.sleep(3);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

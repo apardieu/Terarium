@@ -10,5 +10,7 @@ public class Carnivore extends Insecte{
 		setPrice(1000);
 		setCanibale(true);
 		setSpeedTire(3);
+		percentageStolen = 10;
+		speedMove=1;
 	}
 }

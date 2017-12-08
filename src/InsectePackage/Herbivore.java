@@ -10,25 +10,20 @@ public class Herbivore extends Insecte{
 		setPrice(500);
 		setCanibale(false);
 		setSpeedTire(2);
-	}
-	
-	public Herbivore(String n, int a, int b) {
-		name = n;
-		setX(a);
-		setY(b);
-		foodLevel=50000;
-		setImage(new File("resources/mouchetest.png"));
+		speedMove=2;
 	}
 	
 	public void zombie() {
 		this.setImage(new File("resources/mouchetestZombie.png"));
 		this.setCanibale(true);
 		this.setSpeedTire(0);
+		this.speedMove=1;
 	}
 	
 	public void normal() {
 		this.setImage(new File("resources/mouchetest.png"));
 		this.setCanibale(false);
 		setSpeedTire(2);
+		this.speedMove=1;
 	}
 }
