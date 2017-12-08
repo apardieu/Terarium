@@ -9,5 +9,6 @@ public class Carnivore extends Insecte{
 		setImage(new File("resources/carnivore.png"));
 		setPrice(1000);
 		setCanibale(true);
+		setSpeedTire(3);
 	}
 }

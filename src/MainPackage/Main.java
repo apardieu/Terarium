@@ -1,8 +1,5 @@
 package MainPackage;
 import IHMPackage.IHM;
-import InsectePackage.Carnivore;
-import InsectePackage.Herbivore;
-import InsectePackage.Sexe;
 
 public class Main {
 

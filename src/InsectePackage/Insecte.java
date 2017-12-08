@@ -5,16 +5,17 @@ import Objets.Objet;
 import java.io.File;
 
 public abstract class Insecte extends Objet{
-	protected String name;
 	protected int foodLevel;
 	private int direction = 1;
 	protected int x= 0;
 	protected int y=45;
 	protected int hauteur=80;
 	protected int largeur=60;
+	protected int xp=x+largeur;
+	protected int yp=y+hauteur;
 	protected Sexe sexe;
 	private int maxFoodLevel = 100000;
-	private float speedTire = 20;
+	private float speedTire;
 	private boolean canibale;
 
 	//Move the insect 1 step by 1 step, check if the insect have to move right or left and loose life each step
@@ -26,7 +27,7 @@ public abstract class Insecte extends Objet{
         	else if(getX() <= 0)
         		setDirection(1);
 			setX(getX() + 1 * getDirection());
-			foodLevel-=speedTire;
+			foodLevel-=getSpeedTire();
 		}
 	}
 	
@@ -35,6 +36,18 @@ public abstract class Insecte extends Objet{
 			foodLevel=getMaxFoodLevel();
 		else
 			foodLevel+=n.getFoodPower();
+	}
+	
+	//Kill an insect and win 10% of the life of the victim
+	
+	public void kill(Insecte m) {
+		if(isCanibale()==true) {
+			if ((foodLevel+m.foodLevel/10)<this.getMaxFoodLevel())
+				foodLevel+=m.foodLevel/10;
+			else
+				foodLevel=this.getMaxFoodLevel();
+			m.foodLevel=0;
+		}
 	}
 	
 	public void decrire() {
@@ -112,18 +125,6 @@ public abstract class Insecte extends Objet{
 	public void setMaxFoodLevel(int maxFoodLevel) {
 		this.maxFoodLevel = maxFoodLevel;
 	}
-	
-	//Kill an insect and win 10% of the life of the victim
-	
-	public void kill(Insecte m) {
-		if(m.isCanibale()==true) {
-			if ((foodLevel+m.foodLevel/10)<this.getMaxFoodLevel())
-				foodLevel+=m.foodLevel/10;
-			else
-				foodLevel=this.getMaxFoodLevel();
-			m.foodLevel=0;
-		}
-	}
 
 	public boolean isCanibale() {
 		return canibale;
@@ -131,6 +132,37 @@ public abstract class Insecte extends Objet{
 
 	public void setCanibale(boolean canibale) {
 		this.canibale = canibale;
+	}
+
+	public float getSpeedTire() {
+		return speedTire;
+	}
+
+	public void setSpeedTire(float speedTire) {
+		this.speedTire = speedTire;
+	}
+	
+	public int getXp() {
+		return xp;
+	}
+
+	public void setXp(int xp) {
+		this.xp = xp;
+	}
+
+	public int getYp() {
+		return yp;
+	}
+
+	public void setYp(int yp) {
+		this.yp = yp;
+	}
+
+	public void setSize(float echelleLargeur, float echelleHauteur) {
+		this.x = (int) (x*echelleLargeur);
+		this.y = (int) (y*echelleHauteur);
+		this.largeur = (int) (largeur*echelleLargeur);
+		this.hauteur = (int) (hauteur*echelleHauteur);
 	}
 }
 

@@ -9,6 +9,7 @@ public class Herbivore extends Insecte{
 		setImage(new File("resources/mouchetest.png"));
 		setPrice(500);
 		setCanibale(false);
+		setSpeedTire(2);
 	}
 	
 	public Herbivore(String n, int a, int b) {
@@ -22,10 +23,12 @@ public class Herbivore extends Insecte{
 	public void zombie() {
 		this.setImage(new File("resources/mouchetestZombie.png"));
 		this.setCanibale(true);
+		this.setSpeedTire(0);
 	}
 	
 	public void normal() {
 		this.setImage(new File("resources/mouchetest.png"));
 		this.setCanibale(false);
+		setSpeedTire(2);
 	}
 }

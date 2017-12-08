@@ -5,6 +5,7 @@ import java.io.File;
 public abstract class Objet{
 	protected int price;
 	protected File image;
+	protected String name;
 	private int xShop;
 	private int lShop;
 	private int hShop;
@@ -57,5 +58,11 @@ public abstract class Objet{
 	public void sethShop(int hShop) {
 		this.hShop = hShop;
 	}
-	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

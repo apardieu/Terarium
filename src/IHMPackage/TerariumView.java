@@ -19,6 +19,9 @@ public class TerariumView extends JPanel{
 	protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
+        float echelleLargeur = (float) (((double) this.getWidth())/809);
+        float echelleHauteur = (float) (((double) this.getHeight())/604);
+
         //Paint the background
         try {
 			g.drawImage(ImageIO.read(terarium.getImage()), 0, 0, this.getWidth(), this.getHeight(), null);
@@ -32,8 +35,9 @@ public class TerariumView extends JPanel{
 	        for(Insecte ins : terarium.getListeInsecte()) 
 	        {
 	        	try {
-	        		ins.setY(this.getHeight()-ins.getHauteur()*this.getHeight()/604);
-					g.drawImage(ImageIO.read(ins.getImage()), ins.getX()*this.getWidth()/809, ins.getY(), ins.getLargeur()*this.getWidth()/809, ins.getHauteur()*this.getHeight()/604, null); //changer en getLargeur et getHauteur qui sera défini pour chaque type d'insecte
+	        		ins.setSize(echelleLargeur, echelleHauteur);
+	        		ins.setY((int) (this.getHeight()-ins.getHauteur()*echelleHauteur));
+					g.drawImage(ImageIO.read(ins.getImage()), ins.getX(), ins.getY(), ins.getLargeur(), ins.getHauteur(), null); //changer en getLargeur et getHauteur qui sera défini pour chaque type d'insecte
 				} catch (IOException e) {
 					e.printStackTrace(); 
 				}
