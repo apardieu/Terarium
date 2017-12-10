@@ -5,8 +5,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		Terarium t1 = new Terarium();
-		IHM ihm = new IHM(t1);
-		GameController GC = new GameController(t1, ihm);
+		Player p1 = new Player();
+		IHM ihm = new IHM(t1, p1);
+		GameController GC = new GameController(t1, p1, ihm);
 		GC.start();
 	}
 }

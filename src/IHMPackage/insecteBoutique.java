@@ -107,37 +107,35 @@ public class insecteBoutique extends JPanel implements MouseListener{
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		//Go to mainShop
+		if(e.getX()>716*this.getWidth()/809 & e.getX()<781*this.getWidth()/809 & e.getY()>10*this.getHeight()/604 & e.getY()<67*this.getHeight()/604) {
+			nbPage=0;
+			((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "mainShop");
+		}
+			
+		//Change page by create clickable arrows
 		
-			//Change page by create clickable arrows
-			
-			if(next==true) {
-				if(e.getX()>700*this.getWidth()/809 & e.getX()<760*this.getWidth()/809 & e.getY()>525*this.getHeight()/604 & e.getY()<585*this.getHeight()/604) {
-					nbPage++;
-				}
+		if(next==true) {
+			if(e.getX()>700*this.getWidth()/809 & e.getX()<760*this.getWidth()/809 & e.getY()>525*this.getHeight()/604 & e.getY()<585*this.getHeight()/604) {
+				nbPage++;
 			}
-			if(prev==true) {
-				if(e.getX()>40*this.getWidth()/809 & e.getX()<100*this.getWidth()/809 & e.getY()>525*this.getHeight()/604 & e.getY()<585*this.getHeight()/604) {
-					nbPage--;
-				}
+		}
+		if(prev==true) {
+			if(e.getX()>40*this.getWidth()/809 & e.getX()<100*this.getWidth()/809 & e.getY()>525*this.getHeight()/604 & e.getY()<585*this.getHeight()/604) {
+				nbPage--;
 			}
-			
-			//Create clickable image
-			
-			for(int i=nbPage*21; (i<(nbPage+1)*21 & i<listeInsecte.size()); i++) {
-				Objet o = listeInsecte.get(i);
-				if(e.getX()>o.getxShop() & e.getX()<(o.getxShop()+o.getlShop()) & e.getY()>o.getyShop() & e.getY()<(o.getyShop()+o.gethShop())) {
-					((BoutiqueView) this.getParent()).setObjet(o);
-					((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "vitrine");
-				}
-			}
-			
-			//Return to mainShop
-			
-			if(e.getX()>716*this.getWidth()/809 & e.getX()<781*this.getWidth()/809 & e.getY()>10*this.getHeight()/604 & e.getY()<67*this.getHeight()/604) {
-				insecteShop=false;
-				mainShop=true;
+		}
+		
+		//Create clickable image
+		
+		for(int i=nbPage*21; (i<(nbPage+1)*21 & i<listeInsecte.size()); i++) {
+			Objet o = listeInsecte.get(i);
+			if(e.getX()>o.getxShop() & e.getX()<(o.getxShop()+o.getlShop()) & e.getY()>o.getyShop() & e.getY()<(o.getyShop()+o.gethShop())) {
+				((BoutiqueView) this.getParent()).setObjet(o);
+				((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "vitrine");
 				nbPage=0;
 			}
+		}
 	}
 	
 	@Override

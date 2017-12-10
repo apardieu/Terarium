@@ -26,6 +26,7 @@ public class View extends JPanel{
 	
 	public void boutiqueView() {
 		shop.nbPage=0;
+		shop.getCl().show(shop, "mainShop");
 		cl.last(this);
 	}
 	

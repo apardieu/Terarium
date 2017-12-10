@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
+import MainPackage.Player;
 import MainPackage.Terarium;
 import Objets.Boutique;
 
@@ -22,8 +23,8 @@ public class IHM extends JFrame{
 	protected Border border;
 	protected boolean teraView;
 	
-	public IHM(Terarium t) {
-		
+	public IHM(Terarium t, Player p) {
+
 		//Initialize time when app is launched
 		
 		startTime = (int)(System.currentTimeMillis()/1000);
@@ -32,7 +33,7 @@ public class IHM extends JFrame{
 		setMinimumSize(new Dimension(JFrame.MAXIMIZED_HORIZ, JFrame.MAXIMIZED_VERT));
 		
 		tera = new TerariumView(t);
-		Boutique boutique = new Boutique();
+		Boutique boutique = new Boutique(p);
 		shop = new BoutiqueView(boutique);
 		view = new View(tera, shop);
 		donnes = new Data();
@@ -45,6 +46,7 @@ public class IHM extends JFrame{
 		border.getNewHButton().addActionListener(new ButtonAddHerbivore(t));
 		border.getNewCButton().addActionListener(new ButtonAddCarnivore(t));
 		border.getPrintBoutique().addActionListener(new ButtonPrintBoutique(view));
+		border.getFullScreenButton().addActionListener(new FullScreenButton());
 		
 		//Add view with 95% of Height and 85% of Width
 		
@@ -82,18 +84,19 @@ public class IHM extends JFrame{
 		
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		setLocationRelativeTo(null);
+		setUndecorated(true);
 		setVisible(true);
 	}
 	
 	//Refresh time, money and NbInsect/Capacity
 	
-	public void refreshData(Terarium t) {
+	public void refreshData(Terarium t, Player p) {
 		donnes.getContenantLabel().setForeground(Color.white);
 		donnes.getTempsLabel().setForeground(Color.white);
 		donnes.getArgentLabel().setForeground(Color.white);
 		donnes.getContenantLabel().setText("Nombre d'individus/Capacité : " + t.getNbInsecte() + "/" + t.getCapacity());
 		donnes.getTempsLabel().setText("Temps: " + ((int)(System.currentTimeMillis()/1000) - startTime));
-		donnes.getArgentLabel().setText("Argent : " + "0");
+		donnes.getArgentLabel().setText("Argent : " + p.getArgent());
 	}
 	
 	class ButtonAddHerbivore implements ActionListener{
@@ -143,6 +146,15 @@ public class IHM extends JFrame{
 				teraView=false;
 				view.boutiqueView();
 			}
+		}
 	}
-}
+	
+	class FullScreenButton implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+		}
+		
+	}
 }

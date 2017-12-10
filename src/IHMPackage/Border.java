@@ -9,13 +9,13 @@ import javax.swing.JPanel;
 
 public class Border extends JPanel{
 	private static final long serialVersionUID = -2252455145201448815L;
-	private JButton nourrirButton = null;
+	private JButton fullScreenButton = null;
 	private JButton newHButton = null;
 	private JButton newCButton = null;
 	private JButton printBoutique = null;
 	
 	public Border() {
-		nourrirButton = new JButton("Nourir");
+		fullScreenButton = new JButton("EXIT");
 		setNewHButton(new JButton("Herbivore"));
 		setNewCButton(new JButton("Carnivore"));
 		setPrintBoutique(new JButton("Boutique"));
@@ -32,7 +32,7 @@ public class Border extends JPanel{
 		gbc.gridwidth = 2;
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.insets = new Insets(50, 20, 50, 20);
-		add(nourrirButton, gbc);
+		add(fullScreenButton, gbc);
 		
 		gbc.gridy = 1;
 		gbc.weightx = 0.5;
@@ -71,5 +71,13 @@ public class Border extends JPanel{
 
 	public void setPrintBoutique(JButton printBoutique) {
 		this.printBoutique = printBoutique;
+	}
+
+	public JButton getFullScreenButton() {
+		return fullScreenButton;
+	}
+
+	public void setFullScreenButton(JButton fullScreenButton) {
+		this.fullScreenButton = fullScreenButton;
 	}
 }

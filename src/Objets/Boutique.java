@@ -7,29 +7,45 @@ import InsectePackage.Herbivore;
 import MainPackage.Player;
 
 public class Boutique{
+	private Player p;
 	private List<Objet> listeInsecte = new LinkedList<Objet>();
 	
-	public Boutique(){
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
+	public Boutique(Player p){
+		this.setPlayer(p);
 		getListeInsecte().add(new Carnivore());
 		getListeInsecte().add(new Herbivore());
 		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
 		getListeInsecte().add(new Herbivore());
 		getListeInsecte().add(new Carnivore());
 		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Carnivore());
 		getListeInsecte().add(new Herbivore());
 		getListeInsecte().add(new Carnivore());
+		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Carnivore());
+		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Carnivore());
+		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Carnivore());
+		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Carnivore());
+		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Carnivore());
+		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Carnivore());
+		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Carnivore());
+		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Carnivore());
+		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Carnivore());
+		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Carnivore());
+		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Carnivore());
+		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Carnivore());
+		getListeInsecte().add(new Herbivore());
 		getListeInsecte().add(new Carnivore());
 		getListeInsecte().add(new Herbivore());
 	}
@@ -42,12 +58,21 @@ public class Boutique{
 		this.listeInsecte = listeInsecte;
 	}
 	
-	public boolean buy(Player p, Objet o) {
+	public boolean buy(Objet o) {
 		
-		if(p.getArgent()>=o.getPrice()) {
+		if(getPlayer().getArgent()>=o.getPrice()) {
+			getPlayer().setArgent(getPlayer().getArgent()-o.getPrice());
 			return true;
 		}
 		else
 			return false;
+	}
+
+	public Player getPlayer() {
+		return p;
+	}
+
+	public void setPlayer(Player p) {
+		this.p = p;
 	}
 }

@@ -3,10 +3,12 @@ import IHMPackage.IHM;
 
 public class GameController extends Thread{
 	private Terarium terarium;
+	private Player player;
 	private IHM ihm;
 	
-	public GameController(Terarium terarium, IHM ihm) {
+	public GameController(Terarium terarium, Player player, IHM ihm) {
 		this.terarium = terarium;
+		this.player = player;
 		this.ihm = ihm;
 	}
 	
@@ -15,7 +17,7 @@ public class GameController extends Thread{
 	public void run() {
 		while(true) {
 			terarium.deplacerInsectes();
-			ihm.refreshData(terarium);
+			ihm.refreshData(terarium, player);
 			ihm.repaint();
 		}
 	}
