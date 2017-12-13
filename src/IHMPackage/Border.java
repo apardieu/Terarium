@@ -36,28 +36,32 @@ public class Border extends JPanel{
 		setLayout(gbl);
 		GridBagConstraints gbc = new GridBagConstraints();
 		
-		gbc.gridx = gbc.gridy = 0;
-		gbc.weighty = 0.1;
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		gbc.weighty = 0.05;
 		gbc.weightx = 0.5;
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.insets = new Insets(50, 20, 50, 20);
+		gbc.insets = new Insets(50, 20, 0, 0);
 		add(prevTerraButton, gbc);
 		
 		gbc.gridx = 1;
+		gbc.insets = new Insets(50, 20, 0, 20);
 		add(nextTerraButton, gbc);
 		
 		gbc.gridx = 0;
-		gbc.gridy = 1;
+		gbc.gridy = 3;
 		gbc.gridwidth = 2;
 		gbc.weighty = 0.3;
 		gbc.weightx = 1;
+		gbc.insets = new Insets(20, 20, 90, 20);
 		add(previewTera, gbc);
 		
-		gbc.gridy = 2;
+		gbc.gridy = 0;
 		gbc.weighty = 0.2;
+		gbc.insets = new Insets(50, 20, 50, 20);
 		add(printInventaire, gbc);
 		
-		gbc.gridy = 3;
+		gbc.gridy = 1;
 		add(getPrintBoutique(), gbc);
 	}
 
