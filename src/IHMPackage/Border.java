@@ -3,22 +3,32 @@ package IHMPackage;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import MainPackage.Terarium;
+
 public class Border extends JPanel{
 	private static final long serialVersionUID = -2252455145201448815L;
-	private JButton fullScreenButton = null;
-	private JButton newHButton = null;
-	private JButton newCButton = null;
+	private JButton exitButton = null;
+	private JButton printInventaire = null;
 	private JButton printBoutique = null;
+	private PreviewTerrarium previewTera = null;
+	private JButton nextTerraButton = null;
+	private JButton prevTerraButton = null;
 	
-	public Border() {
-		fullScreenButton = new JButton("EXIT");
-		setNewHButton(new JButton("Herbivore"));
-		setNewCButton(new JButton("Carnivore"));
+	public Border(PreviewTerrarium previewTera){
+		this.previewTera = previewTera;
+		exitButton = new JButton("EXIT");
+		printInventaire = new JButton("Inventaire");
 		setPrintBoutique(new JButton("Boutique"));
+		nextTerraButton = new JButton("Next");
+		prevTerraButton = new JButton("Previous");
 		
 		//GridBagLayout is used to place the buttons
 		
@@ -27,42 +37,44 @@ public class Border extends JPanel{
 		GridBagConstraints gbc = new GridBagConstraints();
 		
 		gbc.gridx = gbc.gridy = 0;
-		gbc.weighty = 0.3;
-		gbc.weightx = 1;
-		gbc.gridwidth = 2;
+		gbc.weighty = 0.1;
+		gbc.weightx = 0.5;
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.insets = new Insets(50, 20, 50, 20);
-		add(fullScreenButton, gbc);
-		
-		gbc.gridy = 1;
-		gbc.weightx = 0.5;
-		gbc.gridwidth = 1;
-		add(getNewHButton(), gbc);
+		add(prevTerraButton, gbc);
 		
 		gbc.gridx = 1;
-		add(getNewCButton(), gbc);
+		add(nextTerraButton, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		gbc.gridwidth = 2;
+		gbc.weighty = 0.3;
+		gbc.weightx = 1;
+		add(previewTera, gbc);
 		
 		gbc.gridy = 2;
-		gbc.gridx=0;
-		gbc.weightx = 1;
-		gbc.gridwidth = 2;
+		gbc.weighty = 0.2;
+		add(printInventaire, gbc);
+		
+		gbc.gridy = 3;
 		add(getPrintBoutique(), gbc);
 	}
 
-	public JButton getNewHButton() {
-		return newHButton;
+	public PreviewTerrarium getPreviewTera() {
+		return previewTera;
 	}
 
-	public void setNewHButton(JButton newHButton) {
-		this.newHButton = newHButton;
+	public void setPreviewTera(PreviewTerrarium previewTera) {
+		this.previewTera = previewTera;
 	}
 
-	public JButton getNewCButton() {
-		return newCButton;
+	public JButton getPrintInventaire() {
+		return printInventaire;
 	}
 
-	public void setNewCButton(JButton newCButton) {
-		this.newCButton = newCButton;
+	public void setPrintInventaire(JButton printInventaire) {
+		this.printInventaire = printInventaire;
 	}
 
 	public JButton getPrintBoutique() {
@@ -73,11 +85,11 @@ public class Border extends JPanel{
 		this.printBoutique = printBoutique;
 	}
 
-	public JButton getFullScreenButton() {
-		return fullScreenButton;
+	public JButton getExitButton() {
+		return exitButton;
 	}
 
-	public void setFullScreenButton(JButton fullScreenButton) {
-		this.fullScreenButton = fullScreenButton;
+	public void setExitButton(JButton exitButton) {
+		this.exitButton = exitButton;
 	}
 }

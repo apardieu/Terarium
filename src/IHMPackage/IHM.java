@@ -6,8 +6,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.JFrame;
-import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
 import MainPackage.Player;
 import MainPackage.Terarium;
@@ -21,7 +22,11 @@ public class IHM extends JFrame{
 	protected BoutiqueView shop;
 	protected Data donnes;
 	protected Border border;
+	protected PreviewTerrarium previewTera;
 	protected boolean teraView;
+	protected boolean shopView;
+	protected boolean invView;
+	protected InventaireView inventaireView;
 	
 	public IHM(Terarium t, Player p) {
 
@@ -32,21 +37,22 @@ public class IHM extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(JFrame.MAXIMIZED_HORIZ, JFrame.MAXIMIZED_VERT));
 		
-		tera = new TerariumView(t);
+		tera = new TerariumView(p.getListeTerarium().get(0));
 		Boutique boutique = new Boutique(p);
+		inventaireView = new InventaireView(p.getInventaire());
 		shop = new BoutiqueView(boutique);
-		view = new View(tera, shop);
+		view = new View(tera, shop, inventaireView);
 		donnes = new Data();
-		border = new Border();
+		previewTera = new PreviewTerrarium(p);
+		border = new Border(previewTera);
 		teraView = true;
 		
 		donnes.setBackground(Color.black);
 		border.setBackground(Color.black);
 		
-		border.getNewHButton().addActionListener(new ButtonAddHerbivore(t));
-		border.getNewCButton().addActionListener(new ButtonAddCarnivore(t));
+		border.getPrintInventaire().addActionListener(new ButtonPrintInventaire(view));
 		border.getPrintBoutique().addActionListener(new ButtonPrintBoutique(view));
-		border.getFullScreenButton().addActionListener(new FullScreenButton());
+		border.getExitButton().addActionListener(new ExitButton());
 		
 		//Add view with 95% of Height and 85% of Width
 		
@@ -99,31 +105,23 @@ public class IHM extends JFrame{
 		donnes.getArgentLabel().setText("Argent : " + p.getArgent());
 	}
 	
-	class ButtonAddHerbivore implements ActionListener{
-		protected Terarium t;
+	class ButtonPrintInventaire implements ActionListener{
+		protected View view;
 		
-		public ButtonAddHerbivore(Terarium t) {
-			this.t= t;
+		public ButtonPrintInventaire(View view) {
+			this.view = view;
 		}
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Herbivore h = new Herbivore();
-			t.addInsecte(h);
-		}
-	}
-	
-	class ButtonAddCarnivore implements ActionListener{
-		protected Terarium t;
-		
-		public ButtonAddCarnivore(Terarium t) {
-			this.t= t;
-		}
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			Carnivore c = new Carnivore();
-			t.addInsecte(c);
+			if(invView==false) {
+				shopView = teraView = !(invView = true);
+				view.invView();
+			}
+			else {
+				teraView = !(invView = false);
+				view.TeraView();
+			}
 		}
 	}
 	
@@ -138,18 +136,18 @@ public class IHM extends JFrame{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(teraView==false) {
-				teraView=true;
-				view.TeraView();
+			if(shopView==false) {
+				invView = teraView = !(shopView = true);
+				view.boutiqueView();
 			}
 			else {
-				teraView=false;
-				view.boutiqueView();
+				teraView = !(shopView = false);
+				view.TeraView();
 			}
 		}
 	}
 	
-	class FullScreenButton implements ActionListener{
+	class ExitButton implements ActionListener{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {

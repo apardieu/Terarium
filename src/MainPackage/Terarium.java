@@ -11,7 +11,7 @@ public class Terarium extends Objet{
 	//Propriétés
 	
 	private int capacity;
-	private List<Insecte> listeInsecte = Collections.synchronizedList(new LinkedList<Insecte>());
+	private List<Insecte> listeInsecte = new LinkedList<Insecte>();
 	private int nbInsecte;
 	
 	public Terarium() {

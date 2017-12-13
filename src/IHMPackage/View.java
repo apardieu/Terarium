@@ -4,15 +4,15 @@ import javax.swing.JPanel;
 
 public class View extends JPanel{
 	private static final long serialVersionUID = 5357544026259177499L;
-	protected boolean insecteShop = false;
-	protected boolean mainShop = true;
 	protected CardLayout cl = null;
 	protected TerariumView tera;
 	protected BoutiqueView shop;
+	protected InventaireView inventaireView;
 	
-	public View(TerariumView tera, BoutiqueView shop) {
+	public View(TerariumView tera, BoutiqueView shop, InventaireView inventaireView) {
 		this.tera = tera;
 		this.shop = shop;
+		this.inventaireView = inventaireView;
 		cl = new CardLayout();
 		setLayout(cl);
 		
@@ -20,6 +20,7 @@ public class View extends JPanel{
 		
 		this.add(tera, "tera");
 		this.add(shop, "shop");
+		this.add(inventaireView, "inventaireView");
 	}
 	
 	//Show the boutique
@@ -27,12 +28,16 @@ public class View extends JPanel{
 	public void boutiqueView() {
 		shop.nbPage=0;
 		shop.getCl().show(shop, "mainShop");
-		cl.last(this);
+		cl.show(this, "shop");
 	}
 	
 	//Show the terrarium
 	
 	public void TeraView() {
-		cl.first(this);
+		cl.show(this, "tera");
+	}
+	
+	public void invView() {
+		cl.show(this, "inventaireView");
 	}
 }

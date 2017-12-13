@@ -36,6 +36,7 @@ public class vitrineBoutique extends JPanel implements MouseListener{
         	else
         		g.drawImage(ImageIO.read(new File("vitrineLocked.png")), 0, 0, this.getWidth(), this.getHeight(), null);
         	g.drawImage(ImageIO.read(new File("main.png")), 716*this.getWidth()/809, 8*this.getHeight()/604, 58*this.getWidth()/809, 51*this.getHeight()/604, null);
+        	g.drawImage(ImageIO.read(new File("undoArrow.png")), 35*this.getWidth()/809, 8*this.getHeight()/604, 58*this.getWidth()/809, 51*this.getHeight()/604, null);
         	g.drawImage(ImageIO.read(objet.getImage()), x*this.getWidth()/1462, y*this.getHeight()/916,l*this.getWidth()/1462, h*this.getHeight()/916, null);
         	g.drawString("Nom : " + objet.getName(), 329*this.getWidth()/1462, 111*this.getHeight()/916);
         } catch (IOException e) {
@@ -53,7 +54,10 @@ public class vitrineBoutique extends JPanel implements MouseListener{
 		if(e.getX()>1167*this.getWidth()/1462 & e.getX()<1429*this.getWidth()/1462 & e.getY()>830*this.getHeight()/916 & e.getY()<897*this.getHeight()/916) {
 			shop.buy(objet);
 		}
-			
+		
+		//Undo
+		if(e.getX()>35*this.getWidth()/809 & e.getX()<93*this.getWidth()/809 & e.getY()>8*this.getHeight()/604 & e.getY()<59*this.getHeight()/604)
+			((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "insecteShop");
 	}
 
 	@Override
