@@ -1,20 +1,22 @@
-package MainPackage;
+package Terrariums;
 import java.io.File;
 import java.util.*;
 import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
 import InsectePackage.Insecte;
+import MainPackage.Variables;
 import Objets.Objet;
 
-public class Terarium extends Objet{
+public class Terrarium extends Objet{
 	
 	//Propriétés
 	
 	private int capacity;
 	private List<Insecte> listeInsecte = new LinkedList<Insecte>();
-	private int nbInsecte;
+	protected int nbInsecte;
 	
-	public Terarium() {
+	public Terrarium() {
+		setName("TerrariumX");
 		setCapacity(30);
 		nbInsecte = 0;
 		setImage(new File("fond.jpg"));
@@ -34,7 +36,7 @@ public class Terarium extends Objet{
 	
 	public void deplacerInsectes() {
 		try {
-			Thread.sleep(4);
+			Thread.sleep(4/Variables.NBTERRARIUM);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

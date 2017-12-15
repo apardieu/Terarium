@@ -6,19 +6,18 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
-import InsectePackage.Herbivore;
 import MainPackage.Player;
-import MainPackage.Terarium;
 import Objets.Boutique;
 
-public class IHM extends JFrame{
+public class IHM extends JFrame implements MouseListener{
 	private static final long serialVersionUID = -3796859435142574261L;
 	private int startTime;
 	protected View view;
-	protected TerariumView tera;
+	protected TerrariumView tera;
 	protected BoutiqueView shop;
 	protected Data donnes;
 	protected Border border;
@@ -28,7 +27,7 @@ public class IHM extends JFrame{
 	protected boolean invView;
 	protected InventaireView inventaireView;
 	
-	public IHM(Terarium t, Player p) {
+	public IHM(Player p) {
 
 		//Initialize time when app is launched
 		
@@ -37,7 +36,7 @@ public class IHM extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(JFrame.MAXIMIZED_HORIZ, JFrame.MAXIMIZED_VERT));
 		
-		tera = new TerariumView(p.getListeTerarium().get(0));
+		tera = new TerrariumView(p.getCurrentTerrarium());
 		Boutique boutique = new Boutique(p);
 		inventaireView = new InventaireView(p.getInventaire());
 		shop = new BoutiqueView(boutique);
@@ -50,6 +49,8 @@ public class IHM extends JFrame{
 		donnes.setBackground(Color.black);
 		border.setBackground(Color.black);
 		
+		border.getNextTerraButton().addActionListener(new NextTerra());
+		border.getPrevTerraButton().addActionListener(new PrevTerra());
 		border.getPrintInventaire().addActionListener(new ButtonPrintInventaire(view));
 		border.getPrintBoutique().addActionListener(new ButtonPrintBoutique(view));
 		border.getExitButton().addActionListener(new ExitButton());
@@ -96,13 +97,14 @@ public class IHM extends JFrame{
 	
 	//Refresh time, money and NbInsect/Capacity
 	
-	public void refreshData(Terarium t, Player p) {
+	public void refreshData(Player p) {
 		donnes.getContenantLabel().setForeground(Color.white);
 		donnes.getTempsLabel().setForeground(Color.white);
 		donnes.getArgentLabel().setForeground(Color.white);
-		donnes.getContenantLabel().setText("Nombre d'individus/Capacité : " + t.getNbInsecte() + "/" + t.getCapacity());
+		donnes.getContenantLabel().setText("Nombre d'individus/Capacité : " + p.getCurrentTerrarium().getNbInsecte() + "/" + p.getCurrentTerrarium().getCapacity());
 		donnes.getTempsLabel().setText("Temps: " + ((int)(System.currentTimeMillis()/1000) - startTime));
 		donnes.getArgentLabel().setText("Argent : " + p.getArgent());
+		tera.update(p.getCurrentTerrarium());
 	}
 	
 	class ButtonPrintInventaire implements ActionListener{
@@ -147,12 +149,60 @@ public class IHM extends JFrame{
 		}
 	}
 	
+	class NextTerra implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			previewTera.next();
+		}
+		
+	}
+
+	class PrevTerra implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			previewTera.prev();
+		}
+		
+	}
+	
 	class ExitButton implements ActionListener{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);
 		}
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

@@ -4,21 +4,26 @@ import java.util.LinkedList;
 import java.util.List;
 
 import Objets.Inventaire;
+import Terrariums.Terrarium;
 
 public class Player {
 	protected String name;
 	private int argent;
 	private Inventaire inventaire;
-	protected List<Terarium> listeTerarium = new LinkedList<Terarium>();
+	protected List<Terrarium> listeTerrarium = new LinkedList<Terrarium>();
+	private Terrarium currentTerrarium;
 
 	public Player() {
 		setArgent(10000);
-		name="Lol";
+		name="Jean-Jacques";
 		inventaire = new Inventaire(this);
 	}
 	
-	public void addTerarium(Terarium t) {
-		listeTerarium.add(t);
+	public void addTerrarium(Terrarium t) {
+		listeTerrarium.add(t);
+		inventaire.getListeTerrarium().add(t);
+		setCurrentTerrarium(t);
+		Variables.NBTERRARIUM++;
 	}
 
 	public int getArgent() {
@@ -37,11 +42,19 @@ public class Player {
 		this.inventaire = inventaire;
 	}
 
-	public List<Terarium> getListeTerarium() {
-		return listeTerarium;
+	public List<Terrarium> getListeTerrarium() {
+		return listeTerrarium;
 	}
 
-	public void setListeTerarium(List<Terarium> listeTerarium) {
-		this.listeTerarium = listeTerarium;
+	public void setListeTerrarium(List<Terrarium> listeTerrarium) {
+		this.listeTerrarium = listeTerrarium;
+	}
+
+	public Terrarium getCurrentTerrarium() {
+		return currentTerrarium;
+	}
+
+	public void setCurrentTerrarium(Terrarium currentTerrarium) {
+		this.currentTerrarium = currentTerrarium;
 	}
 }

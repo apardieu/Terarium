@@ -9,14 +9,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import Objets.Boutique;
-
 public class mainBoutique extends JPanel implements MouseListener{
 	private static final long serialVersionUID = -1758625270358921797L;
-	protected Boutique shop;
 	
-	public mainBoutique(Boutique shop) {
-		this.shop=shop;
+	public mainBoutique() {
 		this.addMouseListener(this);
 	}
 	
@@ -34,7 +30,16 @@ public class mainBoutique extends JPanel implements MouseListener{
 		
 		//Go to InsecteShop
 			if(e.getX()>577*this.getWidth()/1462 & e.getX()<885*this.getWidth()/1462 & e.getY()>241*this.getHeight()/916 & e.getY()<311*this.getHeight()/916) {
-				((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "insecteShop");
+				if(this.getParent() instanceof BoutiqueView)
+					((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "insecteShop");
+				if(this.getParent() instanceof InventaireView)
+					((InventaireView) this.getParent()).getCl().show((InventaireView) this.getParent(), "insecteInventaire");
+			}
+			if(e.getX()>558*this.getWidth()/1462 & e.getX()<902*this.getWidth()/1462 & e.getY()>596*this.getHeight()/916 & e.getY()<649*this.getHeight()/916) {
+				if(this.getParent() instanceof BoutiqueView)
+					((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "TerrariumShop");
+				if(this.getParent() instanceof InventaireView)
+					((InventaireView) this.getParent()).getCl().show((InventaireView) this.getParent(), "TerrariumInventaire");
 			}
 	}
 

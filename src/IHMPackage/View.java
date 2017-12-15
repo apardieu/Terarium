@@ -5,11 +5,11 @@ import javax.swing.JPanel;
 public class View extends JPanel{
 	private static final long serialVersionUID = 5357544026259177499L;
 	protected CardLayout cl = null;
-	protected TerariumView tera;
+	protected TerrariumView tera;
 	protected BoutiqueView shop;
 	protected InventaireView inventaireView;
 	
-	public View(TerariumView tera, BoutiqueView shop, InventaireView inventaireView) {
+	public View(TerrariumView tera, BoutiqueView shop, InventaireView inventaireView) {
 		this.tera = tera;
 		this.shop = shop;
 		this.inventaireView = inventaireView;
@@ -38,6 +38,7 @@ public class View extends JPanel{
 	}
 	
 	public void invView() {
+		inventaireView.getCl().show(inventaireView, "main");
 		cl.show(this, "inventaireView");
 	}
 }

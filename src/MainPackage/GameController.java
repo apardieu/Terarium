@@ -1,13 +1,14 @@
 package MainPackage;
+import java.util.List;
+
 import IHMPackage.IHM;
+import Terrariums.Terrarium;
 
 public class GameController extends Thread{
-	private Terarium terarium;
 	private Player player;
 	private IHM ihm;
 	
-	public GameController(Terarium terarium, Player player, IHM ihm) {
-		this.terarium = terarium;
+	public GameController(Player player, IHM ihm) {
 		this.player = player;
 		this.ihm = ihm;
 	}
@@ -16,8 +17,10 @@ public class GameController extends Thread{
 	
 	public void run() {
 		while(true) {
-			terarium.deplacerInsectes();
-			ihm.refreshData(terarium, player);
+			List<Terrarium> listeTerrarium = player.listeTerrarium;
+			for(int i = 0; i<listeTerrarium.size(); i++)
+				listeTerrarium.get(i).deplacerInsectes();
+			ihm.refreshData(player);
 			ihm.repaint();
 		}
 	}

@@ -13,26 +13,25 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import Objets.Boutique;
+import InsectePackage.Insecte;
 import Objets.Objet;
 
-public class insecteBoutique extends JPanel implements MouseListener{
+public class insecteListeVitrine extends JPanel implements MouseListener{
 	private static final long serialVersionUID = 2398712630839784948L;
-	protected Boutique shop;
 	protected boolean insecteShop;
 	protected boolean mainShop;
 	protected boolean vitrine;
-	private List<Objet> listeInsecte = new LinkedList<Objet>();
+	private List<Insecte> listeInsecte = new LinkedList<Insecte>();
 	protected int nbPage;
 	protected boolean next;
 	protected boolean prev;
-	protected File nextArrow;
-	protected File prevArrow;
+	protected File nextArrow = new File("nextArrowLocked.png");
+	protected File prevArrow = new File("prevArrowLocked.png");
 	protected Objet objet;
 	public boolean visible;
 	
-	public insecteBoutique(Boutique shop) {
-		this.shop = shop;
+	public insecteListeVitrine(List<Insecte> list) {
+		this.listeInsecte = list;
 		visible=false;
 		this.addMouseListener(this);
 		nbPage=0;
@@ -53,8 +52,8 @@ public class insecteBoutique extends JPanel implements MouseListener{
 	    
 	    int x=75, y=110;
 	    int h=80, l=60;
-	    for(int i=nbPage*21; (i<(nbPage+1)*21 & i<shop.getListeInsecte().size()); i++) {
-        	Objet o = shop.getListeInsecte().get(i);
+	    for(int i=nbPage*21; (i<(nbPage+1)*21 & i<listeInsecte.size()); i++) {
+        	Objet o = listeInsecte.get(i);
         	try {
         		g.setColor(Color.BLACK);
         		g.fillRect((x-15)*this.getWidth()/809, (y-15)*this.getHeight()/604, (l+30)*this.getWidth()/809, (h+30)*this.getHeight()/604);
@@ -79,7 +78,8 @@ public class insecteBoutique extends JPanel implements MouseListener{
         	//Change Column
         	else
         		x+=l+40;
-        	if(nbPage==shop.getListeInsecte().size()/21) {
+        	
+        	if(nbPage==listeInsecte.size()/21) {
         		next=false;
         		nextArrow = new File("nextArrowLocked.png");
         	}
@@ -95,7 +95,6 @@ public class insecteBoutique extends JPanel implements MouseListener{
         		prev=true;
         		prevArrow = new File("prevArrow.png");
         	}
-        	listeInsecte = shop.getListeInsecte();
     	}
 	    try {
 	    	g.drawImage(ImageIO.read(nextArrow), 700*this.getWidth()/809, 525*this.getHeight()/604, 60*this.getWidth()/809, 60*this.getHeight()/604, null);
@@ -110,7 +109,11 @@ public class insecteBoutique extends JPanel implements MouseListener{
 		//Go to mainShop
 		if(e.getX()>716*this.getWidth()/809 & e.getX()<781*this.getWidth()/809 & e.getY()>10*this.getHeight()/604 & e.getY()<67*this.getHeight()/604) {
 			nbPage=0;
-			((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "mainShop");
+			if(this.getParent() instanceof BoutiqueView)
+				((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "mainShop");
+			if(this.getParent() instanceof InventaireView)
+				((InventaireView) this.getParent()).getCl().show((InventaireView) this.getParent(), "main");
+			
 		}
 			
 		//Change page by create clickable arrows
@@ -131,8 +134,13 @@ public class insecteBoutique extends JPanel implements MouseListener{
 		for(int i=nbPage*21; (i<(nbPage+1)*21 & i<listeInsecte.size()); i++) {
 			Objet o = listeInsecte.get(i);
 			if(e.getX()>o.getxShop() & e.getX()<(o.getxShop()+o.getlShop()) & e.getY()>o.getyShop() & e.getY()<(o.getyShop()+o.gethShop())) {
-				((BoutiqueView) this.getParent()).setObjet(o);
-				((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "vitrine");
+				if (this.getParent() instanceof InventaireView) {
+					((InventaireView) this.getParent()).inventaire.addInsecte((Insecte) o);
+				}
+				else {
+					((BoutiqueView) this.getParent()).setObjet(o);
+					((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "vitrine");
+				}
 			}
 		}
 	}

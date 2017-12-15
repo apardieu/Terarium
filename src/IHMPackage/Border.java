@@ -3,15 +3,9 @@ package IHMPackage;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
-import MainPackage.Terarium;
 
 public class Border extends JPanel{
 	private static final long serialVersionUID = -2252455145201448815L;
@@ -63,6 +57,22 @@ public class Border extends JPanel{
 		
 		gbc.gridy = 1;
 		add(getPrintBoutique(), gbc);
+	}
+
+	public JButton getNextTerraButton() {
+		return nextTerraButton;
+	}
+
+	public void setNextTerraButton(JButton nextTerraButton) {
+		this.nextTerraButton = nextTerraButton;
+	}
+
+	public JButton getPrevTerraButton() {
+		return prevTerraButton;
+	}
+
+	public void setPrevTerraButton(JButton prevTerraButton) {
+		this.prevTerraButton = prevTerraButton;
 	}
 
 	public PreviewTerrarium getPreviewTera() {

@@ -6,56 +6,38 @@ import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
 import InsectePackage.Insecte;
 import MainPackage.Player;
+import Terrariums.Terrarium;
+import Terrariums.Terrarium1;
+import Terrariums.Terrarium2;
+import Terrariums.Terrarium3;
 
 public class Boutique{
-	private Player p;
-	private List<Objet> listeInsecte = new LinkedList<Objet>();
+	private Player player;
+	private List<Insecte> listeInsecte = new LinkedList<Insecte>();
+	private List<Terrarium> listeTerrarium = new LinkedList<Terrarium>();
 	
-	public Boutique(Player p){
-		this.setPlayer(p);
+	public Boutique(Player player){
+		this.setPlayer(player);
 		getListeInsecte().add(new Carnivore());
 		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
+		listeTerrarium.add(new Terrarium1());
+		listeTerrarium.add(new Terrarium2());
+		listeTerrarium.add(new Terrarium3());
 	}
 
-	public List<Objet> getListeInsecte() {
+	public List<Terrarium> getListeTerrarium() {
+		return listeTerrarium;
+	}
+
+	public void setListeTerrarium(List<Terrarium> listeTerrarium) {
+		this.listeTerrarium = listeTerrarium;
+	}
+
+	public List<Insecte> getListeInsecte() {
 		return listeInsecte;
 	}
 
-	public void setListeInsecte(List<Objet> listeInsecte) {
+	public void setListeInsecte(List<Insecte> listeInsecte) {
 		this.listeInsecte = listeInsecte;
 	}
 	
@@ -72,6 +54,15 @@ public class Boutique{
 				}
 				System.out.println(o.getClass().getName());
 			}
+			if(o instanceof Terrarium) {
+				try {
+					Terrarium t = (Terrarium) Class.forName(o.getClass().getName()).newInstance();
+					getPlayer().addTerrarium(t);
+				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			return true;
 		}
 		else
@@ -79,10 +70,10 @@ public class Boutique{
 	}
 
 	public Player getPlayer() {
-		return p;
+		return player;
 	}
 
-	public void setPlayer(Player p) {
-		this.p = p;
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 }

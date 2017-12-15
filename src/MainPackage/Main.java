@@ -1,16 +1,16 @@
 package MainPackage;
 import IHMPackage.IHM;
+import Terrariums.Terrarium;
+import Terrariums.Terrarium1;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Terarium t1 = new Terarium();
-		Terarium t2 = new Terarium();
+		Terrarium t1 = new Terrarium1();
 		Player p1 = new Player();
-		p1.addTerarium(t1);
-		p1.addTerarium(t2);
-		IHM ihm = new IHM(t1, p1);
-		GameController GC = new GameController(t1, p1, ihm);
+		p1.addTerrarium(t1);
+		IHM ihm = new IHM(p1);
+		GameController GC = new GameController(p1, ihm);
 		GC.start();
 	}
 }
