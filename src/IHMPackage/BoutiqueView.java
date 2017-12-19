@@ -7,8 +7,9 @@ import Objets.Objet;
 public class BoutiqueView extends JPanel{
 	private static final long serialVersionUID = 4502791054000189705L;
 	protected Boutique shop;
-	protected insecteListeVitrine insecteShop;
-	protected TerrariumListeVitrine TerrariumShop;
+	protected ObjetListeVitrine insecteShop;
+	protected ObjetListeVitrine terrariumShop;
+	protected ObjetListeVitrine nourritureShop;
 	protected mainBoutique mainShop;
 	protected vitrineBoutique vitrine;
 	protected Objet objet;
@@ -20,11 +21,13 @@ public class BoutiqueView extends JPanel{
 		this.setLayout(cl);
 		this.shop = shop;
 		mainShop = new mainBoutique();
-		insecteShop = new insecteListeVitrine(shop.getListeInsecte());
-		TerrariumShop = new TerrariumListeVitrine(shop.getListeTerrarium());
+		insecteShop = new ObjetListeVitrine(shop.getListeInsecte());
+		terrariumShop = new ObjetListeVitrine(shop.getListeTerrarium());
+		nourritureShop = new ObjetListeVitrine(shop.getListeNourriture());
 		this.add("mainShop", mainShop);
 		this.add("insecteShop", insecteShop);
-		this.add("TerrariumShop", TerrariumShop);
+		this.add("TerrariumShop", terrariumShop);
+		this.add("nourritureShop", nourritureShop);
 		
 		cl.show(this, "mainShop");
 	}

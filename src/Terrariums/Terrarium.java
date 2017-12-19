@@ -5,21 +5,28 @@ import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
 import InsectePackage.Insecte;
 import MainPackage.Variables;
+import Nourriture.Graine;
+import Nourriture.Mangeoire;
 import Objets.Objet;
 
 public class Terrarium extends Objet{
 	
 	//Propriétés
 	
+	private int startTime;
 	private int capacity;
 	private List<Insecte> listeInsecte = new LinkedList<Insecte>();
 	protected int nbInsecte;
+	protected Mangeoire mangeoire;
 	
 	public Terrarium() {
-		setName("TerrariumX");
-		setCapacity(30);
+		startTime = (int)(System.currentTimeMillis()/1000);
 		nbInsecte = 0;
-		setImage(new File("fond.jpg"));
+		mangeoire = new Mangeoire(new Graine());
+		mangeoire.setlTerra(100);
+		mangeoire.setxTerra((Variables.LARGEUR-mangeoire.getlTerra())/2);
+		mangeoire.sethTerra(100);
+		mangeoire.setyTerra(Variables.HAUTEUR-mangeoire.gethTerra());
 	}
 	
 	//Add an insect to the Terarium
@@ -51,6 +58,10 @@ public class Terrarium extends Objet{
 				this.listeInsecte.remove(a);
 				nbInsecte--;
 			}
+			if(a.isInContactWith(mangeoire)) {
+				a.manger(mangeoire.getNourriture());
+				mangeoire.setNbNourriture(mangeoire.getNbNourriture()-mangeoire.getNourriture().getFoodPower());
+			}
 			List<Insecte> l = new LinkedList<Insecte>();
 			if(a instanceof Herbivore) {
 				if(a.getFoodLevel()<a.getMaxFoodLevel()/10) {
@@ -62,7 +73,7 @@ public class Terrarium extends Objet{
 			}
 			for(Insecte b : getListeInsecte()) {
 				if(a!=b) {
-					if(a.getX()==b.getX() & a.getY()==b.getY()) {
+					if(a.isInContactWith(b)) {
 						if((a instanceof Carnivore) & (b instanceof Herbivore)) {
 							if(a.getFoodLevel()+b.getFoodLevel()/10<=a.getMaxFoodLevel()) {
 								a.kill(b);
@@ -134,5 +145,21 @@ public class Terrarium extends Objet{
 
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
+	}
+
+	public int getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(int startTime) {
+		this.startTime = startTime;
+	}
+
+	public Mangeoire getMangeoire() {
+		return mangeoire;
+	}
+
+	public void setMangeoire(Mangeoire mangeoire) {
+		this.mangeoire = mangeoire;
 	}
 }

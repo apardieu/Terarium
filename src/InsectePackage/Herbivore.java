@@ -11,6 +11,8 @@ public class Herbivore extends Insecte{
 		setCanibale(false);
 		setSpeedTire(2);
 		speedMove=2;
+		hTerra=121;
+		lTerra=108;
 	}
 	
 	public void zombie() {

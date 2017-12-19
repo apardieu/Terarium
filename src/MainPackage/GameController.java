@@ -24,4 +24,12 @@ public class GameController extends Thread{
 			ihm.repaint();
 		}
 	}
+
+	public IHM getIhm() {
+		return ihm;
+	}
+
+	public void setIhm(IHM ihm) {
+		this.ihm = ihm;
+	}
 }

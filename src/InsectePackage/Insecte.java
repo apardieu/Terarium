@@ -9,10 +9,6 @@ import MainPackage.Variables;
 public abstract class Insecte extends Objet{
 	protected int foodLevel;
 	private int direction = 1;
-	protected int x= 0;
-	protected int y=45;
-	protected int hauteur=121;
-	protected int largeur=108;
 	protected Sexe sexe;
 	private int maxFoodLevel = 100000;
 	private float speedTire;
@@ -24,7 +20,7 @@ public abstract class Insecte extends Objet{
 	
 	public void deplacer() {
 		if(foodLevel>0) {
-			if(getX()+getLargeur()>= Variables.LARGEUR)
+			if(getX()+getlTerra()>= Variables.LARGEUR)
         		setDirection(-1);
         	else if(getX() <= 0)
         		setDirection(1);
@@ -57,34 +53,34 @@ public abstract class Insecte extends Objet{
 	}
 
 	public int getY() {
-		return y;
+		return yTerra;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void setY(int yTerra) {
+		this.yTerra = yTerra;
 	}
 
 	public int getX() {
-		return x;
+		return xTerra;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setX(int xTerra) {
+		this.xTerra = xTerra;
 	}
-	public int getLargeur() {
-		return largeur;
-	}
-
-	public void setlargeur(int largeur) {
-		this.largeur = largeur;
+	public int getlTerra() {
+		return lTerra;
 	}
 
-	public int getHauteur() {
-		return hauteur;
+	public void setlTerra(int lTerra) {
+		this.lTerra = lTerra;
 	}
 
-	public void setHauteur(int hauteur) {
-		this.hauteur = hauteur;
+	public int gethTerra() {
+		return hTerra;
+	}
+
+	public void sethTerra(int hTerra) {
+		this.hTerra = hTerra;
 	}
 	
 	public int getFoodLevel()

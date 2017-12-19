@@ -9,70 +9,77 @@ import javax.swing.JPanel;
 
 public class Border extends JPanel{
 	private static final long serialVersionUID = -2252455145201448815L;
-	private JButton exitButton = null;
+	private ImageButton exitButton = null;
+	private ImageButton optionButton = null;
 	private JButton printInventaire = null;
 	private JButton printBoutique = null;
 	private PreviewTerrarium previewTera = null;
-	private JButton nextTerraButton = null;
-	private JButton prevTerraButton = null;
+	private ImageButton nextTerraButton = null;
+	private ImageButton prevTerraButton = null;
 	
 	public Border(PreviewTerrarium previewTera){
 		this.previewTera = previewTera;
-		exitButton = new JButton("EXIT");
+		exitButton = new ImageButton("exit.png", 0, 0, 30, 30);
+		optionButton = new ImageButton("option.png", 0, 0, 30, 30);
 		printInventaire = new JButton("Inventaire");
 		setPrintBoutique(new JButton("Boutique"));
-		nextTerraButton = new JButton("Next");
-		prevTerraButton = new JButton("Previous");
+		nextTerraButton = new ImageButton("nextTerrarium.png", 0, 0, 100, 30);
+		prevTerraButton = new ImageButton("prevTerrarium.png", 0, 0, 100, 30);
 		
 		//GridBagLayout is used to place the buttons
 		
 		GridBagLayout gbl = new GridBagLayout();
 		setLayout(gbl);
-		GridBagConstraints gbc = new GridBagConstraints();
+		GridBagConstraints gbc = new GridBagConstraints();	
+		
+		gbc.gridx = gbc.gridy = 0;
+		gbc.weightx = 1;
+		gbc.anchor = GridBagConstraints.BASELINE_TRAILING;
+		gbc.insets = new Insets(10,10, 10, 10);
+		add(optionButton, gbc);
+		
+		gbc.gridx = 1;	
+		gbc.weightx = 0;
+		add(exitButton, gbc);
 		
 		gbc.gridx = 0;
-		gbc.gridy = 2;
-		gbc.weighty = 0.05;
+		gbc.gridy = 3;
 		gbc.weightx = 0.5;
-		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridwidth = 1;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.insets = new Insets(50, 20, 0, 0);
 		add(prevTerraButton, gbc);
 		
 		gbc.gridx = 1;
 		gbc.insets = new Insets(50, 20, 0, 20);
+		gbc.anchor = GridBagConstraints.LINE_END;
 		add(nextTerraButton, gbc);
 		
 		gbc.gridx = 0;
-		gbc.gridy = 3;
+		gbc.gridy = 4;
 		gbc.gridwidth = 2;
 		gbc.weighty = 0.3;
 		gbc.weightx = 1;
+		gbc.anchor = GridBagConstraints.CENTER;
+		gbc.fill = GridBagConstraints.BOTH;
 		gbc.insets = new Insets(20, 20, 90, 20);
 		add(previewTera, gbc);
 		
-		gbc.gridy = 0;
+		gbc.gridy = 1;
 		gbc.weighty = 0.2;
 		gbc.insets = new Insets(50, 20, 50, 20);
 		add(printInventaire, gbc);
 		
-		gbc.gridy = 1;
+		gbc.gridy = 2;
 		add(getPrintBoutique(), gbc);
 	}
 
 	public JButton getNextTerraButton() {
-		return nextTerraButton;
-	}
-
-	public void setNextTerraButton(JButton nextTerraButton) {
-		this.nextTerraButton = nextTerraButton;
+		return nextTerraButton.getButton();
 	}
 
 	public JButton getPrevTerraButton() {
-		return prevTerraButton;
-	}
-
-	public void setPrevTerraButton(JButton prevTerraButton) {
-		this.prevTerraButton = prevTerraButton;
+		return prevTerraButton.getButton();
 	}
 
 	public PreviewTerrarium getPreviewTera() {
@@ -100,10 +107,10 @@ public class Border extends JPanel{
 	}
 
 	public JButton getExitButton() {
-		return exitButton;
+		return exitButton.getButton();
 	}
 
-	public void setExitButton(JButton exitButton) {
-		this.exitButton = exitButton;
+	public JButton getOptionButton() {
+		return optionButton.getButton();
 	}
 }

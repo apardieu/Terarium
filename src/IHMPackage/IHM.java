@@ -10,12 +10,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
+
+import MainPackage.GameController;
 import MainPackage.Player;
 import Objets.Boutique;
 
 public class IHM extends JFrame implements MouseListener{
 	private static final long serialVersionUID = -3796859435142574261L;
-	private int startTime;
 	protected View view;
 	protected TerrariumView tera;
 	protected BoutiqueView shop;
@@ -25,17 +26,22 @@ public class IHM extends JFrame implements MouseListener{
 	protected boolean teraView;
 	protected boolean shopView;
 	protected boolean invView;
+	protected boolean fullScreen;
 	protected InventaireView inventaireView;
+	protected Player player;
+	protected GameController GC;
 	
-	public IHM(Player p) {
+	public IHM(Player p, boolean fullScreen, GameController GC) {
 
 		//Initialize time when app is launched
 		
-		startTime = (int)(System.currentTimeMillis()/1000);
 		setTitle("Tera Land : The Origins");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(JFrame.MAXIMIZED_HORIZ, JFrame.MAXIMIZED_VERT));
 		
+		this.fullScreen = fullScreen;
+		this.GC = GC;
+		this.player = p;
 		tera = new TerrariumView(p.getCurrentTerrarium());
 		Boutique boutique = new Boutique(p);
 		inventaireView = new InventaireView(p.getInventaire());
@@ -54,6 +60,7 @@ public class IHM extends JFrame implements MouseListener{
 		border.getPrintInventaire().addActionListener(new ButtonPrintInventaire(view));
 		border.getPrintBoutique().addActionListener(new ButtonPrintBoutique(view));
 		border.getExitButton().addActionListener(new ExitButton());
+		border.getOptionButton().addActionListener(new OptionButton());
 		
 		//Add view with 95% of Height and 85% of Width
 		
@@ -91,7 +98,7 @@ public class IHM extends JFrame implements MouseListener{
 		
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		setLocationRelativeTo(null);
-		setUndecorated(true);
+		setUndecorated(fullScreen);
 		setVisible(true);
 	}
 	
@@ -102,7 +109,7 @@ public class IHM extends JFrame implements MouseListener{
 		donnes.getTempsLabel().setForeground(Color.white);
 		donnes.getArgentLabel().setForeground(Color.white);
 		donnes.getContenantLabel().setText("Nombre d'individus/Capacité : " + p.getCurrentTerrarium().getNbInsecte() + "/" + p.getCurrentTerrarium().getCapacity());
-		donnes.getTempsLabel().setText("Temps: " + ((int)(System.currentTimeMillis()/1000) - startTime));
+		donnes.getTempsLabel().setText("Temps: " + ((int)(System.currentTimeMillis()/1000) - p.getCurrentTerrarium().getStartTime()));
 		donnes.getArgentLabel().setText("Argent : " + p.getArgent());
 		tera.update(p.getCurrentTerrarium());
 	}
@@ -153,6 +160,7 @@ public class IHM extends JFrame implements MouseListener{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			if(player.getListeTerrarium().size()>1)
 			previewTera.next();
 		}
 		
@@ -162,6 +170,7 @@ public class IHM extends JFrame implements MouseListener{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			if(player.getListeTerrarium().size()>1)
 			previewTera.prev();
 		}
 		
@@ -174,6 +183,16 @@ public class IHM extends JFrame implements MouseListener{
 			System.exit(0);
 		}
 		
+	}
+	
+	class OptionButton implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			dispose();
+			IHM i = new IHM(player, !fullScreen, GC);
+			GC.setIhm(i);
+		}
 	}
 
 	@Override

@@ -1,8 +1,10 @@
 package Nourriture;
 
-public abstract class Nourriture {
-	protected String name;
+import Objets.Objet;
+
+public abstract class Nourriture extends Objet{
 	private int foodPower;
+	
 	public int getFoodPower() {
 		return foodPower;
 	}

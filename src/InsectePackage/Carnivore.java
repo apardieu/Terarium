@@ -12,5 +12,7 @@ public class Carnivore extends Insecte{
 		setSpeedTire(3);
 		percentageStolen = 10;
 		speedMove=1;
+		hTerra=121;
+		lTerra=108;
 	}
 }

@@ -4,6 +4,7 @@ import java.io.File;
 
 public class Terrarium3 extends Terrarium{
 	public Terrarium3() {
+		super();
 		setName("Terrarium3");
 		setCapacity(25);
 		nbInsecte = 0;

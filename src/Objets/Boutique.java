@@ -6,6 +6,8 @@ import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
 import InsectePackage.Insecte;
 import MainPackage.Player;
+import Nourriture.Graine;
+import Nourriture.Nourriture;
 import Terrariums.Terrarium;
 import Terrariums.Terrarium1;
 import Terrariums.Terrarium2;
@@ -15,6 +17,7 @@ public class Boutique{
 	private Player player;
 	private List<Insecte> listeInsecte = new LinkedList<Insecte>();
 	private List<Terrarium> listeTerrarium = new LinkedList<Terrarium>();
+	private List<Nourriture> listeNourriture = new LinkedList<Nourriture>();
 	
 	public Boutique(Player player){
 		this.setPlayer(player);
@@ -23,6 +26,7 @@ public class Boutique{
 		listeTerrarium.add(new Terrarium1());
 		listeTerrarium.add(new Terrarium2());
 		listeTerrarium.add(new Terrarium3());
+		getListeNourriture().add(new Graine());
 	}
 
 	public List<Terrarium> getListeTerrarium() {
@@ -63,6 +67,15 @@ public class Boutique{
 					e.printStackTrace();
 				}
 			}
+			if(o instanceof Nourriture) {
+				try {
+					Nourriture a = (Nourriture) Class.forName(o.getClass().getName()).newInstance();
+					getPlayer().getInventaire().getListeNourriture().add(a);
+				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			return true;
 		}
 		else
@@ -75,5 +88,13 @@ public class Boutique{
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+
+	public List<Nourriture> getListeNourriture() {
+		return listeNourriture;
+	}
+
+	public void setListeNourriture(List<Nourriture> listeNourriture) {
+		this.listeNourriture = listeNourriture;
 	}
 }

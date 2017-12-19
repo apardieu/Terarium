@@ -13,6 +13,7 @@ public class PreviewTerrarium extends JPanel implements MouseListener{
 	protected CardLayout cl = null;
 	protected Player player;
 	protected int currentPreview = 0;
+	private int nbTerrarium = 0;
 	
 	public PreviewTerrarium(Player player) {
 		cl = new CardLayout();
@@ -21,8 +22,8 @@ public class PreviewTerrarium extends JPanel implements MouseListener{
 		this.addMouseListener(this);
 		
 		//Add the two view with Terrarium first
-		
-		for(int i=0; i<player.getListeTerrarium().size(); i++) {
+		nbTerrarium = player.getListeTerrarium().size();
+		for(int i=0; i<nbTerrarium; i++) {
 			this.add(new TerrariumView(player.getListeTerrarium().get(i)), "Terrarium" + i);
 		}
 		cl.first(this);
@@ -30,7 +31,8 @@ public class PreviewTerrarium extends JPanel implements MouseListener{
 
 	public void update() {
 		this.removeAll();
-		for(int i=0; i<player.getListeTerrarium().size(); i++) {
+		nbTerrarium  = player.getListeTerrarium().size();
+		for(int i=0; i<nbTerrarium; i++) {
 			this.add(new TerrariumView(player.getListeTerrarium().get(i)), "Terrarium" + i);
 		}
 	}
@@ -52,6 +54,14 @@ public class PreviewTerrarium extends JPanel implements MouseListener{
 		else
 			currentPreview--;
 		cl.show(this, "Terrarium" + currentPreview);
+	}
+
+	public int getNbTerrarium() {
+		return nbTerrarium;
+	}
+
+	public void setNbTerrarium(int nbTerrarium) {
+		this.nbTerrarium = nbTerrarium;
 	}
 
 	@Override

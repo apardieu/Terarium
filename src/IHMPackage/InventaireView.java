@@ -10,8 +10,9 @@ public class InventaireView extends JPanel{
 	private static final long serialVersionUID = 4754928741383750759L;
 	protected Inventaire inventaire;
 	protected mainBoutique main;
-	protected insecteListeVitrine insecteInventaire;
-	protected TerrariumListeVitrine TerrariumInventaire;
+	protected ObjetListeVitrine insecteInventaire;
+	protected ObjetListeVitrine TerrariumInventaire;
+	protected ObjetListeVitrine nourritureInventaire;
 	protected Objet objet;
 
 	protected CardLayout cl;
@@ -21,10 +22,12 @@ public class InventaireView extends JPanel{
 		this.setLayout(cl);
 		this.inventaire = inventaire;
 		main = new mainBoutique();
-		insecteInventaire = new insecteListeVitrine(inventaire.getListeInsecte());
-		TerrariumInventaire = new TerrariumListeVitrine(inventaire.getListeTerrarium());
+		insecteInventaire = new ObjetListeVitrine(inventaire.getListeInsecte());
+		TerrariumInventaire = new ObjetListeVitrine(inventaire.getListeTerrarium());
+		nourritureInventaire = new ObjetListeVitrine(inventaire.getListeNourriture());
 		this.add("insecteInventaire", insecteInventaire);
 		this.add("TerrariumInventaire", TerrariumInventaire);
+		this.add("nourritureInventaire", nourritureInventaire);
 		this.add("main", main);
 		
 		cl.show(this, "main");

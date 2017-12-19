@@ -41,6 +41,12 @@ public class mainBoutique extends JPanel implements MouseListener{
 				if(this.getParent() instanceof InventaireView)
 					((InventaireView) this.getParent()).getCl().show((InventaireView) this.getParent(), "TerrariumInventaire");
 			}
+			if(e.getX()>637*this.getWidth()/1462 & e.getX()<825*this.getWidth()/1462 & e.getY()>362*this.getHeight()/916 & e.getY()<427*this.getHeight()/916) {
+				if(this.getParent() instanceof BoutiqueView)
+					((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "nourritureShop");
+				if(this.getParent() instanceof InventaireView)
+					((InventaireView) this.getParent()).getCl().show((InventaireView) this.getParent(), "nourritureInventaire");
+			}
 	}
 
 	@Override
