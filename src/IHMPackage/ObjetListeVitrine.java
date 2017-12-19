@@ -14,24 +14,28 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import InsectePackage.Insecte;
+import Nourriture.Nourriture;
 import Objets.Objet;
 
-public class insecteListeVitrine extends JPanel implements MouseListener{
-	private static final long serialVersionUID = 2398712630839784948L;
+public class ObjetListeVitrine extends JPanel implements MouseListener{
+	private static final long serialVersionUID = -2328453369007393762L;
 	protected boolean insecteShop;
 	protected boolean mainShop;
 	protected boolean vitrine;
-	private List<Insecte> listeInsecte = new LinkedList<Insecte>();
+	private List<? extends Objet> listeObjet = new LinkedList<Objet>();
 	protected int nbPage;
 	protected boolean next;
 	protected boolean prev;
+	protected ImageButton mainButton = null;
+	protected ImageButton nextButton = null;
+	protected File fond = new File("boutique.jpg");
 	protected File nextArrow = new File("nextArrowLocked.png");
 	protected File prevArrow = new File("prevArrowLocked.png");
 	protected Objet objet;
 	public boolean visible;
 	
-	public insecteListeVitrine(List<Insecte> list) {
-		this.listeInsecte = list;
+	public ObjetListeVitrine(List<? extends Objet> list) {
+		this.listeObjet = list;
 		visible=false;
 		this.addMouseListener(this);
 		nbPage=0;
@@ -42,18 +46,22 @@ public class insecteListeVitrine extends JPanel implements MouseListener{
 		//Drawing the background of the shop and add the main button
 		
 	    try {
-	    	g.drawImage(ImageIO.read(new File("boutique.jpg")), 0, 0, this.getWidth(), this.getHeight(), null);
-	    	g.drawImage(ImageIO.read(new File("main.png")), 716*this.getWidth()/809, 10*this.getHeight()/604, 65*this.getWidth()/809, 57*this.getHeight()/604, null);
+	    	g.drawImage(ImageIO.read(fond), 0, 0, this.getWidth(), this.getHeight(), null);
 	    } catch (IOException e) {
 			e.printStackTrace();
 		}
+	    mainButton = new ImageButton("main.png", 1317*this.getWidth()/1462, 8*this.getWidth()/916, 65*this.getWidth()/809, 57*this.getHeight()/604);
+		nextButton = new ImageButton("nextArrowLocked.png", 700*this.getWidth()/809, 525*this.getHeight()/604, 60*this.getWidth()/809, 60*this.getHeight()/604);
+		this.removeAll();
+	    this.add(mainButton);
+	    this.add(nextButton);
 	    
 	    ///!\CHANTIER!!! Creer une methode draw objet et mettre les valeurs dans des variables nan mais ohhh !!!!
 	    
 	    int x=75, y=110;
 	    int h=80, l=60;
-	    for(int i=nbPage*21; (i<(nbPage+1)*21 & i<listeInsecte.size()); i++) {
-        	Objet o = listeInsecte.get(i);
+	    for(int i=nbPage*21; (i<(nbPage+1)*21 & i<listeObjet.size()); i++) {
+        	Objet o = listeObjet.get(i);
         	try {
         		g.setColor(Color.BLACK);
         		g.fillRect((x-15)*this.getWidth()/809, (y-15)*this.getHeight()/604, (l+30)*this.getWidth()/809, (h+30)*this.getHeight()/604);
@@ -79,7 +87,7 @@ public class insecteListeVitrine extends JPanel implements MouseListener{
         	else
         		x+=l+40;
         	
-        	if(nbPage==listeInsecte.size()/21) {
+        	if(nbPage==listeObjet.size()/21) {
         		next=false;
         		nextArrow = new File("nextArrowLocked.png");
         	}
@@ -131,11 +139,14 @@ public class insecteListeVitrine extends JPanel implements MouseListener{
 		
 		//Create clickable image
 		
-		for(int i=nbPage*21; (i<(nbPage+1)*21 & i<listeInsecte.size()); i++) {
-			Objet o = listeInsecte.get(i);
+		for(int i=nbPage*21; (i<(nbPage+1)*21 & i<listeObjet.size()); i++) {
+			Objet o = listeObjet.get(i);
 			if(e.getX()>o.getxShop() & e.getX()<(o.getxShop()+o.getlShop()) & e.getY()>o.getyShop() & e.getY()<(o.getyShop()+o.gethShop())) {
 				if (this.getParent() instanceof InventaireView) {
-					((InventaireView) this.getParent()).inventaire.addInsecte((Insecte) o);
+					if(o instanceof Insecte)
+						((InventaireView) this.getParent()).inventaire.addInsecte((Insecte) o);
+					if(o instanceof Nourriture)
+						((InventaireView) this.getParent()).inventaire.addNourriture((Nourriture) o);
 				}
 				else {
 					((BoutiqueView) this.getParent()).setObjet(o);
