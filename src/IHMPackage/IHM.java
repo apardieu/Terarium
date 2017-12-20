@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 
 import MainPackage.GameController;
 import MainPackage.Player;
+import MainPackage.Variables;
 import Objets.Boutique;
 
 public class IHM extends JFrame implements MouseListener{
@@ -37,7 +38,7 @@ public class IHM extends JFrame implements MouseListener{
 		
 		setTitle("Tera Land : The Origins");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setMinimumSize(new Dimension(JFrame.MAXIMIZED_HORIZ, JFrame.MAXIMIZED_VERT));
+		setMinimumSize(new Dimension(Variables.LARGEURFRAMEMIN, Variables.HAUTEURFRAMEMIN));
 		
 		this.fullScreen = fullScreen;
 		this.GC = GC;
@@ -105,6 +106,8 @@ public class IHM extends JFrame implements MouseListener{
 	//Refresh time, money and NbInsect/Capacity
 	
 	public void refreshData(Player p) {
+		float echelle = (float) (((double) Variables.HAUTEURFRAME)/Variables.LARGEURFRAME); //Echelle largeur
+		
 		donnes.getContenantLabel().setForeground(Color.white);
 		donnes.getTempsLabel().setForeground(Color.white);
 		donnes.getArgentLabel().setForeground(Color.white);
@@ -112,6 +115,8 @@ public class IHM extends JFrame implements MouseListener{
 		donnes.getTempsLabel().setText("Temps: " + ((int)(System.currentTimeMillis()/1000) - p.getCurrentTerrarium().getStartTime()));
 		donnes.getArgentLabel().setText("Argent : " + p.getArgent());
 		tera.update(p.getCurrentTerrarium());
+		if(!fullScreen)
+			setSize(this.getWidth(), (int) (this.getWidth()*echelle));
 	}
 	
 	class ButtonPrintInventaire implements ActionListener{

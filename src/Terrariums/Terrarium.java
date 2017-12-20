@@ -32,8 +32,10 @@ public class Terrarium extends Objet{
 	//Add an insect to the Terarium
 	
 	public void addInsecte(Insecte m) {
-		if (getNbInsecte()<getCapacity())
+		if (getNbInsecte()<getCapacity()) {
 			getListeInsecte().add(m);
+			m.setMangeoire(mangeoire);
+		}
 		else
 			System.out.println("Plus de places dans ce terarium");
 		nbInsecte = getListeInsecte().size();
@@ -58,16 +60,16 @@ public class Terrarium extends Objet{
 				this.listeInsecte.remove(a);
 				nbInsecte--;
 			}
-			if(a.isInContactWith(mangeoire)) {
+			if(a.isInContactWith(mangeoire) & mangeoire.getNbNourriture()>0) {
 				a.manger(mangeoire.getNourriture());
 				mangeoire.setNbNourriture(mangeoire.getNbNourriture()-mangeoire.getNourriture().getFoodPower());
 			}
 			List<Insecte> l = new LinkedList<Insecte>();
-			if(a instanceof Herbivore) {
+			if(a instanceof Herbivore & !a.isFlying()) {
 				if(a.getFoodLevel()<a.getMaxFoodLevel()/10) {
 					((Herbivore)a).zombie();
 				}
-				if(a.getFoodLevel()>a.getMaxFoodLevel()*0.8) {
+				if(a.getFoodLevel()>a.getMaxFoodLevel()*0.5) {
 					((Herbivore)a).normal();
 				}
 			}

@@ -2,7 +2,10 @@ package Objets;
 import java.util.LinkedList;
 import java.util.List;
 
+import InsectePackage.Carnivore;
+import InsectePackage.Herbivore;
 import InsectePackage.Insecte;
+import InsectePackage.Papillon;
 import MainPackage.Player;
 import Nourriture.Nourriture;
 import Terrariums.Terrarium;
@@ -15,7 +18,10 @@ public class Inventaire {
 	
 	public Inventaire(Player p) {
 		this.p = p;
-	}
+		listeInsecte.add(new Papillon());
+		listeInsecte.add(new Herbivore());
+		listeInsecte.add(new Carnivore());
+		}
 
 	public void addInsecte(Insecte o) {
 		p.getCurrentTerrarium().addInsecte((Insecte) o);
@@ -23,7 +29,8 @@ public class Inventaire {
 	}
 	
 	public void addNourriture(Nourriture aliment) {
-		p.getCurrentTerrarium().getMangeoire().remplir(((Nourriture) aliment).getFoodPower());
+		for(int i=0; i<100; i++)
+			p.getCurrentTerrarium().getMangeoire().remplir((Nourriture) aliment);
 		listeNourriture.remove(aliment);
 	}
 	

@@ -2,6 +2,7 @@ package Nourriture;
 
 import java.io.File;
 
+import MainPackage.Variables;
 import Objets.Objet;
 
 public class Mangeoire extends Objet{
@@ -12,11 +13,15 @@ public class Mangeoire extends Objet{
 	public Mangeoire(Nourriture nourriture) {
 		this.setImage(new File("mangeoireVide.png"));
 		this.nourriture = nourriture;
+		hTerra = 100;
+		lTerra = 100;
+		this.setxTerra((Variables.LARGEUR - lTerra)/2);
+		this.setyTerra(Variables.HAUTEUR - hTerra);
 		nbNourriture = 0;
 	}	
 	
-	public void remplir(int nb) {
-		nbNourriture = (nbNourriture+nb)>maxNbNourriture? maxNbNourriture : nbNourriture+nb;
+	public void remplir(Nourriture aliment) {
+		nbNourriture = (nbNourriture+aliment.getFoodPower())>maxNbNourriture? maxNbNourriture : nbNourriture+aliment.getFoodPower();
 		updateImage();
 	}
 	

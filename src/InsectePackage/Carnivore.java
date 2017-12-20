@@ -7,6 +7,8 @@ public class Carnivore extends Insecte{
 		name = "Carnivore";
 		foodLevel=(int) (getMaxFoodLevel()*0.3);
 		setImage(new File("resources/carnivore.png"));
+		imageDroite = getImage();
+		imageGauche = getImage();
 		setPrice(1000);
 		setCanibale(true);
 		setSpeedTire(3);

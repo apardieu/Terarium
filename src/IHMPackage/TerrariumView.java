@@ -26,8 +26,8 @@ public class TerrariumView extends JPanel{
         //Paint the background
         try {
 			g.drawImage(ImageIO.read(Terrarium.getImage()), 0, 0, this.getWidth(), this.getHeight(), null);
-			g.drawImage(ImageIO.read(Terrarium.getMangeoire().getImage()), this.getWidth()/2, (int) (this.getHeight()-100*eH), (int) (100*eH), (int) (100*eH), null);
-		} catch (IOException e) {
+			g.drawImage(ImageIO.read(Terrarium.getMangeoire().getImage()), (int) (Terrarium.getMangeoire().getxTerra()*eL), (int) (Terrarium.getMangeoire().getyTerra()*eH), (int) (Terrarium.getMangeoire().getlTerra()*eL), (int) (Terrarium.getMangeoire().gethTerra()*eH), null);
+        } catch (IOException e) {
 			e.printStackTrace();
 		}
         
@@ -36,8 +36,7 @@ public class TerrariumView extends JPanel{
         for(Insecte ins : Terrarium.getListeInsecte()) 
         {
         	try {
-        		ins.setY((int) (this.getHeight()-ins.gethTerra()*eH));
-				g.drawImage(ImageIO.read(ins.getImage()),(int) (ins.getX()*eL), ins.getY(),(int) (ins.getlTerra()*eL),(int) (ins.gethTerra()*eH), null);
+				g.drawImage(ImageIO.read(ins.getImage()),(int) (ins.getxTerra()*eL), (int) (ins.getyTerra()*eH),(int) (ins.getlTerra()*eL),(int) (ins.gethTerra()*eH), null);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -51,9 +50,9 @@ public class TerrariumView extends JPanel{
 	{
 		int emptyfood = ins.getMaxFoodLevel()-ins.getFoodLevel();
 		g.setColor(Color.GREEN);
-		g.fillRect((int) (ins.getxTerra()*eL), ins.getY()-10,(int) (ins.getFoodLevel()*ins.getlTerra()*eL/ins.getMaxFoodLevel()),(int) (5*eH));
+		g.fillRect((int) (ins.getxTerra()*eL), (int) ((ins.getyTerra()-10)*eH),(int) (ins.getFoodLevel()*ins.getlTerra()*eL/ins.getMaxFoodLevel()),(int) (5*eH));
 		g.setColor(Color.RED);
-		g.fillRect((int) (ins.getX()*eL+ins.getFoodLevel()*ins.getlTerra()*eL/ins.getMaxFoodLevel()), ins.getY()-10, (int) (emptyfood*eL*ins.getlTerra()/ins.getMaxFoodLevel()),(int) (5*eH));
+		g.fillRect((int) (ins.getxTerra()*eL+ins.getFoodLevel()*ins.getlTerra()*eL/ins.getMaxFoodLevel()), (int) ((ins.getyTerra()-10)*eH), (int) (emptyfood*eL*ins.getlTerra()/ins.getMaxFoodLevel()),(int) (5*eH));
 	}
 	
 	public void update(Terrarium tera) {

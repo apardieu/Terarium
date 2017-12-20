@@ -5,6 +5,7 @@ import java.util.List;
 import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
 import InsectePackage.Insecte;
+import InsectePackage.Papillon;
 import MainPackage.Player;
 import Nourriture.Graine;
 import Nourriture.Nourriture;
@@ -23,6 +24,7 @@ public class Boutique{
 		this.setPlayer(player);
 		getListeInsecte().add(new Carnivore());
 		getListeInsecte().add(new Herbivore());
+		getListeInsecte().add(new Papillon());
 		listeTerrarium.add(new Terrarium1());
 		listeTerrarium.add(new Terrarium2());
 		listeTerrarium.add(new Terrarium3());

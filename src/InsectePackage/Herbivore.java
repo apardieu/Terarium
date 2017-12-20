@@ -7,6 +7,8 @@ public class Herbivore extends Insecte{
 		name = "Herbivore";
 		foodLevel=(int) (getMaxFoodLevel()*0.5);
 		setImage(new File("resources/mouchetest.png"));
+		imageDroite = getImage();
+		imageGauche = getImage();
 		setPrice(500);
 		setCanibale(false);
 		setSpeedTire(2);
@@ -26,6 +28,6 @@ public class Herbivore extends Insecte{
 		this.setImage(new File("resources/mouchetest.png"));
 		this.setCanibale(false);
 		setSpeedTire(2);
-		this.speedMove=1;
+		this.speedMove=2;
 	}
 }
