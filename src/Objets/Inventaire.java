@@ -29,9 +29,13 @@ public class Inventaire {
 	}
 	
 	public void addNourriture(Nourriture aliment) {
-		for(int i=0; i<100; i++)
-			p.getCurrentTerrarium().getMangeoire().remplir((Nourriture) aliment);
-		listeNourriture.remove(aliment);
+		if(p.getCurrentTerrarium().getMangeoire().getNourriture().getClass()==aliment.getClass()) {
+			for(int i=0; i<100; i++)
+				p.getCurrentTerrarium().getMangeoire().remplir((Nourriture) aliment);
+			listeNourriture.remove(aliment);
+		}
+		else
+			System.out.println("C'est pas la bonne nourriture");
 	}
 	
 	public List<Nourriture> getListeNourriture() {

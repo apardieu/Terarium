@@ -4,6 +4,8 @@ import Nourriture.Nourriture;
 import Objets.Objet;
 
 import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 
 import MainPackage.Variables;
 
@@ -24,6 +26,7 @@ public abstract class Insecte extends Objet{
 	protected File imageDroite;
 	protected File imageGauche;
 	protected Mangeoire mangeoire;
+	protected List<Class<? extends Nourriture>> acceptedFood = new LinkedList<Class<? extends Nourriture>>();
 
 	//Move the insect 1 step by 1 step, check if the insect have to move right or left and loose life each step
 	
@@ -267,6 +270,14 @@ public abstract class Insecte extends Objet{
 
 	public void setMangeoire(Mangeoire mangeoire) {
 		this.mangeoire = mangeoire;
+	}
+
+	public List<Class<? extends Nourriture>> getAcceptedFood() {
+		return acceptedFood;
+	}
+
+	public void setAcceptedFood(List<Class<? extends Nourriture>> acceptedFood) {
+		this.acceptedFood = acceptedFood;
 	}
 }
 

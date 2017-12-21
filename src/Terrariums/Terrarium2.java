@@ -2,6 +2,8 @@ package Terrariums;
 
 import java.io.File;
 
+import Nourriture.Graine;
+
 public class Terrarium2 extends Terrarium {
 	public Terrarium2() {
 		super();
@@ -10,5 +12,6 @@ public class Terrarium2 extends Terrarium {
 		nbInsecte = 0;
 		setImage(new File("fond2.jpg"));
 		setPrice(3000);
+		mangeoire.setNourriture(new Graine());
 	}
 }

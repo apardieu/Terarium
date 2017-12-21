@@ -29,16 +29,21 @@ public class ObjetListeVitrine extends JPanel implements MouseListener{
 	protected ImageButton mainButton = null;
 	protected ImageButton nextButton = null;
 	protected File fond = new File("boutique.jpg");
-	protected File nextArrow = new File("nextArrowLocked.png");
+	protected String nextArrow = "nextArrowLocked.png";
 	protected File prevArrow = new File("prevArrowLocked.png");
 	protected Objet objet;
 	public boolean visible;
 	
 	public ObjetListeVitrine(List<? extends Objet> list) {
+		this.setLayout(null);
 		this.listeObjet = list;
 		visible=false;
 		this.addMouseListener(this);
 		nbPage=0;
+		mainButton = new ImageButton("main.png", 1317, 8, 65, 57, true);
+		nextButton = new ImageButton(nextArrow, 700, 525, 60, 60, true);
+	    this.add(mainButton);
+	    this.add(nextButton);
 	}
 	
 	protected void paintComponent(Graphics g) {
@@ -50,11 +55,7 @@ public class ObjetListeVitrine extends JPanel implements MouseListener{
 	    } catch (IOException e) {
 			e.printStackTrace();
 		}
-	    mainButton = new ImageButton("main.png", 1317*this.getWidth()/1462, 8*this.getWidth()/916, 65*this.getWidth()/809, 57*this.getHeight()/604);
-		nextButton = new ImageButton("nextArrowLocked.png", 700*this.getWidth()/809, 525*this.getHeight()/604, 60*this.getWidth()/809, 60*this.getHeight()/604);
-		this.removeAll();
-	    this.add(mainButton);
-	    this.add(nextButton);
+	    
 	    
 	    ///!\CHANTIER!!! Creer une methode draw objet et mettre les valeurs dans des variables nan mais ohhh !!!!
 	    
@@ -89,11 +90,11 @@ public class ObjetListeVitrine extends JPanel implements MouseListener{
         	
         	if(nbPage==listeObjet.size()/21) {
         		next=false;
-        		nextArrow = new File("nextArrowLocked.png");
+        		nextArrow ="nextArrowLocked.png";
         	}
         	else {
         		next=true;
-        		nextArrow = new File("nextArrow.png");
+        		nextArrow = "nextArrow.png";
         	}
         	if(nbPage==0) {
         		prev=false;
@@ -105,7 +106,6 @@ public class ObjetListeVitrine extends JPanel implements MouseListener{
         	}
     	}
 	    try {
-	    	g.drawImage(ImageIO.read(nextArrow), 700*this.getWidth()/809, 525*this.getHeight()/604, 60*this.getWidth()/809, 60*this.getHeight()/604, null);
 	    	g.drawImage(ImageIO.read(prevArrow), 40*this.getWidth()/809, 525*this.getHeight()/604, 60*this.getWidth()/809, 60*this.getHeight()/604, null);
 		} catch (IOException e) {
 			e.printStackTrace();

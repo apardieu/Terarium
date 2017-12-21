@@ -9,6 +9,7 @@ import InsectePackage.Papillon;
 import MainPackage.Player;
 import Nourriture.Graine;
 import Nourriture.Nourriture;
+import Nourriture.Viande;
 import Terrariums.Terrarium;
 import Terrariums.Terrarium1;
 import Terrariums.Terrarium2;
@@ -29,6 +30,7 @@ public class Boutique{
 		listeTerrarium.add(new Terrarium2());
 		listeTerrarium.add(new Terrarium3());
 		getListeNourriture().add(new Graine());
+		getListeNourriture().add(new Viande());
 	}
 
 	public List<Terrarium> getListeTerrarium() {

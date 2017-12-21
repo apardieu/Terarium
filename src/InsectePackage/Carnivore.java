@@ -2,6 +2,8 @@ package InsectePackage;
 
 import java.io.File;
 
+import Nourriture.Viande;
+
 public class Carnivore extends Insecte{
 	public Carnivore() {
 		name = "Carnivore";
@@ -16,5 +18,6 @@ public class Carnivore extends Insecte{
 		speedMove=1;
 		hTerra=121;
 		lTerra=108;
+		acceptedFood.add(Viande.class);
 	}
 }

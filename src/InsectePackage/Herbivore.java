@@ -2,6 +2,8 @@ package InsectePackage;
 
 import java.io.File;
 
+import Nourriture.Graine;
+
 public class Herbivore extends Insecte{
 	public Herbivore() {
 		name = "Herbivore";
@@ -15,6 +17,7 @@ public class Herbivore extends Insecte{
 		speedMove=2;
 		hTerra=121;
 		lTerra=108;
+		acceptedFood.add(Graine.class);
 	}
 	
 	public void zombie() {

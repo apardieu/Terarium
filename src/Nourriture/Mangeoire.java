@@ -26,22 +26,27 @@ public class Mangeoire extends Objet{
 	}
 	
 	public void updateImage() {
+		String type = nourriture.getClass().getSimpleName();
 		if (nbNourriture>=maxNbNourriture*0.8) {
-			this.setImage(new File("mangeoirePlein.png"));
+			this.setImage(new File("mangeoirePlein" + type + ".png"));
 		}
 		else if (nbNourriture>=maxNbNourriture*0.2 & nbNourriture<maxNbNourriture*0.8) {
-			this.setImage(new File("mangeoireMiPlein.png"));
+			this.setImage(new File("mangeoireMiPlein" + type + ".png"));
 		}
 		else if (nbNourriture<maxNbNourriture*0.2 & nbNourriture!=0) {
-			this.setImage(new File("mangeoirePresqueVide.png"));
+			this.setImage(new File("mangeoirePresqueVide" + type + ".png"));
 		}
 		else if (nbNourriture==0) {
-			this.setImage(new File("mangeoireVide.png"));
+			this.setImage(new File("mangeoireVide" + type + ".png"));
 		}
 	}
 	
 	public Nourriture getNourriture() {
 		return nourriture;
+	}
+
+	public void setNourriture(Nourriture nourriture) {
+		this.nourriture = nourriture;
 	}
 
 	public void setNbNourriture(int nbNourriture) {

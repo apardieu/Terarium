@@ -1,6 +1,10 @@
 package IHMPackage;
 
 import java.awt.Image;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,7 +19,7 @@ public class ImageButton extends JPanel{
 	protected int largeur;
 	protected int hauteur;
 	
-	public ImageButton(String image, int x, int y, int largeur, int hauteur) {
+	public ImageButton(String image, int x, int y, int largeur, int hauteur, boolean mouseOn) {
 		this.image = image;
 		this.x = x;
 		this.y = y;
@@ -26,11 +30,12 @@ public class ImageButton extends JPanel{
 		button.setBorderPainted(false);
 		button.setSize(largeur, hauteur);
 		button.setMaximumSize(button.getSize());
-		this.setSize(button.getSize());
-		this.setMaximumSize(this.getSize());
+		if(mouseOn)
+			button.addMouseListener(new MouseOn());
+		this.setSize(largeur + 15, hauteur + 15);
+		this.add(button);
 		if(x != 0 & y != 0)
 			this.setLocation(x, y);
-		this.add(button);
 		this.setOpaque(false);
 	}
 	
@@ -42,8 +47,8 @@ public class ImageButton extends JPanel{
 	    return (Icon) imageIcon;
 	}
 	
-	public JButton getButton() {
-		return button;
+	public void addActionListener(ActionListener l) {
+		button.addActionListener(l);
 	}
 
 	public String getImage() {
@@ -53,4 +58,53 @@ public class ImageButton extends JPanel{
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	public void update() {
+		button.setIcon(resizeImage());
+	}
+	
+	public void lock() {
+		
+	}
+	
+	public void unlock() {
+		
+	}
+	
+	class MouseOn implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			String extension = image.substring(image.indexOf("."));
+			image = image.replaceFirst(extension, "Light" + extension);
+			button.setIcon(resizeImage());
+			button.revalidate();
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			String extension = image.substring(image.indexOf("."));
+			image = image.replaceFirst("Light" + extension, extension);
+			button.setIcon(resizeImage());
+			button.revalidate();
+		}
+
+	}
+
 }

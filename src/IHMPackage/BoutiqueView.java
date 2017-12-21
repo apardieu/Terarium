@@ -10,7 +10,7 @@ public class BoutiqueView extends JPanel{
 	protected ObjetListeVitrine insecteShop;
 	protected ObjetListeVitrine terrariumShop;
 	protected ObjetListeVitrine nourritureShop;
-	protected mainBoutique mainShop;
+	protected MainShop mainShop;
 	protected vitrineBoutique vitrine;
 	protected Objet objet;
 	protected int nbPage;
@@ -20,7 +20,7 @@ public class BoutiqueView extends JPanel{
 		cl = new CardLayout();
 		this.setLayout(cl);
 		this.shop = shop;
-		mainShop = new mainBoutique();
+		mainShop = new MainShop(MainShop.BOUTIQUE);
 		insecteShop = new ObjetListeVitrine(shop.getListeInsecte());
 		terrariumShop = new ObjetListeVitrine(shop.getListeTerrarium());
 		nourritureShop = new ObjetListeVitrine(shop.getListeNourriture());

@@ -60,7 +60,7 @@ public class Terrarium extends Objet{
 				this.listeInsecte.remove(a);
 				nbInsecte--;
 			}
-			if(a.isInContactWith(mangeoire) & mangeoire.getNbNourriture()>0) {
+			if(a.isInContactWith(mangeoire) & mangeoire.getNbNourriture()>0 & a.getAcceptedFood().contains(mangeoire.getNourriture().getClass())) {
 				a.manger(mangeoire.getNourriture());
 				mangeoire.setNbNourriture(mangeoire.getNbNourriture()-mangeoire.getNourriture().getFoodPower());
 			}

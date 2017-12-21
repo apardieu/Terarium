@@ -19,12 +19,12 @@ public class Border extends JPanel{
 	
 	public Border(PreviewTerrarium previewTera){
 		this.previewTera = previewTera;
-		exitButton = new ImageButton("exit.png", 0, 0, 30, 30);
-		optionButton = new ImageButton("option.png", 0, 0, 30, 30);
+		exitButton = new ImageButton("exit.png", 0, 0, 30, 30, false);
+		optionButton = new ImageButton("option.png", 0, 0, 30, 30, false);
 		printInventaire = new JButton("Inventaire");
 		setPrintBoutique(new JButton("Boutique"));
-		nextTerraButton = new ImageButton("nextTerrarium.png", 0, 0, 100, 30);
-		prevTerraButton = new ImageButton("prevTerrarium.png", 0, 0, 100, 30);
+		nextTerraButton = new ImageButton("nextTerrarium.png", 0, 0, 100, 30, false);
+		prevTerraButton = new ImageButton("prevTerrarium.png", 0, 0, 100, 30, false);
 		
 		//GridBagLayout is used to place the buttons
 		
@@ -74,12 +74,12 @@ public class Border extends JPanel{
 		add(getPrintBoutique(), gbc);
 	}
 
-	public JButton getNextTerraButton() {
-		return nextTerraButton.getButton();
+	public ImageButton getNextTerraButton() {
+		return nextTerraButton;
 	}
 
-	public JButton getPrevTerraButton() {
-		return prevTerraButton.getButton();
+	public ImageButton getPrevTerraButton() {
+		return prevTerraButton;
 	}
 
 	public PreviewTerrarium getPreviewTera() {
@@ -106,11 +106,11 @@ public class Border extends JPanel{
 		this.printBoutique = printBoutique;
 	}
 
-	public JButton getExitButton() {
-		return exitButton.getButton();
+	public ImageButton getExitButton() {
+		return exitButton;
 	}
 
-	public JButton getOptionButton() {
-		return optionButton.getButton();
+	public ImageButton getOptionButton() {
+		return optionButton;
 	}
 }
