@@ -43,13 +43,15 @@ public class vitrineBoutique extends JPanel implements MouseListener{
 			e.printStackTrace();
 		}
     }
+	
+	//A revoir
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
 		//Go to mainShop
 		if(e.getX()>716*this.getWidth()/809 & e.getX()<774*this.getWidth()/809 & e.getY()>8*this.getHeight()/604 & e.getY()<59*this.getHeight()/604)
-			((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "mainShop");
+			((CardView) this.getParent()).getCl().show((CardView) this.getParent(), "mainShop");
 		
 		if(e.getX()>1167*this.getWidth()/1462 & e.getX()<1429*this.getWidth()/1462 & e.getY()>830*this.getHeight()/916 & e.getY()<897*this.getHeight()/916) {
 			shop.buy(objet);
@@ -57,7 +59,7 @@ public class vitrineBoutique extends JPanel implements MouseListener{
 		
 		//Undo
 		if(e.getX()>35*this.getWidth()/809 & e.getX()<93*this.getWidth()/809 & e.getY()>8*this.getHeight()/604 & e.getY()<59*this.getHeight()/604)
-			((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "insecteShop");
+			((CardView) this.getParent()).getCl().show((CardView) this.getParent(), "insecteShop");
 	}
 
 	@Override

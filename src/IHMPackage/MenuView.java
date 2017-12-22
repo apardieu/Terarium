@@ -9,17 +9,35 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class MainShop extends JPanel{
+enum TypeInventaire {
+	BOUTIQUE("Shop"),
+	INVENTAIRE("Inventaire");
+	
+	private String type;
+	
+	TypeInventaire(String type) {
+		this.setType(type);
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+}
+
+
+public class MenuView extends JPanel{
 	private static final long serialVersionUID = -1758625270358921797L;
 	private ImageButton insectesBoutton = null;
 	private ImageButton soinsBoutton = null;
 	private ImageButton nourritureBoutton = null;
 	private ImageButton terrariumsBoutton = null;
-	private String type;
-	public static final String BOUTIQUE = "Shop";
-	public static final String INVENTAIRE = "Inventaire";
+	private TypeInventaire type;
 	
-	public MainShop(String type) {
+	public MenuView(TypeInventaire type) {
 		this.type = type;
 		this.setLayout(null);
 		insectesBoutton = new ImageButton("insectesBoutton.png", 480, 200, 430, 100, true);
@@ -39,7 +57,7 @@ public class MainShop extends JPanel{
 	protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-			g.drawImage(ImageIO.read(new File("main" + type + ".jpg")), 0, 0, this.getWidth(), this.getHeight(), null);
+			g.drawImage(ImageIO.read(new File("main" + type.getType() + ".jpg")), 0, 0, this.getWidth(), this.getHeight(), null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -50,10 +68,7 @@ public class MainShop extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(getParent() instanceof BoutiqueView)
-					((BoutiqueView) getParent()).getCl().show((BoutiqueView) getParent(), "insecteShop");
-				if(getParent() instanceof InventaireView)
-					((InventaireView) getParent()).getCl().show((InventaireView) getParent(), "insecteInventaire");
+				((CardView) getParent()).getCl().show((CardView) getParent(), "insecteInventaire");
 			}
 		}
 	
@@ -61,10 +76,7 @@ public class MainShop extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(getParent() instanceof BoutiqueView)
-					((BoutiqueView) getParent()).getCl().show((BoutiqueView) getParent(), "soinsShop");
-				if(getParent() instanceof InventaireView)
-					((InventaireView) getParent()).getCl().show((InventaireView) getParent(), "soinsInventaire");
+				((CardView) getParent()).getCl().show((CardView) getParent(), "soinsInventaire");
 			}
 		}
 	
@@ -72,10 +84,7 @@ public class MainShop extends JPanel{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(getParent() instanceof BoutiqueView)
-				((BoutiqueView) getParent()).getCl().show((BoutiqueView) getParent(), "soinsShop");
-			if(getParent() instanceof InventaireView)
-				((InventaireView) getParent()).getCl().show((InventaireView) getParent(), "soinsInventaire");
+			((CardView) getParent()).getCl().show((CardView) getParent(), "nourritureInventaire");
 		}
 	}
 	
@@ -83,10 +92,7 @@ public class MainShop extends JPanel{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(getParent() instanceof BoutiqueView)
-				((BoutiqueView) getParent()).getCl().show((BoutiqueView) getParent(), "Shop");
-			if(getParent() instanceof InventaireView)
-				((InventaireView) getParent()).getCl().show((InventaireView) getParent(), "soinsInventaire");
+			((CardView) getParent()).getCl().show((CardView) getParent(), "TerrariumInventaire");
 		}
 	}
 }

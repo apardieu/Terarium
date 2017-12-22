@@ -6,10 +6,10 @@ public class View extends JPanel{
 	private static final long serialVersionUID = 5357544026259177499L;
 	protected CardLayout cl = null;
 	protected TerrariumView tera;
-	protected BoutiqueView shop;
-	protected InventaireView inventaireView;
+	protected CardView shop;
+	protected CardView inventaireView;
 	
-	public View(TerrariumView tera, BoutiqueView shop, InventaireView inventaireView) {
+	public View(TerrariumView tera, CardView shop, CardView inventaireView) {
 		this.tera = tera;
 		this.shop = shop;
 		this.inventaireView = inventaireView;
@@ -27,7 +27,7 @@ public class View extends JPanel{
 	
 	public void boutiqueView() {
 		shop.nbPage=0;
-		shop.getCl().show(shop, "mainShop");
+		shop.getCl().show(shop, "main");
 		cl.show(this, "shop");
 	}
 	

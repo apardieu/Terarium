@@ -1,6 +1,4 @@
 package Objets;
-import java.util.LinkedList;
-import java.util.List;
 
 import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
@@ -17,36 +15,19 @@ import Terrariums.Terrarium3;
 
 public class Boutique{
 	private Player player;
-	private List<Insecte> listeInsecte = new LinkedList<Insecte>();
-	private List<Terrarium> listeTerrarium = new LinkedList<Terrarium>();
-	private List<Nourriture> listeNourriture = new LinkedList<Nourriture>();
+	private Inventaire inventaire;
 	
 	public Boutique(Player player){
 		this.setPlayer(player);
-		getListeInsecte().add(new Carnivore());
-		getListeInsecte().add(new Herbivore());
-		getListeInsecte().add(new Papillon());
-		listeTerrarium.add(new Terrarium1());
-		listeTerrarium.add(new Terrarium2());
-		listeTerrarium.add(new Terrarium3());
-		getListeNourriture().add(new Graine());
-		getListeNourriture().add(new Viande());
-	}
-
-	public List<Terrarium> getListeTerrarium() {
-		return listeTerrarium;
-	}
-
-	public void setListeTerrarium(List<Terrarium> listeTerrarium) {
-		this.listeTerrarium = listeTerrarium;
-	}
-
-	public List<Insecte> getListeInsecte() {
-		return listeInsecte;
-	}
-
-	public void setListeInsecte(List<Insecte> listeInsecte) {
-		this.listeInsecte = listeInsecte;
+		inventaire = new Inventaire(player);
+		inventaire.add(new Carnivore());
+		inventaire.add(new Herbivore());
+		inventaire.add(new Papillon());
+		inventaire.add(new Terrarium1());
+		inventaire.add(new Terrarium2());
+		inventaire.add(new Terrarium3());
+		inventaire.add(new Graine());
+		inventaire.add(new Viande());
 	}
 	
 	public boolean buy(Objet o) {
@@ -94,11 +75,11 @@ public class Boutique{
 		this.player = player;
 	}
 
-	public List<Nourriture> getListeNourriture() {
-		return listeNourriture;
+	public Inventaire getInventaire() {
+		return inventaire;
 	}
 
-	public void setListeNourriture(List<Nourriture> listeNourriture) {
-		this.listeNourriture = listeNourriture;
+	public void setInventaire(Inventaire inventaire) {
+		this.inventaire = inventaire;
 	}
 }

@@ -1,11 +1,9 @@
 package Objets;
+
 import java.util.LinkedList;
 import java.util.List;
 
-import InsectePackage.Carnivore;
-import InsectePackage.Herbivore;
 import InsectePackage.Insecte;
-import InsectePackage.Papillon;
 import MainPackage.Player;
 import Nourriture.Nourriture;
 import Terrariums.Terrarium;
@@ -14,14 +12,31 @@ public class Inventaire {
 	protected List<Insecte> listeInsecte  = new LinkedList<Insecte>();
 	protected List<Terrarium> listeTerrarium  = new LinkedList<Terrarium>();
 	private List<Nourriture> listeNourriture = new LinkedList<Nourriture>();
+	private List<Soins> listeSoins = new LinkedList<Soins>();
 	protected Player p;
 	
 	public Inventaire(Player p) {
 		this.p = p;
-		listeInsecte.add(new Papillon());
-		listeInsecte.add(new Herbivore());
-		listeInsecte.add(new Carnivore());
+	}
+	
+	//CHANGEMENT
+	
+	public boolean add(Objet o) {
+		if(o instanceof Insecte) {
+			listeInsecte.add((Insecte) o);
+			return true;
 		}
+		else if(o instanceof Nourriture) {
+			listeNourriture.add((Nourriture) o);
+			return true;
+		}
+		else if(o instanceof Terrarium) {
+			listeTerrarium.add((Terrarium) o);
+			return true;
+		}
+		else 
+			return false;
+	}
 
 	public void addInsecte(Insecte o) {
 		p.getCurrentTerrarium().addInsecte((Insecte) o);
@@ -41,29 +56,16 @@ public class Inventaire {
 	public List<Nourriture> getListeNourriture() {
 		return listeNourriture;
 	}
-
-	public void setListeNourriture(List<Nourriture> listeNourriture) {
-		this.listeNourriture = listeNourriture;
-	}
 	
 	public List<Insecte> getListeInsecte() {
 		return listeInsecte;
 	}
 
-	public void setListeInsecte(List<Insecte> listeInsecte) {
-		this.listeInsecte = listeInsecte;
-	}
-	
 	public List<Terrarium> getListeTerrarium() {
 		return listeTerrarium;
 	}
 
-	public void setListeTerrarium(List<Terrarium> listeTerrarium) {
-		this.listeTerrarium = listeTerrarium;
-	}
-
-	public void decrire() {
-		for(Objet o : listeInsecte)
-			System.out.println(o.name);
+	public List<Soins> getListeSoins() {
+		return listeSoins;
 	}
 }

@@ -117,10 +117,7 @@ public class ObjetListeVitrine extends JPanel implements MouseListener{
 		//Go to mainShop
 		if(e.getX()>716*this.getWidth()/809 & e.getX()<781*this.getWidth()/809 & e.getY()>10*this.getHeight()/604 & e.getY()<67*this.getHeight()/604) {
 			nbPage=0;
-			if(this.getParent() instanceof BoutiqueView)
-				((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "mainShop");
-			if(this.getParent() instanceof InventaireView)
-				((InventaireView) this.getParent()).getCl().show((InventaireView) this.getParent(), "main");
+			((CardView) this.getParent()).getCl().show((CardView) this.getParent(), "main");
 			
 		}
 			
@@ -142,15 +139,15 @@ public class ObjetListeVitrine extends JPanel implements MouseListener{
 		for(int i=nbPage*21; (i<(nbPage+1)*21 & i<listeObjet.size()); i++) {
 			Objet o = listeObjet.get(i);
 			if(e.getX()>o.getxShop() & e.getX()<(o.getxShop()+o.getlShop()) & e.getY()>o.getyShop() & e.getY()<(o.getyShop()+o.gethShop())) {
-				if (this.getParent() instanceof InventaireView) {
+				if (this.getParent() instanceof CardView) {
 					if(o instanceof Insecte)
-						((InventaireView) this.getParent()).inventaire.addInsecte((Insecte) o);
+						((CardView) this.getParent()).inventaire.addInsecte((Insecte) o);
 					if(o instanceof Nourriture)
-						((InventaireView) this.getParent()).inventaire.addNourriture((Nourriture) o);
+						((CardView) this.getParent()).inventaire.addNourriture((Nourriture) o);
 				}
 				else {
-					((BoutiqueView) this.getParent()).setObjet(o);
-					((BoutiqueView) this.getParent()).getCl().show((BoutiqueView) this.getParent(), "vitrine");
+					((CardView) this.getParent()).setObjet(o);
+					((CardView) this.getParent()).getCl().show((CardView) this.getParent(), "vitrine");
 				}
 			}
 		}

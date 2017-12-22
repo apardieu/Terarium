@@ -15,12 +15,13 @@ import MainPackage.GameController;
 import MainPackage.Player;
 import MainPackage.Variables;
 import Objets.Boutique;
+import Objets.Inventaire;
 
 public class IHM extends JFrame implements MouseListener{
 	private static final long serialVersionUID = -3796859435142574261L;
 	protected View view;
 	protected TerrariumView tera;
-	protected BoutiqueView shop;
+	protected CardView shop;
 	protected Data donnes;
 	protected Border border;
 	protected PreviewTerrarium previewTera;
@@ -28,7 +29,7 @@ public class IHM extends JFrame implements MouseListener{
 	protected boolean shopView;
 	protected boolean invView;
 	protected boolean fullScreen;
-	protected InventaireView inventaireView;
+	protected CardView inventaireView;
 	protected Player player;
 	protected GameController GC;
 	
@@ -45,8 +46,8 @@ public class IHM extends JFrame implements MouseListener{
 		this.player = p;
 		tera = new TerrariumView(p.getCurrentTerrarium());
 		Boutique boutique = new Boutique(p);
-		inventaireView = new InventaireView(p.getInventaire());
-		shop = new BoutiqueView(boutique);
+		inventaireView = new CardView(p.getInventaire(), TypeInventaire.INVENTAIRE);
+		shop = new CardView(boutique.getInventaire(), TypeInventaire.BOUTIQUE);
 		view = new View(tera, shop, inventaireView);
 		donnes = new Data();
 		previewTera = new PreviewTerrarium(p);
