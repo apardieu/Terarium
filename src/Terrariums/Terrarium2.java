@@ -8,7 +8,7 @@ public class Terrarium2 extends Terrarium {
 	public Terrarium2() {
 		super();
 		setName("Terrarium2");
-		setCapacity(20);
+		setCapacity(8);
 		nbInsecte = 0;
 		setImage(new File("fond2.jpg"));
 		setPrice(3000);
