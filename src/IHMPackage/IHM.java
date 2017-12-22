@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import MainPackage.GameController;
 import MainPackage.Player;
 import MainPackage.Variables;
-import Objets.Boutique;
 import Objets.Inventaire;
 
 public class IHM extends JFrame implements MouseListener{
@@ -32,8 +31,9 @@ public class IHM extends JFrame implements MouseListener{
 	protected CardView inventaireView;
 	protected Player player;
 	protected GameController GC;
+	protected Inventaire boutique;
 	
-	public IHM(Player p, boolean fullScreen, GameController GC) {
+	public IHM(Player p, Inventaire boutique, boolean fullScreen, GameController GC) {
 
 		//Initialize time when app is launched
 		
@@ -44,10 +44,10 @@ public class IHM extends JFrame implements MouseListener{
 		this.fullScreen = fullScreen;
 		this.GC = GC;
 		this.player = p;
+		this.boutique = boutique;
 		tera = new TerrariumView(p.getCurrentTerrarium());
-		Boutique boutique = new Boutique(p);
 		inventaireView = new CardView(p.getInventaire(), TypeInventaire.INVENTAIRE);
-		shop = new CardView(boutique.getInventaire(), TypeInventaire.BOUTIQUE);
+		shop = new CardView(boutique, TypeInventaire.BOUTIQUE);
 		view = new View(tera, shop, inventaireView);
 		donnes = new Data();
 		previewTera = new PreviewTerrarium(p);
@@ -196,7 +196,7 @@ public class IHM extends JFrame implements MouseListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			IHM i = new IHM(player, !fullScreen, GC);
+			IHM i = new IHM(player, boutique, !fullScreen, GC);
 			GC.setIhm(i);
 		}
 	}

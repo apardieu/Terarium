@@ -9,17 +9,17 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import Objets.Boutique;
+import Objets.Inventaire;
 import Objets.Objet;
 
 public class vitrineBoutique extends JPanel implements MouseListener{
 	private static final long serialVersionUID = 2525121154772774593L;
 	protected Objet objet;
-	protected Boutique shop;
+	protected Inventaire inventaire;
 	public boolean visible;
 	
-	public vitrineBoutique(Boutique shop, Objet objet) {
-		this.shop = shop;
+	public vitrineBoutique(Inventaire inventaire, Objet objet) {
+		this.inventaire = inventaire;
 		this.objet = objet;
 		visible=false;
 		this.addMouseListener(this);
@@ -28,10 +28,10 @@ public class vitrineBoutique extends JPanel implements MouseListener{
 	protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-    	//Drawing the background of the shop and add the main button
+    	//Drawing the background of the inventaire and add the main button
     	int x=46, y=101, l=202, h=270;
         try {
-        	if(shop.getPlayer().getArgent()>=objet.getPrice())
+        	if(inventaire.getPlayer().getArgent()>=objet.getPrice())
         		g.drawImage(ImageIO.read(new File("vitrine.png")), 0, 0, this.getWidth(), this.getHeight(), null);
         	else
         		g.drawImage(ImageIO.read(new File("vitrineLocked.png")), 0, 0, this.getWidth(), this.getHeight(), null);
@@ -49,17 +49,17 @@ public class vitrineBoutique extends JPanel implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
-		//Go to mainShop
+		//Go to maininventaire
 		if(e.getX()>716*this.getWidth()/809 & e.getX()<774*this.getWidth()/809 & e.getY()>8*this.getHeight()/604 & e.getY()<59*this.getHeight()/604)
-			((CardView) this.getParent()).getCl().show((CardView) this.getParent(), "mainShop");
+			((CardView) this.getParent()).getCl().show((CardView) this.getParent(), "main");
 		
 		if(e.getX()>1167*this.getWidth()/1462 & e.getX()<1429*this.getWidth()/1462 & e.getY()>830*this.getHeight()/916 & e.getY()<897*this.getHeight()/916) {
-			shop.buy(objet);
+			inventaire.getPlayer().buy(objet);
 		}
 		
 		//Undo
 		if(e.getX()>35*this.getWidth()/809 & e.getX()<93*this.getWidth()/809 & e.getY()>8*this.getHeight()/604 & e.getY()<59*this.getHeight()/604)
-			((CardView) this.getParent()).getCl().show((CardView) this.getParent(), "insecteShop");
+			((CardView) this.getParent()).getCl().show((CardView) this.getParent(), "insecteInventaire");
 	}
 
 	@Override

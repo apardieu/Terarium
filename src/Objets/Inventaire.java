@@ -68,4 +68,8 @@ public class Inventaire {
 	public List<Soins> getListeSoins() {
 		return listeSoins;
 	}
+
+	public Player getPlayer() {
+		return p;
+	}
 }

@@ -9,7 +9,7 @@ import Nourriture.Graine;
 import Nourriture.Mangeoire;
 import Objets.Objet;
 
-public class Terrarium extends Objet{
+public abstract class Terrarium extends Objet{
 	
 	//Propriétés
 	

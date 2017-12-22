@@ -54,8 +54,7 @@ public class ObjetListeVitrine extends JPanel implements MouseListener{
 	    	g.drawImage(ImageIO.read(fond), 0, 0, this.getWidth(), this.getHeight(), null);
 	    } catch (IOException e) {
 			e.printStackTrace();
-		}
-	    
+		} 
 	    
 	    ///!\CHANTIER!!! Creer une methode draw objet et mettre les valeurs dans des variables nan mais ohhh !!!!
 	    
@@ -139,7 +138,7 @@ public class ObjetListeVitrine extends JPanel implements MouseListener{
 		for(int i=nbPage*21; (i<(nbPage+1)*21 & i<listeObjet.size()); i++) {
 			Objet o = listeObjet.get(i);
 			if(e.getX()>o.getxShop() & e.getX()<(o.getxShop()+o.getlShop()) & e.getY()>o.getyShop() & e.getY()<(o.getyShop()+o.gethShop())) {
-				if (this.getParent() instanceof CardView) {
+				if (((CardView) this.getParent()).getType() == TypeInventaire.INVENTAIRE) {
 					if(o instanceof Insecte)
 						((CardView) this.getParent()).inventaire.addInsecte((Insecte) o);
 					if(o instanceof Nourriture)
@@ -147,7 +146,7 @@ public class ObjetListeVitrine extends JPanel implements MouseListener{
 				}
 				else {
 					((CardView) this.getParent()).setObjet(o);
-					((CardView) this.getParent()).getCl().show((CardView) this.getParent(), "vitrine");
+					((CardView) this.getParent()).getCl().show((CardView) this.getParent(), "vitrine");	
 				}
 			}
 		}

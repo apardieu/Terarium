@@ -3,7 +3,10 @@ package MainPackage;
 import java.util.LinkedList;
 import java.util.List;
 
+import InsectePackage.Insecte;
+import Nourriture.Nourriture;
 import Objets.Inventaire;
+import Objets.Objet;
 import Terrariums.Terrarium;
 
 public class Player {
@@ -24,6 +27,43 @@ public class Player {
 		inventaire.getListeTerrarium().add(t);
 		setCurrentTerrarium(t);
 		Variables.NBTERRARIUM++;
+	}
+	
+	public boolean buy(Objet o) {
+		
+		if(getArgent()>=o.getPrice()) {
+			setArgent(getArgent()-o.getPrice());
+			if(o instanceof Insecte) {
+				try {
+					getInventaire().getListeInsecte().add((Insecte) Class.forName(o.getClass().getName()).newInstance());
+				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(o.getClass().getName());
+			}
+			if(o instanceof Terrarium) {
+				try {
+					Terrarium t = (Terrarium) Class.forName(o.getClass().getName()).newInstance();
+					addTerrarium(t);
+				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(o instanceof Nourriture) {
+				try {
+					Nourriture a = (Nourriture) Class.forName(o.getClass().getName()).newInstance();
+					getInventaire().getListeNourriture().add(a);
+				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return true;
+		}
+		else
+			return false;
 	}
 
 	public int getArgent() {

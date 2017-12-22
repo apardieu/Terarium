@@ -15,13 +15,16 @@ public class CardView extends JPanel{
 	protected ObjetListeVitrine TerrariumInventaire;
 	protected ObjetListeVitrine nourritureInventaire;
 	protected ObjetListeVitrine soinsInventaire;
+	protected vitrineBoutique vitrine;
 	protected Objet objet;
 	protected CardLayout cl;
 	protected int nbPage=0;
+	protected TypeInventaire type;
 
 	public CardView(Inventaire inventaire, TypeInventaire type) {
 		cl = new CardLayout();
 		this.setLayout(cl);
+		this.type = type;
 		this.inventaire = inventaire;
 		main = new MenuView(type);
 		insecteInventaire = new ObjetListeVitrine(inventaire.getListeInsecte());
@@ -51,5 +54,11 @@ public class CardView extends JPanel{
 
 	public void setObjet(Objet objet) {
 		this.objet = objet;
+		vitrine = new vitrineBoutique(inventaire, objet);
+		this.add("vitrine", vitrine);
+	}
+	
+	public TypeInventaire getType() {
+		return type;
 	}
 }
