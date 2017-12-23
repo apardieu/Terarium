@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import InsectePackage.Insecte;
+import MainPackage.Variables;
 import Nourriture.Nourriture;
 import Objets.Objet;
 
@@ -28,9 +29,9 @@ public class ObjetListeVitrine extends JPanel implements MouseListener{
 	protected boolean prev;
 	protected ImageButton mainButton = null;
 	protected ImageButton nextButton = null;
-	protected File fond = new File("boutique.jpg");
-	protected String nextArrow = "nextArrowLocked.png";
-	protected File prevArrow = new File("prevArrowLocked.png");
+	protected File fond = new File(Variables.FONDSPATH + "boutique.jpg");
+	protected String nextArrow = Variables.BOUTONSPATH + "nextArrowLocked.png";
+	protected File prevArrow = new File(Variables.BOUTONSPATH + "prevArrowLocked.png");
 	protected Objet objet;
 	public boolean visible;
 	
@@ -40,7 +41,7 @@ public class ObjetListeVitrine extends JPanel implements MouseListener{
 		visible=false;
 		this.addMouseListener(this);
 		nbPage=0;
-		mainButton = new ImageButton("main.png", 1317, 8, 65, 57, true);
+		mainButton = new ImageButton(Variables.BOUTONSPATH + "main.png", 1317, 8, 65, 57, true);
 		nextButton = new ImageButton(nextArrow, 700, 525, 60, 60, true);
 	    this.add(mainButton);
 	    this.add(nextButton);
@@ -89,19 +90,19 @@ public class ObjetListeVitrine extends JPanel implements MouseListener{
         	
         	if(nbPage==listeObjet.size()/21) {
         		next=false;
-        		nextArrow ="nextArrowLocked.png";
+        		nextArrow = Variables.BOUTONSPATH + "nextArrowLocked.png";
         	}
         	else {
         		next=true;
-        		nextArrow = "nextArrow.png";
+        		nextArrow = Variables.BOUTONSPATH + "nextArrow.png";
         	}
         	if(nbPage==0) {
         		prev=false;
-        		prevArrow = new File("prevArrowLocked.png");
+        		prevArrow = new File(Variables.BOUTONSPATH + "prevArrowLocked.png");
         	}
         	else {
         		prev=true;
-        		prevArrow = new File("prevArrow.png");
+        		prevArrow = new File(Variables.BOUTONSPATH + "prevArrow.png");
         	}
     	}
 	    try {

@@ -10,6 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import MainPackage.Variables;
+
 public class ImageButton extends JPanel{
 	private static final long serialVersionUID = -5208419355329885260L;
 	protected JButton button;
@@ -20,7 +22,7 @@ public class ImageButton extends JPanel{
 	protected int hauteur;
 	
 	public ImageButton(String image, int x, int y, int largeur, int hauteur, boolean mouseOn) {
-		this.image = image;
+		this.image = Variables.BOUTONSPATH + image;
 		this.x = x;
 		this.y = y;
 		this.largeur = largeur;

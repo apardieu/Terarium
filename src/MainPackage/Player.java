@@ -35,7 +35,7 @@ public class Player {
 			setArgent(getArgent()-o.getPrice());
 			if(o instanceof Insecte) {
 				try {
-					getInventaire().getListeInsecte().add((Insecte) Class.forName(o.getClass().getName()).newInstance());
+					getInventaire().add((Insecte) Class.forName(o.getClass().getName()).newInstance());
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -54,7 +54,7 @@ public class Player {
 			if(o instanceof Nourriture) {
 				try {
 					Nourriture a = (Nourriture) Class.forName(o.getClass().getName()).newInstance();
-					getInventaire().getListeNourriture().add(a);
+					getInventaire().add(a);
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

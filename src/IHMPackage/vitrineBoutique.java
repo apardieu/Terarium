@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import MainPackage.Variables;
 import Objets.Inventaire;
 import Objets.Objet;
 
@@ -32,11 +33,11 @@ public class vitrineBoutique extends JPanel implements MouseListener{
     	int x=46, y=101, l=202, h=270;
         try {
         	if(inventaire.getPlayer().getArgent()>=objet.getPrice())
-        		g.drawImage(ImageIO.read(new File("vitrine.png")), 0, 0, this.getWidth(), this.getHeight(), null);
+        		g.drawImage(ImageIO.read(new File(Variables.FONDSPATH + "vitrine.png")), 0, 0, this.getWidth(), this.getHeight(), null);
         	else
-        		g.drawImage(ImageIO.read(new File("vitrineLocked.png")), 0, 0, this.getWidth(), this.getHeight(), null);
-        	g.drawImage(ImageIO.read(new File("main.png")), 716*this.getWidth()/809, 8*this.getHeight()/604, 58*this.getWidth()/809, 51*this.getHeight()/604, null);
-        	g.drawImage(ImageIO.read(new File("undoArrow.png")), 35*this.getWidth()/809, 8*this.getHeight()/604, 58*this.getWidth()/809, 51*this.getHeight()/604, null);
+        		g.drawImage(ImageIO.read(new File(Variables.FONDSPATH + "vitrineLocked.png")), 0, 0, this.getWidth(), this.getHeight(), null);
+        	g.drawImage(ImageIO.read(new File(Variables.BOUTONSPATH + "main.png")), 716*this.getWidth()/809, 8*this.getHeight()/604, 58*this.getWidth()/809, 51*this.getHeight()/604, null);
+        	g.drawImage(ImageIO.read(new File(Variables.BOUTONSPATH + "undoArrow.png")), 35*this.getWidth()/809, 8*this.getHeight()/604, 58*this.getWidth()/809, 51*this.getHeight()/604, null);
         	g.drawImage(ImageIO.read(objet.getImage()), x*this.getWidth()/1462, y*this.getHeight()/916,l*this.getWidth()/1462, h*this.getHeight()/916, null);
         	g.drawString("Nom : " + objet.getName(), 329*this.getWidth()/1462, 111*this.getHeight()/916);
         } catch (IOException e) {

@@ -9,6 +9,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import MainPackage.Variables;
+
 enum TypeInventaire {
 	BOUTIQUE("Shop"),
 	INVENTAIRE("Inventaire");
@@ -57,7 +59,7 @@ public class MenuView extends JPanel{
 	protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-			g.drawImage(ImageIO.read(new File("main" + type.getType() + ".jpg")), 0, 0, this.getWidth(), this.getHeight(), null);
+			g.drawImage(ImageIO.read(new File(Variables.FONDSPATH + "main" + type.getType() + ".jpg")), 0, 0, this.getWidth(), this.getHeight(), null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

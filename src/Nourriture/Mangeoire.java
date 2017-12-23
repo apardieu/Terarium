@@ -11,7 +11,7 @@ public class Mangeoire extends Objet{
 	protected int maxNbNourriture = 300000;
 	
 	public Mangeoire(Nourriture nourriture) {
-		this.setImage(new File("mangeoireVide.png"));
+		this.setImage(new File(Variables.MANGEOIRESPATH + "mangeoireVide.png"));
 		this.nourriture = nourriture;
 		hTerra = 100;
 		lTerra = 100;
@@ -28,16 +28,16 @@ public class Mangeoire extends Objet{
 	public void updateImage() {
 		String type = nourriture.getClass().getSimpleName();
 		if (nbNourriture>=maxNbNourriture*0.8) {
-			this.setImage(new File("mangeoirePlein" + type + ".png"));
+			this.setImage(new File(Variables.MANGEOIRESPATH + "mangeoirePlein" + type + ".png"));
 		}
 		else if (nbNourriture>=maxNbNourriture*0.2 & nbNourriture<maxNbNourriture*0.8) {
-			this.setImage(new File("mangeoireMiPlein" + type + ".png"));
+			this.setImage(new File(Variables.MANGEOIRESPATH + "mangeoireMiPlein" + type + ".png"));
 		}
 		else if (nbNourriture<maxNbNourriture*0.2 & nbNourriture!=0) {
-			this.setImage(new File("mangeoirePresqueVide" + type + ".png"));
+			this.setImage(new File(Variables.MANGEOIRESPATH + "mangeoirePresqueVide" + type + ".png"));
 		}
 		else if (nbNourriture==0) {
-			this.setImage(new File("mangeoireVide" + type + ".png"));
+			this.setImage(new File(Variables.MANGEOIRESPATH + "mangeoireVide" + type + ".png"));
 		}
 	}
 	

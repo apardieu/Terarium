@@ -2,13 +2,14 @@ package InsectePackage;
 
 import java.io.File;
 
+import MainPackage.Variables;
 import Nourriture.Viande;
 
 public class Carnivore extends Insecte{
 	public Carnivore() {
 		name = "Carnivore";
 		foodLevel=(int) (getMaxFoodLevel()*0.3);
-		setImage(new File("resources/carnivore.png"));
+		setImage(new File(Variables.INSECTESPATH + "carnivore.png"));
 		imageDroite = getImage();
 		imageGauche = getImage();
 		setPrice(1000);
