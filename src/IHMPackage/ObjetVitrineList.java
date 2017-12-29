@@ -24,6 +24,8 @@ public class ObjetVitrineList extends JPanel{
 	private File fond = new File(Variables.FONDSPATH + "vitrine.jpg");
 	private String nom;
 	private int nbElementPage = 0;
+	private int h = 1;
+	private int l = 1;
 	private final int marge = 20;
 	private final int largeur = 1340;
 	private final int hauteur = 640;
@@ -59,9 +61,12 @@ public class ObjetVitrineList extends JPanel{
 	    this.add(mainButton);
 	    this.add(nextButton);
 	    this.add(prevButton);
-	    
+	    if(listeObjet.size()>0) {
+	    	h=listeObjet.get(0).gethShop();
+	    	l=listeObjet.get(0).getlShop();
+	    }
+	    	
 		int x=xCadre, y=yCadre;
-	    int h=193, l=120;
 	    x+=marge;
 	    y+=marge;
 	    nbElementPage = (largeur/(l+marge)) * (hauteur/(h+marge));

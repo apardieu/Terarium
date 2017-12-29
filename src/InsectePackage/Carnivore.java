@@ -7,6 +7,7 @@ import Nourriture.Viande;
 
 public class Carnivore extends Insecte{
 	public Carnivore() {
+		super();
 		name = "Carnivore";
 		foodLevel=(int) (getMaxFoodLevel()*0.3);
 		setImage(new File(Variables.INSECTESPATH + "carnivore.png"));

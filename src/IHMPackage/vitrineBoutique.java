@@ -48,7 +48,7 @@ public class vitrineBoutique extends JPanel{
         super.paintComponent(g);
         
     	//Drawing the background of the inventaire and add the main button
-    	int x=70, y=150, l=202, h=270;
+    	int x=70, y=150, l=objet.getlShop()*2, h=objet.gethShop()*2;
         try {
         	g.drawImage(ImageIO.read(fond), 0, 0, this.getWidth(), this.getHeight(), null);
         	if(inventaire.getPlayer().getArgent()>=objet.getPrice())

@@ -13,6 +13,11 @@ public abstract class Objet{
 	protected int lShop;
 	protected int hShop;
 	
+	public Objet() {
+		lShop = 120;
+		hShop = 193;
+	}
+	
 	public boolean isInContactWith(Objet a) {
 		if((xTerra+lTerra) >= a.xTerra & xTerra <= (a.xTerra+a.lTerra) & (yTerra+hTerra) >= a.yTerra & yTerra <= (a.yTerra+a.hTerra)) {
 			return true;

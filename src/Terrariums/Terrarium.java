@@ -27,6 +27,8 @@ public abstract class Terrarium extends Objet{
 		mangeoire.setxTerra((Variables.LARGEUR-mangeoire.getlTerra())/2);
 		mangeoire.sethTerra(100);
 		mangeoire.setyTerra(Variables.HAUTEUR-mangeoire.gethTerra());
+		lShop = 300;
+		hShop = 193;
 	}
 	
 	//Add an insect to the Terarium
@@ -163,5 +165,9 @@ public abstract class Terrarium extends Objet{
 
 	public void setMangeoire(Mangeoire mangeoire) {
 		this.mangeoire = mangeoire;
+	}
+	
+	public void vendu() {
+		
 	}
 }

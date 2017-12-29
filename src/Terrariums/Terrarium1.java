@@ -15,4 +15,8 @@ public class Terrarium1 extends Terrarium{
 		price = 3000;
 		mangeoire.setNourriture(new Viande());
 	}
+	
+	public void vendu() {
+		image = new File(Variables.TERRARIUMSPATH + "fondVendu.jpg");
+	}
 }

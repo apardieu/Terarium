@@ -7,6 +7,7 @@ import Nourriture.Graine;
 
 public class Herbivore extends Insecte{
 	public Herbivore() {
+		super();
 		name = "Herbivore";
 		foodLevel=(int) (getMaxFoodLevel()*0.5);
 		setImage(new File(Variables.INSECTESPATH + "mouchetest.png"));

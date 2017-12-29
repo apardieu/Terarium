@@ -30,6 +30,10 @@ public abstract class Insecte extends Objet{
 
 	//Move the insect 1 step by 1 step, check if the insect have to move right or left and loose life each step
 	
+	public Insecte() {
+		super();
+	}
+	
 	public void deplacer() {
 		if(foodLevel>0) {
 			if(isFlying) {

@@ -25,6 +25,7 @@ public class Papillon extends Herbivore{
 	}
 	
 	public Papillon(String name) {
-		super(name);
+		this();
+		this.name = name;
 	}
 }

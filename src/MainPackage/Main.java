@@ -1,6 +1,7 @@
 package MainPackage;
 import IHMPackage.IHM;
 import InsectePackage.Carnivore;
+import InsectePackage.Escargot;
 import InsectePackage.Herbivore;
 import InsectePackage.Papillon;
 import Nourriture.Graine;
@@ -21,6 +22,7 @@ public class Main {
 		boutique.add(new Carnivore());
 		boutique.add(new Herbivore());
 		boutique.add(new Papillon());
+		boutique.add(new Escargot());
 		boutique.add(new Terrarium1());
 		boutique.add(new Terrarium2());
 		boutique.add(new Terrarium3());

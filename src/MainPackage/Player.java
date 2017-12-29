@@ -53,6 +53,7 @@ public class Player {
 				try {
 					Terrarium t = (Terrarium) Class.forName(o.getClass().getName()).newInstance();
 					addTerrarium(t);
+					((Terrarium) o).vendu();
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
