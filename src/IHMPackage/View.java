@@ -4,13 +4,11 @@ import javax.swing.JPanel;
 
 public class View extends JPanel{
 	private static final long serialVersionUID = 5357544026259177499L;
-	protected CardLayout cl = null;
-	protected TerrariumView tera;
-	protected CardView shop;
-	protected CardView inventaireView;
+	private CardLayout cl = null;
+	private CardView shop;
+	private CardView inventaireView;
 	
 	public View(TerrariumView tera, CardView shop, CardView inventaireView) {
-		this.tera = tera;
 		this.shop = shop;
 		this.inventaireView = inventaireView;
 		cl = new CardLayout();
@@ -26,7 +24,6 @@ public class View extends JPanel{
 	//Show the boutique
 	
 	public void boutiqueView() {
-		shop.nbPage=0;
 		shop.getCl().show(shop, "main");
 		cl.show(this, "shop");
 	}

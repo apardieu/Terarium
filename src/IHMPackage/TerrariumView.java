@@ -10,7 +10,7 @@ import Terrariums.Terrarium;
 
 public class TerrariumView extends JPanel{
 	private static final long serialVersionUID = -8916755259904328022L;
-	protected Terrarium Terrarium;
+	private Terrarium Terrarium;
 	
 	public TerrariumView(Terrarium tera) {
 		Terrarium = tera;

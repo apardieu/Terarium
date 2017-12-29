@@ -21,6 +21,11 @@ public class Herbivore extends Insecte{
 		acceptedFood.add(Graine.class);
 	}
 	
+	public Herbivore(String name) {
+		this();
+		this.name = name;
+	}
+	
 	public void zombie() {
 		this.setImage(new File(Variables.INSECTESPATH  + "mouchetestZombie.png"));
 		this.setCanibale(true);

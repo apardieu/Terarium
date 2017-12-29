@@ -6,9 +6,9 @@ import MainPackage.Variables;
 
 public class Viande extends Nourriture{
 	public Viande() {
-		setName("viande");
-		setPrice(50);
-		setImage(new File(Variables.NOURRITUREPATH + "viande.png"));
-		setFoodPower(300);
+		name = "Viande";
+		price = 50;
+		image = new File(Variables.NOURRITUREPATH + "viande.png");
+		foodPower = 300;
 	}
 }

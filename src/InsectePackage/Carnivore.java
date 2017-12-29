@@ -21,4 +21,9 @@ public class Carnivore extends Insecte{
 		lTerra=108;
 		acceptedFood.add(Viande.class);
 	}
+	
+	public Carnivore(String name) {
+		this();
+		this.name = name;
+	}
 }

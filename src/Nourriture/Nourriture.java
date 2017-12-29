@@ -3,7 +3,7 @@ package Nourriture;
 import Objets.Objet;
 
 public abstract class Nourriture extends Objet{
-	private int foodPower;
+	protected int foodPower;
 	
 	public int getFoodPower() {
 		return foodPower;

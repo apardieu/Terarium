@@ -18,15 +18,11 @@ enum TypeInventaire {
 	private String type;
 	
 	TypeInventaire(String type) {
-		this.setType(type);
+		this.type = type;
 	}
 
 	public String getType() {
 		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 }
 
@@ -63,30 +59,32 @@ public class MenuView extends JPanel{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        insectesBoutton.update();
 	}
 	
 	class ButtonInsectes implements ActionListener{
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				((CardView) getParent()).getCl().show((CardView) getParent(), "insecteInventaire");
-			}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			((CardView) getParent()).getCl().show((CardView) getParent(), "insecteInventaire");
+			((CardView) getParent()).getInsecteInventaire().update();
 		}
+	}
 	
 	class ButtonSoins implements ActionListener{
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				((CardView) getParent()).getCl().show((CardView) getParent(), "soinsInventaire");
-			}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			((CardView) getParent()).getCl().show((CardView) getParent(), "soinsInventaire");
+			((CardView) getParent()).getSoinsInventaire().update();
 		}
+	}
 	
 	class ButtonNourriture implements ActionListener{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			((CardView) getParent()).getCl().show((CardView) getParent(), "nourritureInventaire");
+			((CardView) getParent()).getNourritureInventaire().update();
 		}
 	}
 	
@@ -94,7 +92,8 @@ public class MenuView extends JPanel{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			((CardView) getParent()).getCl().show((CardView) getParent(), "TerrariumInventaire");
+			((CardView) getParent()).getCl().show((CardView) getParent(), "terrariumInventaire");
+			((CardView) getParent()).getTerrariumInventaire().update();
 		}
 	}
 }

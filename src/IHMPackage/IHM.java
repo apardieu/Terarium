@@ -1,13 +1,9 @@
 package IHMPackage;
+
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
@@ -16,22 +12,21 @@ import MainPackage.Player;
 import MainPackage.Variables;
 import Objets.Inventaire;
 
-public class IHM extends JFrame implements MouseListener{
+public class IHM extends JFrame{
 	private static final long serialVersionUID = -3796859435142574261L;
-	protected View view;
-	protected TerrariumView tera;
-	protected CardView shop;
-	protected Data donnes;
-	protected Border border;
-	protected PreviewTerrarium previewTera;
-	protected boolean teraView;
-	protected boolean shopView;
-	protected boolean invView;
-	protected boolean fullScreen;
-	protected CardView inventaireView;
-	protected Player player;
-	protected GameController GC;
-	protected Inventaire boutique;
+	private View view;
+	private TerrariumView tera;
+	private CardView shop;
+	private Data donnes;
+	private Border border;
+	private PreviewTerrarium previewTera;
+	private boolean shopView;
+	private boolean invView;
+	private boolean fullScreen;
+	private CardView inventaireView;
+	private Player player;
+	private GameController GC;
+	private Inventaire boutique;
 	
 	public IHM(Player p, Inventaire boutique, boolean fullScreen, GameController GC) {
 
@@ -45,6 +40,7 @@ public class IHM extends JFrame implements MouseListener{
 		this.GC = GC;
 		this.player = p;
 		this.boutique = boutique;
+		this.setLayout(null);
 		tera = new TerrariumView(p.getCurrentTerrarium());
 		inventaireView = new CardView(p.getInventaire(), TypeInventaire.INVENTAIRE);
 		shop = new CardView(boutique, TypeInventaire.BOUTIQUE);
@@ -52,7 +48,6 @@ public class IHM extends JFrame implements MouseListener{
 		donnes = new Data();
 		previewTera = new PreviewTerrarium(p);
 		border = new Border(previewTera);
-		teraView = true;
 		
 		donnes.setBackground(Color.black);
 		border.setBackground(Color.black);
@@ -65,38 +60,19 @@ public class IHM extends JFrame implements MouseListener{
 		border.getOptionButton().addActionListener(new OptionButton());
 		
 		//Add view with 95% of Height and 85% of Width
-		
-		GridBagLayout gbl = new GridBagLayout();
-		Container container = getContentPane();
-		container.setLayout(gbl);
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = gbc.gridy = 0;
-		gbc.weightx = 0.85;
-		gbc.weighty = 0.95;
-		gbc.anchor = GridBagConstraints.PAGE_START;
-		gbc.fill = GridBagConstraints.BOTH;
-		container.add(view, gbc);
+		view.setSize(1460, 980);
+		view.setLocation(0, 0);
+		this.add(view);
 		
 		//Add donnes with 85% of Width and 5% of Height
-		
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.weightx = 0.85;
-		gbc.weighty = 0.05;
-		gbc.anchor = GridBagConstraints.LAST_LINE_START;
-		gbc.fill = GridBagConstraints.BOTH;
-		container.add(donnes, gbc);
+		donnes.setSize(1460, 100);
+		donnes.setLocation(0, 980);
+		this.add(donnes);
 		
 		//Add border with 15% of Width and 100% of Height
-		
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.gridheight = 2;
-		gbc.weightx = 0.15;
-		gbc.weighty = 1;
-		gbc.anchor = GridBagConstraints.CENTER;
-		gbc.fill = GridBagConstraints.BOTH;
-		container.add(border, gbc);
+		border.setSize(460, 1080);
+		border.setLocation(1460, 0);
+		this.add(border);
 		
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		setLocationRelativeTo(null);
@@ -109,9 +85,9 @@ public class IHM extends JFrame implements MouseListener{
 	public void refreshData(Player p) {
 		float echelle = (float) (((double) Variables.HAUTEURFRAME)/Variables.LARGEURFRAME); //Echelle largeur
 		
-		donnes.getContenantLabel().setForeground(Color.white);
-		donnes.getTempsLabel().setForeground(Color.white);
-		donnes.getArgentLabel().setForeground(Color.white);
+		donnes.getContenantLabel().setForeground(Color.black);
+		donnes.getTempsLabel().setForeground(Color.black);
+		donnes.getArgentLabel().setForeground(Color.black);
 		donnes.getContenantLabel().setText("Nombre d'individus/Capacité : " + p.getCurrentTerrarium().getNbInsecte() + "/" + p.getCurrentTerrarium().getCapacity());
 		donnes.getTempsLabel().setText("Temps: " + ((int)(System.currentTimeMillis()/1000) - p.getCurrentTerrarium().getStartTime()));
 		donnes.getArgentLabel().setText("Argent : " + p.getArgent());
@@ -121,7 +97,7 @@ public class IHM extends JFrame implements MouseListener{
 	}
 	
 	class ButtonPrintInventaire implements ActionListener{
-		protected View view;
+		private View view;
 		
 		public ButtonPrintInventaire(View view) {
 			this.view = view;
@@ -130,11 +106,11 @@ public class IHM extends JFrame implements MouseListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(invView==false) {
-				shopView = teraView = !(invView = true);
+				shopView = !(invView = true);
 				view.invView();
 			}
 			else {
-				teraView = !(invView = false);
+				invView = false;
 				view.TeraView();
 			}
 		}
@@ -143,7 +119,7 @@ public class IHM extends JFrame implements MouseListener{
 	//Change the Card in the cardLayout of view to switch between Boutique and Terrarium
 	
 	class ButtonPrintBoutique implements ActionListener{
-		protected View view;
+		private View view;
 		
 		public ButtonPrintBoutique(View view) {
 			this.view = view;
@@ -152,11 +128,11 @@ public class IHM extends JFrame implements MouseListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(shopView==false) {
-				invView = teraView = !(shopView = true);
+				invView = !(shopView = true);
 				view.boutiqueView();
 			}
 			else {
-				teraView = !(shopView = false);
+				shopView = false;
 				view.TeraView();
 			}
 		}
@@ -169,7 +145,6 @@ public class IHM extends JFrame implements MouseListener{
 			if(player.getListeTerrarium().size()>1)
 			previewTera.next();
 		}
-		
 	}
 
 	class PrevTerra implements ActionListener{
@@ -179,7 +154,6 @@ public class IHM extends JFrame implements MouseListener{
 			if(player.getListeTerrarium().size()>1)
 			previewTera.prev();
 		}
-		
 	}
 	
 	class ExitButton implements ActionListener{
@@ -188,7 +162,6 @@ public class IHM extends JFrame implements MouseListener{
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);
 		}
-		
 	}
 	
 	class OptionButton implements ActionListener{
@@ -199,35 +172,5 @@ public class IHM extends JFrame implements MouseListener{
 			IHM i = new IHM(player, boutique, !fullScreen, GC);
 			GC.setIhm(i);
 		}
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 }

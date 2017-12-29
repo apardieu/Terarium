@@ -1,25 +1,33 @@
 package MainPackage;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 import java.util.List;
 
+import InsectePackage.Carnivore;
+import InsectePackage.Herbivore;
 import InsectePackage.Insecte;
+import InsectePackage.Papillon;
 import Nourriture.Nourriture;
 import Objets.Inventaire;
 import Objets.Objet;
 import Terrariums.Terrarium;
 
 public class Player {
-	protected String name;
+	private String name;
 	private int argent;
 	private Inventaire inventaire;
-	protected List<Terrarium> listeTerrarium = new LinkedList<Terrarium>();
+	private List<Terrarium> listeTerrarium = new LinkedList<Terrarium>();
 	private Terrarium currentTerrarium;
 
 	public Player() {
 		setArgent(10000);
 		name="Jean-Jacques";
 		inventaire = new Inventaire(this);
+		inventaire.add(new Papillon());
+		inventaire.add(new Papillon());
+		inventaire.add(new Herbivore());
+		inventaire.add(new Carnivore());
 	}
 	
 	public void addTerrarium(Terrarium t) {
@@ -40,7 +48,6 @@ public class Player {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println(o.getClass().getName());
 			}
 			if(o instanceof Terrarium) {
 				try {
@@ -65,6 +72,24 @@ public class Player {
 		else
 			return false;
 	}
+	
+	public boolean buy(Objet o, String name) {
+		
+		if(getArgent()>=o.getPrice()) {
+			setArgent(getArgent()-o.getPrice());
+			if(o instanceof Insecte) {
+				try {
+					getInventaire().add((Insecte) Class.forName(o.getClass().getName()).getDeclaredConstructor(String.class).newInstance(name));
+				} catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return true;
+		}
+		else
+			return false;
+	}
 
 	public int getArgent() {
 		return argent;
@@ -78,16 +103,8 @@ public class Player {
 		return inventaire;
 	}
 
-	public void setInventaire(Inventaire inventaire) {
-		this.inventaire = inventaire;
-	}
-
 	public List<Terrarium> getListeTerrarium() {
 		return listeTerrarium;
-	}
-
-	public void setListeTerrarium(List<Terrarium> listeTerrarium) {
-		this.listeTerrarium = listeTerrarium;
 	}
 
 	public Terrarium getCurrentTerrarium() {

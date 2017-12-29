@@ -9,11 +9,11 @@ import Nourriture.Nourriture;
 import Terrariums.Terrarium;
 
 public class Inventaire {
-	protected List<Insecte> listeInsecte  = new LinkedList<Insecte>();
-	protected List<Terrarium> listeTerrarium  = new LinkedList<Terrarium>();
+	private List<Insecte> listeInsecte  = new LinkedList<Insecte>();
+	private List<Terrarium> listeTerrarium  = new LinkedList<Terrarium>();
 	private List<Nourriture> listeNourriture = new LinkedList<Nourriture>();
 	private List<Soins> listeSoins = new LinkedList<Soins>();
-	protected Player p;
+	private Player p;
 	
 	public Inventaire(Player p) {
 		this.p = p;

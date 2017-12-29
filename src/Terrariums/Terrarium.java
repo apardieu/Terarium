@@ -14,7 +14,7 @@ public abstract class Terrarium extends Objet{
 	//Propriétés
 	
 	private int startTime;
-	private int capacity;
+	protected int capacity;
 	private List<Insecte> listeInsecte = new LinkedList<Insecte>();
 	protected int nbInsecte;
 	protected Mangeoire mangeoire;

@@ -6,9 +6,9 @@ import MainPackage.Variables;
 
 public class Graine extends Nourriture{
 	public Graine() {
-		setName("graine");
-		setPrice(10);
-		setImage(new File(Variables.NOURRITUREPATH + "graine.png"));
-		setFoodPower(100);
+		name = "graine";
+		price = 10;
+		image = new File(Variables.NOURRITUREPATH + "graine.png");
+		foodPower = 100;
 	}
 }

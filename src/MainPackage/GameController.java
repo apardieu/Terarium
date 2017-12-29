@@ -17,16 +17,12 @@ public class GameController extends Thread{
 	
 	public void run() {
 		while(true) {
-			List<Terrarium> listeTerrarium = player.listeTerrarium;
+			List<Terrarium> listeTerrarium = player.getListeTerrarium();
 			for(int i = 0; i<listeTerrarium.size(); i++)
 				listeTerrarium.get(i).deplacerInsectes();
 			ihm.refreshData(player);
 			ihm.repaint();
 		}
-	}
-
-	public IHM getIhm() {
-		return ihm;
 	}
 
 	public void setIhm(IHM ihm) {

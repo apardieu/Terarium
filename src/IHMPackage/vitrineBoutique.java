@@ -1,89 +1,92 @@
 package IHMPackage;
 
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import MainPackage.Variables;
 import Objets.Inventaire;
 import Objets.Objet;
 
-public class vitrineBoutique extends JPanel implements MouseListener{
+public class vitrineBoutique extends JPanel{
 	private static final long serialVersionUID = 2525121154772774593L;
-	protected Objet objet;
-	protected Inventaire inventaire;
-	public boolean visible;
+	private Objet objet;
+	private Inventaire inventaire;
+	private File fond = new File(Variables.FONDSPATH + "vitrine.jpg");
+	private ImageButton acheterBoutton = null;
+	private ImageButton mainBoutton = null;
+	private ImageButton goBackBoutton = null;
+	private JTextField nameObjet = new JTextField(15);
+	private String previousCard;
 	
-	public vitrineBoutique(Inventaire inventaire, Objet objet) {
+	public vitrineBoutique(Inventaire inventaire, Objet objet, String previousCard) {
+		this.setLayout(null);
 		this.inventaire = inventaire;
 		this.objet = objet;
-		visible=false;
-		this.addMouseListener(this);
+		this.previousCard = previousCard;
+		acheterBoutton = new ImageButton("acheterBoutton.png", 1050, 885, 270, 70, true);
+		acheterBoutton.addActionListener(new ButtonAcheter());
+		this.add(acheterBoutton);
+		mainBoutton = new ImageButton("mainBoutton.png", 1260, 20, 80, 65, false);
+		mainBoutton.addActionListener(new ButtonMain());
+		this.add(mainBoutton);
+		goBackBoutton = new ImageButton("goBackBoutton.png", 35, 25, 75, 60, false);
+		goBackBoutton.addActionListener(new ButtonGoBack());
+		this.add(goBackBoutton);
+		nameObjet.setSize(100, 25);
+		nameObjet.setLocation(500, 300);
+		this.add(nameObjet);
 	}
 
 	protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
     	//Drawing the background of the inventaire and add the main button
-    	int x=46, y=101, l=202, h=270;
+    	int x=70, y=150, l=202, h=270;
         try {
+        	g.drawImage(ImageIO.read(fond), 0, 0, this.getWidth(), this.getHeight(), null);
         	if(inventaire.getPlayer().getArgent()>=objet.getPrice())
-        		g.drawImage(ImageIO.read(new File(Variables.FONDSPATH + "vitrine.png")), 0, 0, this.getWidth(), this.getHeight(), null);
+        		acheterBoutton.unlock();
         	else
-        		g.drawImage(ImageIO.read(new File(Variables.FONDSPATH + "vitrineLocked.png")), 0, 0, this.getWidth(), this.getHeight(), null);
-        	g.drawImage(ImageIO.read(new File(Variables.BOUTONSPATH + "main.png")), 716*this.getWidth()/809, 8*this.getHeight()/604, 58*this.getWidth()/809, 51*this.getHeight()/604, null);
-        	g.drawImage(ImageIO.read(new File(Variables.BOUTONSPATH + "undoArrow.png")), 35*this.getWidth()/809, 8*this.getHeight()/604, 58*this.getWidth()/809, 51*this.getHeight()/604, null);
+        		acheterBoutton.lock();
+       
         	g.drawImage(ImageIO.read(objet.getImage()), x*this.getWidth()/1462, y*this.getHeight()/916,l*this.getWidth()/1462, h*this.getHeight()/916, null);
-        	g.drawString("Nom : " + objet.getName(), 329*this.getWidth()/1462, 111*this.getHeight()/916);
+        	g.drawString("Nom : " + objet.getName(), 329*this.getWidth()/1462, 150*this.getHeight()/916);
         } catch (IOException e) {
 			e.printStackTrace();
 		}
     }
 	
-	//A revoir
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
+	class ButtonAcheter implements ActionListener{
 		
-		//Go to maininventaire
-		if(e.getX()>716*this.getWidth()/809 & e.getX()<774*this.getWidth()/809 & e.getY()>8*this.getHeight()/604 & e.getY()<59*this.getHeight()/604)
-			((CardView) this.getParent()).getCl().show((CardView) this.getParent(), "main");
-		
-		if(e.getX()>1167*this.getWidth()/1462 & e.getX()<1429*this.getWidth()/1462 & e.getY()>830*this.getHeight()/916 & e.getY()<897*this.getHeight()/916) {
-			inventaire.getPlayer().buy(objet);
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(nameObjet.getText()!="")
+				inventaire.getPlayer().buy(objet, nameObjet.getText());
+			else
+				inventaire.getPlayer().buy(objet);
 		}
-		
-		//Undo
-		if(e.getX()>35*this.getWidth()/809 & e.getX()<93*this.getWidth()/809 & e.getY()>8*this.getHeight()/604 & e.getY()<59*this.getHeight()/604)
-			((CardView) this.getParent()).getCl().show((CardView) this.getParent(), "insecteInventaire");
 	}
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+	class ButtonMain implements ActionListener{
 		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			((CardView) getParent()).getCl().show((CardView) getParent(), "main");
+		}
 	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+	
+	class ButtonGoBack implements ActionListener{
 		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			((CardView) getParent()).getCl().show((CardView) getParent(), previousCard);
+		}
 	}
 }

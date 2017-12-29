@@ -8,11 +8,23 @@ public class Papillon extends Herbivore{
 	public Papillon() {
 		super();
 		this.isFlying = true;
-		setImage(new File(Variables.INSECTESPATH + "papillonDroite.png"));
-		setImageDroite(new File(Variables.INSECTESPATH  + "papillonDroite.png"));
-		setImageGauche(new File(Variables.INSECTESPATH  + "papillonGauche.png"));
+		int alea = (int) (Math.random() * 100);
+		setImage(new File(Variables.INSECTESPATH + "papillon/papillonBleuDroite.png"));
+		String couleur;
+		if(alea>50)
+			couleur = "Bleu";
+		else if(alea > 10 & alea <51)
+			couleur = "Rouge";
+		else
+			couleur = "Rare";
+		setImageDroite(new File(Variables.INSECTESPATH  + "papillon/papillon" + couleur + "Droite.png"));
+		setImageGauche(new File(Variables.INSECTESPATH  + "papillon/papillon" + couleur + "Gauche.png"));
 		setPrice(2000);
 		hTerra=121;
 		lTerra=108;
+	}
+	
+	public Papillon(String name) {
+		super(name);
 	}
 }

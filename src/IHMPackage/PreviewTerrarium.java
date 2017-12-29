@@ -10,9 +10,9 @@ import MainPackage.Player;
 
 public class PreviewTerrarium extends JPanel implements MouseListener{
 	private static final long serialVersionUID = -7139645551109818022L;
-	protected CardLayout cl = null;
-	protected Player player;
-	protected int currentPreview = 0;
+	private CardLayout cl = null;
+	private Player player;
+	private int currentPreview = 0;
 	private int nbTerrarium = 0;
 	
 	public PreviewTerrarium(Player player) {
@@ -54,14 +54,6 @@ public class PreviewTerrarium extends JPanel implements MouseListener{
 		else
 			currentPreview--;
 		cl.show(this, "Terrarium" + currentPreview);
-	}
-
-	public int getNbTerrarium() {
-		return nbTerrarium;
-	}
-
-	public void setNbTerrarium(int nbTerrarium) {
-		this.nbTerrarium = nbTerrarium;
 	}
 
 	@Override

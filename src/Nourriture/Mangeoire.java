@@ -6,9 +6,9 @@ import MainPackage.Variables;
 import Objets.Objet;
 
 public class Mangeoire extends Objet{
-	protected Nourriture nourriture;
-	protected int nbNourriture;
-	protected int maxNbNourriture = 300000;
+	private Nourriture nourriture;
+	private int nbNourriture;
+	private int maxNbNourriture = 300000;
 	
 	public Mangeoire(Nourriture nourriture) {
 		this.setImage(new File(Variables.MANGEOIRESPATH + "mangeoireVide.png"));

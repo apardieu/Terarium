@@ -10,10 +10,8 @@ public abstract class Objet{
 	protected int lTerra;
 	protected int hTerra;
 	protected int yTerra;
-	protected int xShop;
 	protected int lShop;
 	protected int hShop;
-	protected int yShop;
 	
 	public boolean isInContactWith(Objet a) {
 		if((xTerra+lTerra) >= a.xTerra & xTerra <= (a.xTerra+a.lTerra) & (yTerra+hTerra) >= a.yTerra & yTerra <= (a.yTerra+a.hTerra)) {
@@ -39,22 +37,6 @@ public abstract class Objet{
 		this.price = price;
 	}
 
-	public int getxShop() {
-		return xShop;
-	}
-
-	public void setxShop(int xShop) {
-		this.xShop = xShop;
-	}
-
-	public int getyShop() {
-		return yShop;
-	}
-
-	public void setyShop(int yShop) {
-		this.yShop = yShop;
-	}
-
 	public int getlShop() {
 		return lShop;
 	}
@@ -72,10 +54,6 @@ public abstract class Objet{
 	}
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public int getxTerra() {

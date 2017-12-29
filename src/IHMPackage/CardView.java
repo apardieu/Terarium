@@ -10,16 +10,15 @@ import Objets.Objet;
 public class CardView extends JPanel{
 	private static final long serialVersionUID = 4754928741383750759L;
 	protected Inventaire inventaire;
-	protected MenuView main;
-	protected ObjetListeVitrine insecteInventaire;
-	protected ObjetListeVitrine TerrariumInventaire;
-	protected ObjetListeVitrine nourritureInventaire;
-	protected ObjetListeVitrine soinsInventaire;
-	protected vitrineBoutique vitrine;
-	protected Objet objet;
-	protected CardLayout cl;
-	protected int nbPage=0;
-	protected TypeInventaire type;
+	private MenuView main;
+	private ObjetVitrineList insecteInventaire;
+	private ObjetVitrineList TerrariumInventaire;
+	private ObjetVitrineList nourritureInventaire;
+	private ObjetVitrineList soinsInventaire;
+	private vitrineBoutique vitrine;
+	private Objet objet;
+	private CardLayout cl;
+	private TypeInventaire type;
 
 	public CardView(Inventaire inventaire, TypeInventaire type) {
 		cl = new CardLayout();
@@ -27,12 +26,12 @@ public class CardView extends JPanel{
 		this.type = type;
 		this.inventaire = inventaire;
 		main = new MenuView(type);
-		insecteInventaire = new ObjetListeVitrine(inventaire.getListeInsecte());
-		TerrariumInventaire = new ObjetListeVitrine(inventaire.getListeTerrarium());
-		nourritureInventaire = new ObjetListeVitrine(inventaire.getListeNourriture());
-		soinsInventaire = new ObjetListeVitrine(inventaire.getListeSoins());
+		insecteInventaire = new ObjetVitrineList(inventaire.getListeInsecte(), "insecteInventaire");
+		TerrariumInventaire = new ObjetVitrineList(inventaire.getListeTerrarium(), "terrariumInventaire");
+		nourritureInventaire = new ObjetVitrineList(inventaire.getListeNourriture(), "nourritureInventaire");
+		soinsInventaire = new ObjetVitrineList(inventaire.getListeSoins(), "soinsInventaire");
 		this.add("insecteInventaire", insecteInventaire);
-		this.add("TerrariumInventaire", TerrariumInventaire);
+		this.add("terrariumInventaire", TerrariumInventaire);
 		this.add("nourritureInventaire", nourritureInventaire);
 		this.add("soinsInventaire", soinsInventaire);
 		this.add("main", main);
@@ -40,22 +39,35 @@ public class CardView extends JPanel{
 		cl.show(this, "main");
 	}
 	
-	public CardLayout getCl() {
-		return cl;
+	public ObjetVitrineList getInsecteInventaire() {
+		return insecteInventaire;
 	}
 
-	public void setCl(CardLayout cl) {
-		this.cl = cl;
+	public ObjetVitrineList getTerrariumInventaire() {
+		return TerrariumInventaire;
+	}
+
+	public ObjetVitrineList getNourritureInventaire() {
+		return nourritureInventaire;
+	}
+
+	public ObjetVitrineList getSoinsInventaire() {
+		return soinsInventaire;
+	}
+
+	public CardLayout getCl() {
+		return cl;
 	}
 	
 	public Objet getObjet() {
 		return objet;
 	}
 
-	public void setObjet(Objet objet) {
+	public void showVitrine(Objet objet, String name) {
 		this.objet = objet;
-		vitrine = new vitrineBoutique(inventaire, objet);
+		vitrine = new vitrineBoutique(inventaire, objet, name);
 		this.add("vitrine", vitrine);
+		cl.show(this, "vitrine");
 	}
 	
 	public TypeInventaire getType() {

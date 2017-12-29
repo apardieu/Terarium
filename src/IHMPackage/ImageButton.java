@@ -14,17 +14,17 @@ import MainPackage.Variables;
 
 public class ImageButton extends JPanel{
 	private static final long serialVersionUID = -5208419355329885260L;
-	protected JButton button;
-	protected String image;
-	protected int x;
-	protected int y;
-	protected int largeur;
-	protected int hauteur;
+	private JButton button;
+	private String image;
+	private int largeur;
+	private int hauteur;
+	private boolean locked = false;
+	private boolean unlocked = true;
+	private MouseListener mL = null;
+	private ActionListener aL = null;
 	
 	public ImageButton(String image, int x, int y, int largeur, int hauteur, boolean mouseOn) {
 		this.image = Variables.BOUTONSPATH + image;
-		this.x = x;
-		this.y = y;
 		this.largeur = largeur;
 		this.hauteur = hauteur;
 		button = new JButton(resizeImage());
@@ -32,12 +32,13 @@ public class ImageButton extends JPanel{
 		button.setBorderPainted(false);
 		button.setSize(largeur, hauteur);
 		button.setMaximumSize(button.getSize());
-		if(mouseOn)
-			button.addMouseListener(new MouseOn());
+		if(mouseOn) {
+			mL = new MouseOn();
+			button.addMouseListener(mL);
+		}
 		this.setSize(largeur + 15, hauteur + 15);
 		this.add(button);
-		if(x != 0 & y != 0)
-			this.setLocation(x, y);
+		this.setLocation(x, y);
 		this.setOpaque(false);
 	}
 	
@@ -50,15 +51,12 @@ public class ImageButton extends JPanel{
 	}
 	
 	public void addActionListener(ActionListener l) {
-		button.addActionListener(l);
+		aL = l;
+		button.addActionListener(aL);
 	}
 
 	public String getImage() {
 		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
 	}
 	
 	public void update() {
@@ -66,11 +64,29 @@ public class ImageButton extends JPanel{
 	}
 	
 	public void lock() {
-		
+		if(unlocked) {
+			String extension = image.substring(image.indexOf("."));
+			image = image.replaceFirst("Light" + extension, extension);
+			image = image.replaceFirst(extension, "Locked" + extension);
+			button.setIcon(resizeImage());
+			button.removeMouseListener(mL);
+			button.removeActionListener(aL);
+			button.revalidate();
+			unlocked = !(locked = true);
+		}
 	}
 	
 	public void unlock() {
-		
+		if(locked) {
+			String extension = image.substring(image.indexOf("."));
+			image = image.replaceFirst("Light" + extension, extension);
+			image = image.replaceFirst("Locked" + extension, extension);
+			button.setIcon(resizeImage());
+			button.addMouseListener(mL);
+			button.addActionListener(aL);
+			button.revalidate();
+			locked = !(unlocked = true);
+		}
 	}
 	
 	class MouseOn implements MouseListener{
@@ -106,7 +122,5 @@ public class ImageButton extends JPanel{
 			button.setIcon(resizeImage());
 			button.revalidate();
 		}
-
 	}
-
 }
