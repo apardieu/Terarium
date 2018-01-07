@@ -4,6 +4,7 @@ import java.util.*;
 import InsectePackage.Carnivore;
 import InsectePackage.Herbivore;
 import InsectePackage.Insecte;
+import InsectePackage.Oeuf;
 import MainPackage.Variables;
 import Nourriture.Graine;
 import Nourriture.Mangeoire;
@@ -11,7 +12,6 @@ import Objets.Objet;
 
 public abstract class Terrarium extends Objet{
 	
-	//Propriétés
 	
 	private int startTime;
 	protected int capacity;
@@ -56,64 +56,111 @@ public abstract class Terrarium extends Objet{
 		//Using a while loop because the number of insect change into the loop
 		
 		while(i<nbInsecte) {
+
 			Insecte a = this.listeInsecte.get(i);
-			a.deplacer();
-			if(a.getFoodLevel()<1) {
-				this.listeInsecte.remove(a);
-				nbInsecte--;
-			}
-			if(a.isInContactWith(mangeoire) & mangeoire.getNbNourriture()>0 & a.getAcceptedFood().contains(mangeoire.getNourriture().getClass())) {
-				a.manger(mangeoire.getNourriture());
-				mangeoire.setNbNourriture(mangeoire.getNbNourriture()-mangeoire.getNourriture().getFoodPower());
-			}
-			List<Insecte> l = new LinkedList<Insecte>();
-			if(a instanceof Herbivore & !a.isFlying()) {
-				if(a.getFoodLevel()<a.getMaxFoodLevel()/10) {
-					((Herbivore)a).zombie();
+			List<Insecte> toremove = new LinkedList<Insecte>(); //used to  know which insect have to be removed 
+			List<Oeuf> eggs = new LinkedList<Oeuf>(); //used to add eggs to the insecteListe
+			int nbEggToRemove = 0; //use to know how many eggs must be removed in order to not decrease the number of insects when eggs are added to the toremovelist
+			if(a instanceof Oeuf)
+			{
+				if(((Oeuf) a).eclore())
+				{
+					System.out.println("ECLOSION");
+					toremove.add(a);
+					nbEggToRemove++;
+					Insecte insnait=((Oeuf) a).getInsecteNait();
+					insnait.decrire();
+					System.out.println(insnait.getName()+" a éclot");
+					this.getListeInsecte().add(insnait);
+					this.description();
+					
 				}
-				if(a.getFoodLevel()>a.getMaxFoodLevel()*0.5) {
-					((Herbivore)a).normal();
+				else
+				{
+					((Oeuf) a).increasetemps();					
 				}
 			}
-			for(Insecte b : getListeInsecte()) {
-				if(a!=b) {
-					if(a.isInContactWith(b)) {
-						if((a instanceof Carnivore) & (b instanceof Herbivore)) {
-							if(a.getFoodLevel()+b.getFoodLevel()/10<=a.getMaxFoodLevel()) {
-								a.kill(b);
-								l.add(b);
-							}
-						}
-						if((b instanceof Carnivore) & (a instanceof Herbivore)) {
-							if(b.getFoodLevel()+a.getFoodLevel()/10<=b.getMaxFoodLevel()) {
-								b.kill(a);
-								l.add(a);
-							}
-						}
-						if((a instanceof Herbivore) & (b instanceof Herbivore)) {
-							if(a.isCanibale()==true & (b instanceof Herbivore) & b.isCanibale()==false) {
+			else
+			{
+				a.deplacer();
+				a.decreaseGestation();
+				if(a.getFoodLevel()<1) {
+					this.listeInsecte.remove(a);
+					nbInsecte--;
+				}
+				if(a.isInContactWith(mangeoire) & mangeoire.getNbNourriture()>0 & a.getAcceptedFood().contains(mangeoire.getNourriture().getClass())) {
+					a.manger(mangeoire.getNourriture());
+					mangeoire.setNbNourriture(mangeoire.getNbNourriture()-mangeoire.getNourriture().getFoodPower());
+				}
+				
+
+				if(a instanceof Herbivore & !a.isFlying()) {
+					if(a.getFoodLevel()<a.getMaxFoodLevel()/10) {
+						((Herbivore)a).zombie();
+					}
+					if(a.getFoodLevel()>a.getMaxFoodLevel()*0.5) {
+						((Herbivore)a).normal();
+					}
+				}
+				for(Insecte b : getListeInsecte()) {
+	
+					if(a!=b) {
+						if(a.isInContactWith(b)) {
+							
+							
+							if((a instanceof Carnivore) & (b instanceof Herbivore)) {
 								if(a.getFoodLevel()+b.getFoodLevel()/10<=a.getMaxFoodLevel()) {
 									a.kill(b);
-									l.add(b);
+									toremove.add(b);
 								}
 							}
-							if(b.isCanibale()==true & (a instanceof Herbivore) & a.isCanibale()==false) {
+							if((b instanceof Carnivore) & (a instanceof Herbivore)) {
 								if(b.getFoodLevel()+a.getFoodLevel()/10<=b.getMaxFoodLevel()) {
 									b.kill(a);
-									l.add(a);
+									toremove.add(a);
 								}
+							}
+							if((a instanceof Herbivore) & (b instanceof Herbivore)) {
+								if(a.isCanibale()==true & (b instanceof Herbivore) & b.isCanibale()==false) {
+									if(a.getFoodLevel()+b.getFoodLevel()/10<=a.getMaxFoodLevel()) {
+										a.kill(b);
+										toremove.add(b);
+									}
+								}
+								if(b.isCanibale()==true & (a instanceof Herbivore) & a.isCanibale()==false) {
+									if(b.getFoodLevel()+a.getFoodLevel()/10<=b.getMaxFoodLevel()) {
+										b.kill(a);
+										toremove.add(a);
+									}
+								}
+								
+								if(checkParent(a,b))
+								{
+									System.out.println("Accouplement");
+									eggs.add(new Oeuf(a));
+									nbInsecte++;
+								}
+								
 							}
 						}
 					}
+	
 				}
 			}
-			nbInsecte-=l.size();
-			for(Insecte ins : l) {
+			nbInsecte=nbInsecte-toremove.size()+nbEggToRemove;
+			System.out.println("++++++++++++++++NBINSECTE : "+nbInsecte);
+			for(Insecte ins : toremove) {
 				this.listeInsecte.remove(ins);
 			}
+			
+			for(Oeuf o : eggs)
+			{
+				o.setName("Oeuf");
+				this.listeInsecte.add(o);
+			}
+			eggs.clear();
 			i++;
 		}
-		
 	}
 	
 	public void description() {
@@ -121,6 +168,25 @@ public abstract class Terrarium extends Objet{
 		for(Insecte i : getListeInsecte()) {
 			i.decrire();
 		}
+	}
+	
+	public boolean checkParent(Insecte a, Insecte b)
+	{
+		if(a.getClass() == b.getClass() & a.getSexe()!=b.getSexe())
+		{
+
+			if(a.getGestationTime()==0 & b.getGestationTime()==0 & a.getFoodLevel()>75000 & b.getFoodLevel()>75000 & this.nbInsecte<capacity)
+			{
+				a.setGestationTime(10000);
+				b.setGestationTime(10000);
+				return true;
+				
+			}
+			
+		}
+		
+		return false; 
+		
 	}
 
 	public File getImage() {

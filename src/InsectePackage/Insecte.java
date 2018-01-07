@@ -6,10 +6,11 @@ import Objets.Objet;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import MainPackage.Variables;
 
-public abstract class Insecte extends Objet{
+public abstract class Insecte extends Objet implements Cloneable{
 	protected int foodLevel;
 	private int directionX = 1;
 	private int directionY = 1;
@@ -18,6 +19,7 @@ public abstract class Insecte extends Objet{
 	private float speedTire;
 	private boolean canibale;
 	protected int percentageStolen=0;
+	protected int gestationtime;
 	protected int speedMove;
 	protected boolean isFlying = false;
 	protected int actionTime=0;
@@ -32,8 +34,37 @@ public abstract class Insecte extends Objet{
 	
 	public Insecte() {
 		super();
+		randomSexe();
+		
 	}
 	
+	
+	public void randomSexe()
+	{
+		Random rand = new Random();
+		int randint = rand.nextInt(2);
+		if(randint==1)
+		{
+			this.sexe=Sexe.MALE;
+			
+		}
+		else
+		{
+			this.sexe=Sexe.FEMALE;
+		}
+		
+		
+		
+		
+	}
+	
+	public void decreaseGestation()
+	{
+		if(this.gestationtime>0)
+		{
+			this.gestationtime--;
+		}
+	}
 	public void deplacer() {
 		if(foodLevel>0) {
 			if(isFlying) {
@@ -283,5 +314,34 @@ public abstract class Insecte extends Objet{
 	public void setAcceptedFood(List<Class<? extends Nourriture>> acceptedFood) {
 		this.acceptedFood = acceptedFood;
 	}
+	
+	public void setFoodlevel(int f)
+	{
+		this.foodLevel = f;
+	}
+	public int getGestationTime()
+	{
+		return this.gestationtime;
+		
+	}
+	
+	public void setGestationTime(int t)
+	{
+		this.gestationtime=t;
+	}
+	
+	public Object clone()
+	  { 
+		Object o = null;
+	    try
+	    { 
+	      o = super.clone();
+	    } catch (CloneNotSupportedException x)
+	    { 
+	      System.out.println("Error");
+	    }
+	    
+	    return o;
+	  }
 }
 

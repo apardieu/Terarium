@@ -92,4 +92,9 @@ public abstract class Objet{
 	public void setyTerra(int yTerra) {
 		this.yTerra = yTerra;
 	}
+	
+	public void setName(String name)
+	{
+		this.name=name;
+	}
 }

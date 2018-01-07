@@ -1,10 +1,12 @@
 package IHMPackage;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import InsectePackage.Insecte;
+import InsectePackage.Sexe;
 import MainPackage.Variables;
 import Terrariums.Terrarium;
 
@@ -41,6 +43,28 @@ public class TerrariumView extends JPanel{
 				e.printStackTrace();
 			}
         	this.drawHealthBar(ins, g, eL, eH);
+        	if(ins.getSexe()==Sexe.MALE)
+        	{
+        		try {
+					g.drawImage(ImageIO.read(new File("resources/male.png")), (int) (ins.getxTerra()*eL)+70, (int) (ins.getyTerra()*eH)-50, 20, 35, null);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        		
+        	}
+        	if(ins.getSexe()==Sexe.FEMALE)
+        	{
+        		try {
+					g.drawImage(ImageIO.read(new File("resources/female.png")),(int) (ins.getxTerra()*eL)+70, (int) (ins.getyTerra()*eH)-50, 20, 35, null);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        		
+        	}
+
+        	
         }
     }
 	
@@ -53,6 +77,7 @@ public class TerrariumView extends JPanel{
 		g.fillRect((int) (ins.getxTerra()*eL), (int) ((ins.getyTerra()-10)*eH),(int) (ins.getFoodLevel()*ins.getlTerra()*eL/ins.getMaxFoodLevel()),(int) (5*eH));
 		g.setColor(Color.RED);
 		g.fillRect((int) (ins.getxTerra()*eL+ins.getFoodLevel()*ins.getlTerra()*eL/ins.getMaxFoodLevel()), (int) ((ins.getyTerra()-10)*eH), (int) (emptyfood*eL*ins.getlTerra()/ins.getMaxFoodLevel()),(int) (5*eH));
+		
 	}
 	
 	public void update(Terrarium tera) {
