@@ -232,6 +232,11 @@ public abstract class Insecte extends Objet implements Cloneable{
 	
 	public void setSexe(Sexe s)
 	{
+		if(s.equals(Sexe.FEMALE))
+			this.imageSexe = new File("resources/female.png");
+		if(s.equals(Sexe.MALE))
+			this.imageSexe = new File("resources/male.png");
+		
 		this.sexe=s;
 	}
 	

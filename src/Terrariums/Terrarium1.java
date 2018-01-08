@@ -18,8 +18,8 @@ public class Terrarium1 extends Terrarium{
 		image = new File(Variables.TERRARIUMSPATH + "fond.jpg");
 		price = 3000;
 		mangeoire.setNourriture(new Viande());
-		Guepechter male = new Guepechter();
-		Papillon female = new Papillon();
+		Herbivore male = new Herbivore();
+		Herbivore female = new Herbivore();
 		male.setSexe(Sexe.MALE);
 		male.setName("MALE");
 		male.setFoodlevel(100000);
