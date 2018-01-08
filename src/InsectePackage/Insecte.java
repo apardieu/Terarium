@@ -28,6 +28,7 @@ public abstract class Insecte extends Objet implements Cloneable{
 	protected File imageDroite;
 	protected File imageGauche;
 	protected Mangeoire mangeoire;
+	protected File imageSexe;
 	protected List<Class<? extends Nourriture>> acceptedFood = new LinkedList<Class<? extends Nourriture>>();
 
 	//Move the insect 1 step by 1 step, check if the insect have to move right or left and loose life each step
@@ -35,7 +36,6 @@ public abstract class Insecte extends Objet implements Cloneable{
 	public Insecte() {
 		super();
 		randomSexe();
-		
 	}
 	
 	
@@ -46,11 +46,12 @@ public abstract class Insecte extends Objet implements Cloneable{
 		if(randint==1)
 		{
 			this.sexe=Sexe.MALE;
-			
+			this.imageSexe = new File("resources/male.png");
 		}
 		else
 		{
 			this.sexe=Sexe.FEMALE;
+			this.imageSexe = new File("resources/female.png");
 		}
 		
 		
@@ -328,6 +329,10 @@ public abstract class Insecte extends Objet implements Cloneable{
 	public void setGestationTime(int t)
 	{
 		this.gestationtime=t;
+	}
+	
+	public File getImageSexe() {
+		return imageSexe;
 	}
 	
 	public Object clone()
