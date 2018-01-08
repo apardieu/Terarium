@@ -67,10 +67,10 @@ public class vitrineBoutique extends JPanel{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(nameObjet.getText()!="")
-				inventaire.getPlayer().buy(objet, nameObjet.getText());
-			else
+			if(nameObjet.getText().isEmpty())
 				inventaire.getPlayer().buy(objet);
+			else
+				inventaire.getPlayer().buy(objet, nameObjet.getText());
 		}
 	}
 

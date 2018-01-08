@@ -46,7 +46,7 @@ public class TerrariumView extends JPanel{
         	if(ins.getSexe()==Sexe.MALE)
         	{
         		try {
-					g.drawImage(ImageIO.read(new File("resources/male.png")), (int) (ins.getxTerra()*eL)+70, (int) (ins.getyTerra()*eH)-50, 20, 35, null);
+					g.drawImage(ImageIO.read(new File("resources/male.png")), (int) ((ins.getxTerra()+70)*eL), (int) ((ins.getyTerra()-50)*eH),(int) (20*eL),(int) (35*eH), null);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -56,7 +56,7 @@ public class TerrariumView extends JPanel{
         	if(ins.getSexe()==Sexe.FEMALE)
         	{
         		try {
-					g.drawImage(ImageIO.read(new File("resources/female.png")),(int) (ins.getxTerra()*eL)+70, (int) (ins.getyTerra()*eH)-50, 20, 35, null);
+					g.drawImage(ImageIO.read(new File("resources/female.png")),(int) ((ins.getxTerra()+70)*eL), (int) ((ins.getyTerra()-50)*eH),(int) (20*eL),(int) (35*eH), null);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

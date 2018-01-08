@@ -39,8 +39,8 @@ public class Inventaire {
 	}
 
 	public void addInsecte(Insecte o) {
-		p.getCurrentTerrarium().addInsecte((Insecte) o);
-		listeInsecte.remove(o);
+		if (p.getCurrentTerrarium().addInsecte((Insecte) o))
+			listeInsecte.remove(o);
 	}
 	
 	public void addNourriture(Nourriture aliment) {

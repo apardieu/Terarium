@@ -33,14 +33,15 @@ public abstract class Terrarium extends Objet{
 	
 	//Add an insect to the Terarium
 	
-	public void addInsecte(Insecte m) {
+	public boolean addInsecte(Insecte m) {
 		if (getNbInsecte()<getCapacity()) {
 			getListeInsecte().add(m);
 			m.setMangeoire(mangeoire);
+			nbInsecte = getListeInsecte().size();
+			return true;
 		}
 		else
-			System.out.println("Plus de places dans ce terarium");
-		nbInsecte = getListeInsecte().size();
+			return false;
 	}
 	
 	//Move an insect and check the position of the other in order to kill then if possible
@@ -148,7 +149,6 @@ public abstract class Terrarium extends Objet{
 				}
 			}
 			nbInsecte=nbInsecte-toremove.size()+nbEggToRemove;
-			System.out.println("++++++++++++++++NBINSECTE : "+nbInsecte);
 			for(Insecte ins : toremove) {
 				this.listeInsecte.remove(ins);
 			}
