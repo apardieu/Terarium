@@ -15,7 +15,7 @@ import Terrariums.Terrarium3;
 
 public class Main {
 	public static void main(String[] args) {
-		Terrarium t1 = new Terrarium1();
+		Terrarium t1 = new Terrarium3();
 		Player p1 = new Player();
 		p1.addTerrarium(t1);
 		IHM ihm = null;

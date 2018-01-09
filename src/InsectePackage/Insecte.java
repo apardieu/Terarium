@@ -16,7 +16,7 @@ public abstract class Insecte extends Objet implements Cloneable{
 	private int directionY = 1;
 	protected Sexe sexe;
 	private int maxFoodLevel = 100000;
-	private float speedTire;
+	protected float speedTire;
 	private boolean canibale;
 	protected int percentageStolen=0;
 	protected int gestationtime;
@@ -37,7 +37,6 @@ public abstract class Insecte extends Objet implements Cloneable{
 		super();
 		randomSexe();
 	}
-	
 	
 	public void randomSexe()
 	{
@@ -232,12 +231,8 @@ public abstract class Insecte extends Objet implements Cloneable{
 	
 	public void setSexe(Sexe s)
 	{
-		if(s.equals(Sexe.FEMALE))
-			this.imageSexe = new File("resources/female.png");
-		if(s.equals(Sexe.MALE))
-			this.imageSexe = new File("resources/male.png");
-		
 		this.sexe=s;
+		this.imageSexe = s.equals(Sexe.MALE)?new File("resources/male.png"):new File("resources/female.png");
 	}
 	
 	public Sexe getSexe()

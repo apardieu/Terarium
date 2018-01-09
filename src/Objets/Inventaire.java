@@ -43,14 +43,15 @@ public class Inventaire {
 			listeInsecte.remove(o);
 	}
 	
-	public void addNourriture(Nourriture aliment) {
+	public boolean addNourriture(Nourriture aliment) {
 		if(p.getCurrentTerrarium().getMangeoire().getNourriture().getClass()==aliment.getClass()) {
 			for(int i=0; i<100; i++)
 				p.getCurrentTerrarium().getMangeoire().remplir((Nourriture) aliment);
 			listeNourriture.remove(aliment);
+			return true;
 		}
 		else
-			System.out.println("C'est pas la bonne nourriture");
+			return false;
 	}
 	
 	public List<Nourriture> getListeNourriture() {

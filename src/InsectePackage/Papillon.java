@@ -20,6 +20,7 @@ public class Papillon extends Herbivore{
 		setImageDroite(new File(Variables.INSECTESPATH  + "papillon/papillon" + couleur + "Droite.png"));
 		setImageGauche(new File(Variables.INSECTESPATH  + "papillon/papillon" + couleur + "Gauche.png"));
 		setPrice(2000);
+		revenu = 1200;
 		hTerra=121;
 		lTerra=108;
 	}

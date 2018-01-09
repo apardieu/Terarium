@@ -14,8 +14,9 @@ public class Carnivore extends Insecte{
 		imageDroite = getImage();
 		imageGauche = getImage();
 		setPrice(1000);
+		setRevenu(650);
 		setCanibale(true);
-		setSpeedTire(3);
+		speedTire = 3;
 		percentageStolen = 10;
 		speedMove=1;
 		hTerra=121;

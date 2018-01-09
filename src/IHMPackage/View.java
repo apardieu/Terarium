@@ -8,7 +8,7 @@ public class View extends JPanel{
 	private CardView shop;
 	private CardView inventaireView;
 	
-	public View(TerrariumView tera, CardView shop, CardView inventaireView) {
+	public View(TerrariumView tera, CardView shop, CardView inventaireView, VenteListObjet venteView) {
 		this.shop = shop;
 		this.inventaireView = inventaireView;
 		cl = new CardLayout();
@@ -19,6 +19,7 @@ public class View extends JPanel{
 		this.add(tera, "tera");
 		this.add(shop, "shop");
 		this.add(inventaireView, "inventaireView");
+		this.add(venteView, "venteView");
 	}
 	
 	//Show the boutique
@@ -32,6 +33,10 @@ public class View extends JPanel{
 	
 	public void TeraView() {
 		cl.show(this, "tera");
+	}
+	
+	public void venteView() {
+		cl.show(this, "venteView");
 	}
 	
 	public void invView() {

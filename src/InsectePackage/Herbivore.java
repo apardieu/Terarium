@@ -14,6 +14,7 @@ public class Herbivore extends Insecte implements Cloneable{
 		imageDroite = getImage();
 		imageGauche = getImage();
 		setPrice(500);
+		revenu = 300;
 		setCanibale(false);
 		setSpeedTire(2);
 		speedMove=2;

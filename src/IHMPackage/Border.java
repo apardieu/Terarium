@@ -15,6 +15,7 @@ public class Border extends JPanel{
 	private ImageButton optionButton = null;
 	private ImageButton printInventaire = null;
 	private ImageButton printBoutique = null;
+	private ImageButton printVentes = null;
 	private PreviewTerrarium previewTera = null;
 	private ImageButton nextTerraButton = null;
 	private ImageButton prevTerraButton = null;
@@ -26,6 +27,7 @@ public class Border extends JPanel{
 		optionButton = new ImageButton("option.png", 385, 0, 30, 30, false);
 		printInventaire = new ImageButton("inventaireBoutton.png", 30, 250, 400, 100, true);
 		printBoutique = new ImageButton("boutiqueBoutton.png", 30, 450, 400, 100, true);
+		printVentes = new ImageButton("boutiqueBoutton.png", 30, 50, 400, 100, true);
 		nextTerraButton = new ImageButton("nextTerrarium.png", 370, 650, 50, 50, true);
 		prevTerraButton = new ImageButton("prevTerrarium.png", 10, 650, 50, 50, true);
 		
@@ -44,6 +46,8 @@ public class Border extends JPanel{
 		this.add(printInventaire);
 		
 		this.add(printBoutique);
+		
+		this.add(printVentes);
 	}
 	
 	protected void paintComponent(Graphics g) {
@@ -82,5 +86,9 @@ public class Border extends JPanel{
 
 	public ImageButton getOptionButton() {
 		return optionButton;
+	}
+
+	public ImageButton getPrintVentes() {
+		return printVentes;
 	}
 }

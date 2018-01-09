@@ -12,10 +12,13 @@ public abstract class Objet{
 	protected int yTerra;
 	protected int lShop;
 	protected int hShop;
+	protected int revenu;
+	protected boolean vendable;
 	
 	public Objet() {
 		lShop = 120;
 		hShop = 193;
+		vendable = true;
 	}
 	
 	public boolean isInContactWith(Objet a) {
@@ -96,5 +99,13 @@ public abstract class Objet{
 	public void setName(String name)
 	{
 		this.name=name;
+	}
+
+	public int getRevenu() {
+		return revenu;
+	}
+
+	public void setRevenu(int revenu) {
+		this.revenu = revenu;
 	}
 }

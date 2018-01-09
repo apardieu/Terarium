@@ -41,10 +41,12 @@ public class ObjetVitrine extends JPanel implements MouseListener{
         		g.drawImage(ImageIO.read(objet.getImage()), 15, 15, l-30, h-50, null);
         		g.setColor(Color.BLACK);
         		g.setFont(new Font("Dialog", Font.BOLD, 19));
-        		if (((CardView) this.getParent().getParent()).getType() == TypeInventaire.INVENTAIRE) 
-        			g.drawString(objet.getName(),0, h);
-        		else
+        		if (!(this.getParent().getParent() instanceof View)) {
+        			if (((CardView) this.getParent().getParent()).getType() == TypeInventaire.BOUTIQUE) 
         			g.drawString("Price : " + objet.getPrice(),0, h);
+	        		else
+	        			g.drawString(objet.getName(),0, h);
+        		}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -52,15 +54,22 @@ public class ObjetVitrine extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (((CardView) this.getParent().getParent()).getType() == TypeInventaire.INVENTAIRE) {
+		if (this.getParent() instanceof VenteListObjet) {
+			((VenteListObjet) this.getParent()).getPlayer().vendre(objet);;
+		}
+		else {
+			if (((CardView) this.getParent().getParent()).getType() == TypeInventaire.INVENTAIRE) {
 			if(objet instanceof Insecte)
 				((CardView) this.getParent().getParent()).inventaire.addInsecte((Insecte) objet);
 			if(objet instanceof Nourriture)
 				((CardView) this.getParent().getParent()).inventaire.addNourriture((Nourriture) objet);
+			}
+			else
+				((CardView) this.getParent().getParent()).showVitrine(objet, ((ObjetVitrineList) this.getParent()).getNom());
+				
+			((ObjetVitrineList) this.getParent()).update();
 		}
-		else
-			((CardView) this.getParent().getParent()).showVitrine(objet, ((ObjetVitrineList) this.getParent()).getNom());
-		((ObjetVitrineList) this.getParent()).update();
+		
 	}
 
 	@Override

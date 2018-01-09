@@ -18,7 +18,7 @@ public class Guepechter extends Herbivore {
 	hTerra=121;
 	lTerra=108;
 	this.speedMove = 2;
-
+	vendable = false;
 	}
 
 }

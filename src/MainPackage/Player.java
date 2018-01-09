@@ -91,6 +91,11 @@ public class Player {
 		else
 			return false;
 	}
+	
+	public void vendre(Objet o) {
+		argent += o.getRevenu();
+		currentTerrarium.getListeInsecte().get(currentTerrarium.getListeInsecte().indexOf(o)).setFoodlevel(0);
+	}
 
 	public int getArgent() {
 		return argent;

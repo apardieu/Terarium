@@ -18,18 +18,6 @@ public class Terrarium1 extends Terrarium{
 		image = new File(Variables.TERRARIUMSPATH + "fond.jpg");
 		price = 3000;
 		mangeoire.setNourriture(new Viande());
-		Herbivore male = new Herbivore();
-		Herbivore female = new Herbivore();
-		male.setSexe(Sexe.MALE);
-		male.setName("MALE");
-		male.setFoodlevel(100000);
-		male.setGestationTime(0);
-		female.setSexe(Sexe.FEMALE);
-		female.setFoodlevel(100000);
-		female.setGestationTime(0);
-		female.setName("FEMALE");
-		this.addInsecte(male);
-		this.addInsecte(female);
 	}
 	
 	public void vendu() {

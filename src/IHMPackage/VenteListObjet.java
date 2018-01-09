@@ -1,6 +1,5 @@
 package IHMPackage;
 
-import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,10 +11,14 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import IHMPackage.ObjetVitrineList.NextPage;
+import IHMPackage.ObjetVitrineList.PrevPage;
+import InsectePackage.Oeuf;
+import MainPackage.Player;
 import MainPackage.Variables;
 import Objets.Objet;
 
-public class ObjetVitrineList extends JPanel{
+public class VenteListObjet extends JPanel{
 	private static final long serialVersionUID = -2328453369007393762L;
 	private List<? extends Objet> listeObjet = new LinkedList<Objet>();
 	private int nbPage;
@@ -23,7 +26,6 @@ public class ObjetVitrineList extends JPanel{
 	private ImageButton nextButton = null;
 	private ImageButton prevButton = null;
 	private File fond = new File(Variables.FONDSPATH + "vitrine.jpg");
-	private String nom;
 	private int nbElementPage = 0;
 	private int h = 1;
 	private int l = 1;
@@ -32,33 +34,45 @@ public class ObjetVitrineList extends JPanel{
 	private final int hauteur = 640;
 	private final int xCadre = 55;
 	private final int yCadre = 140;
+	private Player player;
+	private int nbElement;
+	private int nbOeuf;
 	
-	public ObjetVitrineList(List<? extends Objet> list, String nom) {
+	public VenteListObjet(Player player) {
 		this.setLayout(null);
-		this.listeObjet = list;
-		this.nom = nom;
+		this.player	= player;
+		this.listeObjet = player.getCurrentTerrarium().getListeInsecte();
 		nbPage=0;
 	    update();
 	}
 	
 	protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-		//Drawing the background of the shop and add the main button
+		//Drawing the background of the shop
 		
 	    try {
 	    	g.drawImage(ImageIO.read(fond), 0, 0, this.getWidth(), this.getHeight(), null);
 	    } catch (IOException e) {
 			e.printStackTrace();
 		}
+	    
+	    if(player.getCurrentTerrarium().getListeInsecte().size()!=nbElement)
+	    	update();
+	    
+	    if(nbOeuf!= calNbOeuf()) 
+	    	update();
 	}
 	
 	public void update() {
+		nbElement = listeObjet.size();
+		nbOeuf = calNbOeuf();
 		this.removeAll();
 		mainButton = new ImageButton("mainBoutton.png", 1200, 8, 100, 100, false);
 		nextButton = new ImageButton("nextArrow.png", 1210, 850, 100, 100, true);
 		prevButton = new ImageButton("prevArrow.png", 55, 850, 100, 100, true);
 		nextButton.addActionListener(new NextPage());
 		prevButton.addActionListener(new PrevPage());
+		this.listeObjet = player.getCurrentTerrarium().getListeInsecte();
 	    this.add(mainButton);
 	    this.add(nextButton);
 	    this.add(prevButton);
@@ -73,19 +87,21 @@ public class ObjetVitrineList extends JPanel{
 	    nbElementPage = (largeur/(l+marge)) * (hauteur/(h+marge));
 	    
 	    for(int i=nbPage*nbElementPage; (i<(nbPage+1)*nbElementPage & i<listeObjet.size()); i++) {
-        	Objet o = listeObjet.get(i);
+	    	Objet o = listeObjet.get(i);
+	    	if(!(o instanceof Oeuf)){
 
-        	ObjetVitrine objetVitrine = new ObjetVitrine(o, x, y, l, h);
-        	this.add(objetVitrine); 
-        	
-        	//Change line
-        	if((x+l+marge+l)>=xCadre+largeur) {
-        		x=xCadre+marge;
-        		y+=h+marge;
-        	}
-        	//Change Column
-        	else
-        		x+=l+marge;
+	        	ObjetVitrine objetVitrine = new ObjetVitrine(o, x, y, l, h);
+	        	this.add(objetVitrine); 
+	        	
+	        	//Change line
+	        	if((x+l+marge+l)>=xCadre+largeur) {
+	        		x=xCadre+marge;
+	        		y+=h+marge;
+	        	}
+	        	//Change Column
+	        	else
+	        		x+=l+marge;
+	    	}
     	}
 	    
 	    if(nbPage==listeObjet.size()/nbElementPage)
@@ -97,6 +113,17 @@ public class ObjetVitrineList extends JPanel{
     		prevButton.lock();
     	else
     		prevButton.unlock();
+	}
+	
+	public int calNbOeuf() {
+		nbElementPage = (largeur/(l+marge)) * (hauteur/(h+marge));
+		int nbOeufCal = 0;
+	    for(int i=nbPage*nbElementPage; (i<(nbPage+1)*nbElementPage & i<listeObjet.size()); i++) {
+	    	Objet o = listeObjet.get(i);
+	    	if(o instanceof Oeuf)
+	    		nbOeufCal++;
+	    }
+	    return nbOeufCal;
 	}
 	
 	class NextPage implements ActionListener{
@@ -117,7 +144,7 @@ public class ObjetVitrineList extends JPanel{
 		}
 	}
 
-	public String getNom() {
-		return nom;
+	public Player getPlayer() {
+		return player;
 	}
 }

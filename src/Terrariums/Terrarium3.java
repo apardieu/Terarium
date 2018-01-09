@@ -2,6 +2,8 @@ package Terrariums;
 
 import java.io.File;
 
+import InsectePackage.Herbivore;
+import InsectePackage.Sexe;
 import MainPackage.Variables;
 
 public class Terrarium3 extends Terrarium{
@@ -12,5 +14,17 @@ public class Terrarium3 extends Terrarium{
 		nbInsecte = 0;
 		image = new File(Variables.TERRARIUMSPATH + "fond3.jpg");
 		price = 3000;
+		Herbivore male = new Herbivore();
+		Herbivore female = new Herbivore();
+		male.setSexe(Sexe.MALE);
+		male.setName("MALE");
+		male.setFoodlevel(100000);
+		male.setGestationTime(0);
+		female.setSexe(Sexe.FEMALE);
+		female.setFoodlevel(100000);
+		female.setGestationTime(0);
+		female.setName("FEMALE");
+		this.addInsecte(male);
+		this.addInsecte(female);
 	}
 }

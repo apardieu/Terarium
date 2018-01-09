@@ -22,7 +22,6 @@ public class GameController extends Thread{
 				listeTerrarium.get(i).deplacerInsectes();
 			ihm.refreshData(player);
 			ihm.repaint();
-
 		}
 	}
 

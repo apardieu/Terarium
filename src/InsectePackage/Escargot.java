@@ -11,6 +11,7 @@ public class Escargot extends Herbivore{
 		imageDroite = new File(Variables.INSECTESPATH  + "escargot/EscargotDroite.png");
 		imageGauche = new File(Variables.INSECTESPATH  + "escargot/EscargotGauche.png");
 		price = 1200;
+		revenu = 800;
 		hTerra=121;
 		lTerra=108;
 		this.speedMove = 1;
@@ -23,21 +24,25 @@ public class Escargot extends Herbivore{
 			image = new File(Variables.INSECTESPATH + "escargot/EscargotRaphDroite.png");
 			imageDroite = new File(Variables.INSECTESPATH  + "escargot/EscargotRaphDroite.png");
 			imageGauche = new File(Variables.INSECTESPATH  + "escargot/EscargotRaphGauche.png");
+			vendable = false;
 		}
 		else if(name.equals(new String("Donatello"))) {
 			image = new File(Variables.INSECTESPATH + "escargot/EscargotDonaDroite.png");
 			imageDroite = new File(Variables.INSECTESPATH  + "escargot/EscargotDonaDroite.png");
 			imageGauche = new File(Variables.INSECTESPATH  + "escargot/EscargotDonaGauche.png");
+			vendable = false;
 		}
 		else if(name.equals(new String("Leonardo"))) {
 			image = new File(Variables.INSECTESPATH + "escargot/EscargotLeoDroite.png");
 			imageDroite = new File(Variables.INSECTESPATH  + "escargot/EscargotLeoDroite.png");
 			imageGauche = new File(Variables.INSECTESPATH  + "escargot/EscargotLeoGauche.png");
+			vendable = false;
 		}
 		else if(name.equals(new String("Michelangelo"))) {
 			image = new File(Variables.INSECTESPATH + "escargot/EscargotMichelDroite.png");
 			imageDroite = new File(Variables.INSECTESPATH  + "escargot/EscargotMichelDroite.png");
 			imageGauche = new File(Variables.INSECTESPATH  + "escargot/EscargotMichelGauche.png");
+			vendable = false;
 		}
 	}
 }

@@ -13,7 +13,8 @@ import MainPackage.Variables;
 
 enum TypeInventaire {
 	BOUTIQUE("Shop"),
-	INVENTAIRE("Inventaire");
+	INVENTAIRE("Inventaire"),
+	VENTE("Vente");
 	
 	private String type;
 	

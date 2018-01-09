@@ -21,9 +21,11 @@ public class IHM extends JFrame{
 	private Border border;
 	private PreviewTerrarium previewTera;
 	private boolean shopView;
+	private boolean venteView;
 	private boolean invView;
 	private boolean fullScreen;
 	private CardView inventaireView;
+	private VenteListObjet venteInventaireView;
 	private Player player;
 	private GameController GC;
 	private Inventaire boutique;
@@ -44,7 +46,8 @@ public class IHM extends JFrame{
 		tera = new TerrariumView(p.getCurrentTerrarium());
 		inventaireView = new CardView(p.getInventaire(), TypeInventaire.INVENTAIRE);
 		shop = new CardView(boutique, TypeInventaire.BOUTIQUE);
-		view = new View(tera, shop, inventaireView);
+		venteInventaireView = new VenteListObjet(player);
+		view = new View(tera, shop, inventaireView, venteInventaireView);
 		donnes = new Data();
 		previewTera = new PreviewTerrarium(p);
 		border = new Border(previewTera);
@@ -56,6 +59,7 @@ public class IHM extends JFrame{
 		border.getPrevTerraButton().addActionListener(new PrevTerra());
 		border.getPrintInventaire().addActionListener(new ButtonPrintInventaire(view));
 		border.getPrintBoutique().addActionListener(new ButtonPrintBoutique(view));
+		border.getPrintVentes().addActionListener(new ButtonPrintVentes(view));
 		border.getExitButton().addActionListener(new ExitButton());
 		border.getOptionButton().addActionListener(new OptionButton());
 		
@@ -106,7 +110,7 @@ public class IHM extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(invView==false) {
-				shopView = !(invView = true);
+				shopView = venteView = !(invView = true);
 				view.invView();
 			}
 			else {
@@ -128,11 +132,33 @@ public class IHM extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(shopView==false) {
-				invView = !(shopView = true);
+				invView = venteView = !(shopView = true);
 				view.boutiqueView();
 			}
 			else {
 				shopView = false;
+				view.TeraView();
+			}
+		}
+	}
+	
+	//Change the Card in the cardLayout of view to switch between Sales and Terrarium
+	
+	class ButtonPrintVentes implements ActionListener{
+		private View view;
+		
+		public ButtonPrintVentes(View view) {
+			this.view = view;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(venteView==false) {
+				shopView = invView = !(venteView = true);
+				view.venteView();
+			}
+			else {
+				venteView = false;
 				view.TeraView();
 			}
 		}

@@ -66,15 +66,9 @@ public abstract class Terrarium extends Objet{
 			{
 				if(((Oeuf) a).eclore())
 				{
-					System.out.println("ECLOSION");
 					toremove.add(a);
 					nbEggToRemove++;
-					Insecte insnait=((Oeuf) a).getInsecteNait();
-					insnait.decrire();
-					System.out.println(insnait.getName()+" a éclot");
-					this.getListeInsecte().add(insnait);
-					this.description();
-					
+					this.getListeInsecte().add(((Oeuf) a).getInsecteNait());
 				}
 				else
 				{
@@ -108,7 +102,6 @@ public abstract class Terrarium extends Objet{
 					if(a!=b) {
 						if(a.isInContactWith(b)) {
 							
-							
 							if((a instanceof Carnivore) & (b instanceof Herbivore)) {
 								if(a.getFoodLevel()+b.getFoodLevel()/10<=a.getMaxFoodLevel()) {
 									a.kill(b);
@@ -134,18 +127,14 @@ public abstract class Terrarium extends Objet{
 										toremove.add(a);
 									}
 								}
-								
 								if(checkParent(a,b))
 								{
-									System.out.println("Accouplement");
 									eggs.add(new Oeuf(a));
 									nbInsecte++;
 								}
-								
 							}
 						}
 					}
-	
 				}
 			}
 			nbInsecte=nbInsecte-toremove.size()+nbEggToRemove;
