@@ -38,8 +38,8 @@ public class TerrariumView extends JPanel{
         for(Insecte ins : Terrarium.getListeInsecte()) 
         {
         	try {
-				g.drawImage(ImageIO.read(ins.getImage()),(int) (ins.getxTerra()*eL), (int) (ins.getyTerra()*eH),(int) (ins.getlTerra()*eL),(int) (ins.gethTerra()*eH), null);
-				g.drawImage(ImageIO.read(ins.getImageSexe()), (int) ((ins.getxTerra()+70)*eL), (int) ((ins.getyTerra()-50)*eH),(int) (20*eL),(int) (35*eH), null);
+				g.drawImage(ImageIO.read(ins.getImage()),(int) (ins.getxTerra()*eL), (int) (ins.getyTerra()*eH),(int) (ins.getlTerra()*eL),(int) (ins.gethTerra()*eH), null); //draw insect's image
+				g.drawImage(ImageIO.read(ins.getImageSexe()), (int) ((ins.getxTerra()+70)*eL), (int) ((ins.getyTerra()-50)*eH),(int) (20*eL),(int) (35*eH), null); //draw insect's sex 
         	} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -53,7 +53,7 @@ public class TerrariumView extends JPanel{
 	{
 		int emptyfood = ins.getMaxFoodLevel()-ins.getFoodLevel();
 		g.setColor(Color.GREEN);
-		g.fillRect((int) (ins.getxTerra()*eL), (int) ((ins.getyTerra()-10)*eH),(int) (ins.getFoodLevel()*ins.getlTerra()*eL/ins.getMaxFoodLevel()),(int) (5*eH));
+		g.fillRect((int) (ins.getxTerra()*eL), (int) ((ins.getyTerra()-10)*eH),(int) (ins.getFoodLevel()*ins.getlTerra()*eL/ins.getMaxFoodLevel()),(int) (5*eH)); //draw green part of 
 		g.setColor(Color.RED);
 		g.fillRect((int) (ins.getxTerra()*eL+ins.getFoodLevel()*ins.getlTerra()*eL/ins.getMaxFoodLevel()), (int) ((ins.getyTerra()-10)*eH), (int) (emptyfood*eL*ins.getlTerra()/ins.getMaxFoodLevel()),(int) (5*eH));
 		

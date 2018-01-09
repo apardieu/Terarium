@@ -2,6 +2,8 @@ package MainPackage;
 import IHMPackage.IHM;
 import InsectePackage.Carnivore;
 import InsectePackage.Escargot;
+import InsectePackage.FourmisNoire;
+import InsectePackage.FourmisRouge;
 import InsectePackage.Guepechter;
 import InsectePackage.Herbivore;
 import InsectePackage.Papillon;
@@ -30,6 +32,8 @@ public class Main {
 		boutique.add(new Terrarium3());
 		boutique.add(new Graine());
 		boutique.add(new Viande());
+		boutique.add(new FourmisNoire());
+		boutique.add(new FourmisRouge());
 		GameController GC = new GameController(p1, ihm);
 		ihm = new IHM(p1, boutique, true, GC);
 		GC.setIhm(ihm);

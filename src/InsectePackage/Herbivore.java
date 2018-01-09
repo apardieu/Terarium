@@ -5,7 +5,7 @@ import java.io.File;
 import MainPackage.Variables;
 import Nourriture.Graine;
 
-public class Herbivore extends Insecte implements Cloneable{
+public class Herbivore extends Insecte {
 	public Herbivore() {
 		super();
 		name = "Herbivore";
@@ -41,21 +41,6 @@ public class Herbivore extends Insecte implements Cloneable{
 		setSpeedTire(2);
 		this.speedMove=2;
 		
-		/*public Object clone()
-		  { 
-			Object o = null;
-		    try
-		    { 
-		      o = super.clone();
-		    } catch (CloneNotSupportedException x)
-		    { 
-		      System.out.println("Error");
-		    }
-		    
-		    return o;
-		  }
-		*/
-
 	}
 	
 

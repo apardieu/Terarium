@@ -24,6 +24,7 @@ public class Oeuf extends Insecte
 		this.name="Enfant de "+t.getName();
 		this.insecteNait = (Insecte) t.clone();
 		this.insecteNait.setName(this.getName());	
+		this.insecteNait.setSexe(this.getSexe());
 	}
 	
 	public int getTempsVecu()
@@ -43,7 +44,7 @@ public class Oeuf extends Insecte
 	
 	public boolean eclore()
 	{
-		if(tempsVecu>1000)
+		if(tempsVecu>2000)
 		{
 			return true;
 		}

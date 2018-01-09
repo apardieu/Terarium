@@ -16,6 +16,7 @@ public class Terrarium3 extends Terrarium{
 		price = 3000;
 		Herbivore male = new Herbivore();
 		Herbivore female = new Herbivore();
+		System.out.println("TEST");
 		male.setSexe(Sexe.MALE);
 		male.setName("MALE");
 		male.setFoodlevel(100000);
@@ -26,5 +27,6 @@ public class Terrarium3 extends Terrarium{
 		female.setName("FEMALE");
 		this.addInsecte(male);
 		this.addInsecte(female);
+		description();
 	}
 }
