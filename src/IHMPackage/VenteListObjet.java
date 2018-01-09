@@ -11,8 +11,6 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import IHMPackage.ObjetVitrineList.NextPage;
-import IHMPackage.ObjetVitrineList.PrevPage;
 import InsectePackage.Oeuf;
 import MainPackage.Player;
 import MainPackage.Variables;
@@ -37,11 +35,13 @@ public class VenteListObjet extends JPanel{
 	private Player player;
 	private int nbElement;
 	private int nbOeuf;
+	private String nameTerra;
 	
 	public VenteListObjet(Player player) {
 		this.setLayout(null);
 		this.player	= player;
 		this.listeObjet = player.getCurrentTerrarium().getListeInsecte();
+		nameTerra = player.getCurrentTerrarium().getName();
 		nbPage=0;
 	    update();
 	}
@@ -61,11 +61,15 @@ public class VenteListObjet extends JPanel{
 	    
 	    if(nbOeuf!= calNbOeuf()) 
 	    	update();
+	    
+	    if(!(nameTerra.equals(player.getCurrentTerrarium().getName())))
+	    	update();
 	}
 	
 	public void update() {
 		nbElement = listeObjet.size();
 		nbOeuf = calNbOeuf();
+		nameTerra = player.getCurrentTerrarium().getName();
 		this.removeAll();
 		mainButton = new ImageButton("mainBoutton.png", 1200, 8, 100, 100, false);
 		nextButton = new ImageButton("nextArrow.png", 1210, 850, 100, 100, true);
